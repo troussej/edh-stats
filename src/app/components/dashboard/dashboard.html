@@ -1,0 +1,14 @@
+<p-panel header="Statistiques Commander">
+
+    @if(ready|async){
+
+    <app-table [stats]="perWinrate" sortField="winrate" [sortOrder]="-1"
+        title="Par winrate (plus de 3 parties)"></app-table>
+
+    <!-- <app-table [stats]="perWinrate" sortField="winrate" [sortOrder]="-1"
+            title="Par winrate (plus de 3 parties)"></app-table> -->
+
+    }
+
+
+</p-panel>
