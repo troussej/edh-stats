@@ -1,7 +1,6 @@
 <p-card header="{{title}}">
 
-    <p-table [value]="stats" [tableStyle]="{ 'min-width': '50rem' }" size="small" showGridlines stripedRows
-        [sortField]="sortField" [sortOrder]="sortOrder">
+    <p-table [value]="stats" size="small" showGridlines [sortField]="sortField" [sortOrder]="sortOrder">
         <ng-template #header>
             <tr>
                 <th>Commander</th>

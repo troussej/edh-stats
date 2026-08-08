@@ -1,0 +1,8 @@
+.layout-topbar {
+    position: sticky;
+    top: var(1.7rem);
+    margin-bottom: 5px;
+    z-index: 1100;
+    transition: background-color .15s;
+    border-bottom: 1px solid white;
+}
