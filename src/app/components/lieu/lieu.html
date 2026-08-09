@@ -1,0 +1,8 @@
+@if(stats.isReady|async){
+
+<app-table [commanderCol]="false" [lieuCol]="true" [stats]="stats.parLieu" sortField="games" [sortOrder]="-1"
+    title="Par lieu"></app-table>
+
+
+
+}

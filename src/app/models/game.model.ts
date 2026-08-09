@@ -16,10 +16,12 @@ export interface Commander {
 
 export class Stats {
     // date: Date,
-    constructor(public commander: Commander,
+    constructor(public commander?: Commander,
+        public lieu = '',
         public games = 0,
         public wins = 0,
         public losses = 0,
-        public winrate = 0) { }
+        public winrate = 0
+    ) { }
 
 }

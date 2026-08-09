@@ -10,7 +10,9 @@ export class StatsService {
 
     public games: Game[] = [];
     public commanders: { [name: string]: Commander } = {};
+    public parLieu: Stats[] = [];
     public stats: Stats[] = [];
+    public globals: Stats = new Stats();
 
 
 
@@ -59,12 +61,33 @@ export class StatsService {
 
         let cmrDictio = _.groupBy(this.games, "deck");
 
-        this.stats = _.chain(this.commanders).map((cmr, cmrName) => this.calcStatsForCommander(cmr, cmrDictio[cmr.commander])).value();
+        this.stats = _.chain(this.commanders).map((cmr, cmrName) => this.calcStatsForCommander(cmr, '', cmrDictio[cmr.commander])).value();
+
+        this.calcGlobals(this.stats, this.globals);
+
+        this.calcStatsLieux();
+
         console.log('calcStats done');
         return true;
     }
+    calcStatsLieux() {
+        let lieuDictio = _.groupBy(this.games, "lieu");
 
-    private calcStatsForCommander(cmr: Commander, games: Game[]): Stats {
+        this.parLieu = _.chain(lieuDictio).map((values, lieu) => this.calcStatsForCommander(undefined, lieu, lieuDictio[lieu])).value();
+
+    }
+    private calcGlobals(stats: Stats[], res: Stats) {
+
+        _.reduce(stats, (accu, value) => {
+            accu.games += value.games;
+            accu.wins += value.wins;
+            accu.losses += value.losses;
+            return accu;
+        }, res);
+        res.winrate = res.wins / res.games;
+    }
+
+    private calcStatsForCommander(cmr: Commander | undefined, lieu: string, games: Game[]): Stats {
 
         return _.reduce(games, (stat, game) => {
             stat.games++;
@@ -76,6 +99,6 @@ export class StatsService {
             stat.winrate = stat.wins / stat.games;
 
             return stat;
-        }, new Stats(cmr));
+        }, new Stats(cmr, lieu));
     }
 }

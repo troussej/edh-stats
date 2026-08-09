@@ -3,21 +3,35 @@
     <p-table [value]="stats" size="small" showGridlines [sortField]="sortField" [sortOrder]="sortOrder">
         <ng-template #header>
             <tr>
-                <th>Commander</th>
-                <th>Games</th>
-                <th>Wins</th>
-                <th>Losses</th>
+                @if(commanderCol){
+                <th>Commandeur</th>
+                }
+                @if(lieuCol){
+                <th>Lieu</th>
+                }
+                <th>Parties</th>
+                <th>Gagnées</th>
+                <th>Perdues</th>
                 <th>Winrate</th>
             </tr>
         </ng-template>
         <ng-template #body let-stat>
             <tr>
+                @if(commanderCol){
                 <td>
                     <div class="flex items-center gap-2">
+                        @if(stat.commander && stat.commander.url){
                         <p-avatar [image]="stat.commander.url" shape="circle" />
+
+                        }
                         <span class="text-sm"> {{ stat.commander.commander }}</span>
                     </div>
+
                 </td>
+                }
+                @if(lieuCol){
+                <td>{{ stat.lieu }}</td>
+                }
                 <td>{{ stat.games }}</td>
                 <td>{{ stat.wins }}</td>
                 <td>{{ stat.losses }}</td>

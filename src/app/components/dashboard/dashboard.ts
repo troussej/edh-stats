@@ -8,13 +8,15 @@ import { ImageModule } from 'primeng/image';
 
 import { PanelModule } from 'primeng/panel';
 import { Table } from "../table/table";
+import { GlobalStats } from '../global-stats/global-stats';
+import { Lieu } from '../lieu/lieu';
 import _ from 'lodash';
 import { Stats } from 'app/models/game.model';
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [JsonPipe, AsyncPipe, PercentPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
+  imports: [GlobalStats, Lieu, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
