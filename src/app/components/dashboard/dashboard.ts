@@ -33,4 +33,8 @@ export class Dashboard {
   get perWinrate(): Stats[] {
     return _.filter(this.stats.stats, s => s.games >= 3);
   }
+
+  get perGames(): Stats[] {
+    return this.stats.stats;
+  }
 }
