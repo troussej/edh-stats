@@ -19,6 +19,7 @@
           "options": {
             "browser": "src/main.ts",
             "polyfills": [
+              "buffer",
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
@@ -53,7 +54,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -79,7 +80,8 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/testing",
+              "buffer"
             ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
