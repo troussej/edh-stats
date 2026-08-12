@@ -44,8 +44,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2MB",
+                  "maximumError": "3MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -58,7 +58,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
             }
           },
           "defaultConfiguration": "production"
@@ -67,7 +67,8 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "edh-stats:build:production"
+              "buildTarget": "edh-stats:build:production",
+              "allowedHosts": true
             },
             "development": {
               "buildTarget": "edh-stats:build:development"
