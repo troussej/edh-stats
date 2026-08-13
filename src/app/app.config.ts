@@ -15,6 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     providePrimeNG({
+      license: 'eyJpZCI6ImIyODU1ZjJmLTQ4NDUtNGM3Zi1hZWM1LWQzNmFkMGY3YTI1YiIsInByb2R1Y3QiOiJwcmltZXVpIiwidGllciI6ImNvbW11bml0eSIsInR5cGUiOiJkZXYiLCJpYXQiOjE3ODY2MzMyMzYsImV4cCI6MTgxODE2OTIzNn0.-a4OJXAKKM9q3fC6PJ8TyCMrRDGnoivoORTbFreE1hqvA23uSZDcQn_VeC4nRB45TN0cYqUvOitnY4n_TpVSCA',
       ripple: true,
       theme: {
         preset: Aura,
