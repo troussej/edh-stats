@@ -1,32 +1,20 @@
-<p-panel header="Statistiques Commander">
+<div class="grid grid-cols-2 gap-2">
 
+    <app-global-stats></app-global-stats>
+    <app-lieu></app-lieu>
 
-
-    <div class="grid">
-        <div class="col-6">
-            <app-global-stats></app-global-stats>
-        </div>
-        <div class="col-6">
-            <app-lieu></app-lieu>
-        </div>
-
-        @if(perWinrate|async){
-        <div class="col-6">
-            <app-table [stats]="(perWinrate|async)??[]" sortField="winrate" [sortOrder]="-1"
-                title="Par winrate (plus de 3 parties)"></app-table>
-        </div>
-        }
-        @if(perGames|async){
-        <div class="col-6">
-            <app-table [stats]="(perGames|async)??[]" sortField="games" [sortOrder]="-1"
-                title="Nombre de parties"></app-table>
-        </div>
-        }
+</div>
+<div class="grid grid-cols-2 gap-2">
+    @if(perWinrate|async){
+    <div class="">
+        <app-table [stats]="(perWinrate|async)??[]" sortField="winrate" [sortOrder]="-1"
+            title="Par winrate (plus de 3 parties)"></app-table>
     </div>
-
-
-
-
-
-
-</p-panel>
+    }
+    @if(perGames|async){
+    <div class="">
+        <app-table [stats]="(perGames|async)??[]" sortField="games" [sortOrder]="-1"
+            title="Nombre de parties"></app-table>
+    </div>
+    }
+</div>

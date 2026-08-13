@@ -9,6 +9,16 @@ import { provideHttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { StatsService } from './services/stats.service';
+import { definePreset } from '@primeuix/themes';
+
+// const MyPreset = definePreset(Aura, {
+//   semantic: {
+//     primary: {
+//       color: 'light-dark({primary.500}, {primary.400})',
+//       contrastColor: 'light-dark(#ffffff, {surface.900})'
+//     }
+//   }
+// });
 
 export const appConfig: ApplicationConfig = {
   providers: [

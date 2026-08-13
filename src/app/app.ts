@@ -11,6 +11,6 @@ import { Dashboard } from "./components/dashboard/dashboard";
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('test-ng');
+  protected readonly title = signal('EDH Stats');
 }
 

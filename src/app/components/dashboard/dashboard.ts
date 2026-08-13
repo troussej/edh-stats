@@ -5,6 +5,7 @@ import { map, Observable } from 'rxjs';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { ImageModule } from 'primeng/image';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { PanelModule } from 'primeng/panel';
 import { Table } from "../table/table";
@@ -16,7 +17,7 @@ import { Stats } from 'app/models/game.model';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, Lieu, PanelModule, CardModule, TableModule, ImageModule, Table, GlobalStats],
+  imports: [AsyncPipe, Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStats],
   // imports: [GlobalStats, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
