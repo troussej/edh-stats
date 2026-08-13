@@ -5,11 +5,13 @@ import * as Papa from 'papaparse';
 import { Commander, Game } from "app/models/game.model";
 import * as _ from 'lodash';
 import { ConfigService } from "./config.service";
+import { LocationStrategy } from "@angular/common";
 
 @Service()
 export class SheetService {
 
     private http: HttpClient = inject(HttpClient);
+    private locationStrategy = inject(LocationStrategy);
     private config = inject(ConfigService).config;
 
 
@@ -19,7 +21,7 @@ export class SheetService {
         if (googlesheet) {
             url = this.config.data[index].games;
         } else {
-            url = '/cache/games-' + year + '.csv';
+            url = 'cache/games-' + year + '.csv';
         }
         console.log('getGames %s %s', index, url);
         return this.getGamesParUrl(url);
