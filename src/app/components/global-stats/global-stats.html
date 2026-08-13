@@ -1,8 +1,8 @@
 @if(globals|async){
-
-<app-table [commanderCol]="false" [stats]="(globals|async)??[]" sortField="games" [sortOrder]="-1"
-    title="Stats globales"></app-table>
+<p-fieldset legend="Stats globales" class="">
 
 
+    <app-pie [data]="(globals|async)!"></app-pie>
+</p-fieldset>
 
 }

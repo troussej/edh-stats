@@ -7,10 +7,12 @@ import { Table } from '../table/table';
 import { Observable } from 'rxjs/internal/Observable';
 import { Stats } from 'app/models/game.model';
 import { map } from 'rxjs';
+import { Pie } from '../pie/pie';
+import { FieldsetModule } from "primeng/fieldset";
 
 @Component({
   selector: 'app-global-stats',
-  imports: [AsyncPipe, CardModule, Table,],
+  imports: [AsyncPipe, CardModule, Pie, FieldsetModule],
   templateUrl: './global-stats.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './global-stats.css',
@@ -19,7 +21,7 @@ export class GlobalStats {
   public statsService: StatsService = inject(StatsService);
 
 
-  get globals(): Observable<Stats[]> {
-    return this.statsService.stats.pipe(map(stats => [stats.globals]));
+  get globals(): Observable<Stats> {
+    return this.statsService.stats.pipe(map(stats => stats.globals));
   }
 }

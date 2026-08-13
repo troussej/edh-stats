@@ -1,20 +1,15 @@
-<div class="grid grid-cols-2 gap-2">
+<div class="grid grid-cols-2 gap-4 m-4">
+    <div class="col-span-1">
 
-    <app-global-stats></app-global-stats>
+        <app-global-stats></app-global-stats>
+    </div>
     <app-lieu></app-lieu>
 
-</div>
-<div class="grid grid-cols-2 gap-2">
     @if(perWinrate|async){
-    <div class="">
-        <app-table [stats]="(perWinrate|async)??[]" sortField="winrate" [sortOrder]="-1"
-            title="Par winrate (plus de 3 parties)"></app-table>
-    </div>
+    <app-table [stats]="(perWinrate|async)??[]" sortField="winrate" [sortOrder]="-1"
+        title="Par winrate (plus de 3 parties)"></app-table>
     }
     @if(perGames|async){
-    <div class="">
-        <app-table [stats]="(perGames|async)??[]" sortField="games" [sortOrder]="-1"
-            title="Nombre de parties"></app-table>
-    </div>
+    <app-table [stats]="(perGames|async)??[]" sortField="games" [sortOrder]="-1" title="Nombre de parties"></app-table>
     }
 </div>
