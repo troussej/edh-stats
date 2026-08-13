@@ -1,5 +1,5 @@
 import { JsonPipe, AsyncPipe, PercentPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Stats } from 'app/models/game.model';
 import { CardModule } from 'primeng/card';
 import { ImageModule } from 'primeng/image';
@@ -11,6 +11,7 @@ import { Popover, PopoverModule } from 'primeng/popover';
   selector: 'app-table',
   imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, PopoverModule],
   templateUrl: './table.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './table.scss',
 })
 export class Table {

@@ -1,5 +1,5 @@
 import { AsyncPipe, JsonPipe, PercentPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { Observable } from 'rxjs';
 import { CardModule } from 'primeng/card';
@@ -18,6 +18,7 @@ import { Stats } from 'app/models/game.model';
   selector: 'app-dashboard',
   imports: [GlobalStats, Lieu, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
   templateUrl: './dashboard.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {

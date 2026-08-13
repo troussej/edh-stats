@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
 import { Table } from '../table/table';
@@ -9,6 +9,7 @@ import { Table } from '../table/table';
   selector: 'app-lieu',
   imports: [AsyncPipe, CardModule, Table],
   templateUrl: './lieu.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './lieu.scss',
 })
 export class Lieu {
