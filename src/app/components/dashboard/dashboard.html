@@ -1,9 +1,9 @@
 <div class="grid grid-cols-2 gap-4 m-4">
     <div class="col-span-1">
 
-        <app-global-stats></app-global-stats>
+        <app-global-stats [currentYear]="currentYear"></app-global-stats>
     </div>
-    <app-lieu></app-lieu>
+    <app-lieu [currentYear]="currentYear"></app-lieu>
 
     @if(perWinrate|async){
     <app-table [stats]="(perWinrate|async)??[]" sortField="winrate" [sortOrder]="-1"

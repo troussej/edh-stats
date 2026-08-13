@@ -16,21 +16,39 @@ export interface Commander {
 
 export class Stats {
     // date: Date,
-    constructor(public commander?: Commander,
-        public lieu = '',
+    constructor(
+        public name = '',
         public games = 0,
         public wins = 0,
         public losses = 0,
         public winrate = 0
     ) { }
 
+    calcWinrate() {
+        this.winrate = this.wins / this.games;
+    }
+    get title() {
+        return this.name;
+    }
 }
 
-export class AllStats {
+export class StatsPerCommander extends Stats {
     constructor(
+        public commander: Commander
+    ) {
+        super();
+    }
+
+    override get title() {
+        return this.commander.commander;
+    }
+}
+
+export class StatsPerYear {
+    constructor(
+        public year: number,
         public games: Game[] = [],
-        public commanders: { [name: string]: Commander } = {},
-        public allStats: Stats[] = [],
+        public parCommander: StatsPerCommander[] = [],
         public parLieu: Stats[] = [],
         public globals: Stats = new Stats()
     ) { }

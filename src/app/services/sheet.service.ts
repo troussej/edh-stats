@@ -15,9 +15,9 @@ export class SheetService {
 
 
 
-    public getGames(): Observable<Game[]> {
-        const index = this.config.defaultYear as keyof typeof this.config.sheets;
-        const url = this.config.sheets[index].games;
+    public getGames(year: number): Observable<Game[]> {
+        const index = year as keyof typeof this.config.data;
+        const url = this.config.data[index].games;
         console.log('getGames %s %s', index, url);
         return this.http.get(url, { responseType: "text" })
             .pipe(
@@ -38,9 +38,8 @@ export class SheetService {
     }
 
     public getCommanders(): Observable<Commander[]> {
-        const index = this.config.defaultYear as keyof typeof this.config.sheets;
-        const url = this.config.sheets[index].commanders;
-        console.log('getCommanders %s %s', index, url);
+        const url = this.config.commanders;
+        console.log('getCommanders %s %s', url);
         return this.http.get(url, { responseType: "text" })
             .pipe(
                 map(text => {

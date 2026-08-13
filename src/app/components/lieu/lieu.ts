@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, Input } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
 import { Table } from '../table/table';
@@ -17,7 +17,11 @@ import { Stats } from 'app/models/game.model';
 export class Lieu {
   public statsService: StatsService = inject(StatsService);
 
+
+  @Input({ required: true })
+  public currentYear!: number;
+
   get parlieu(): Observable<Stats[]> {
-    return this.statsService.stats.pipe(map(stats => stats.parLieu));
+    return this.statsService.stats.pipe(map(stats => stats[this.currentYear].parLieu));
   }
 }

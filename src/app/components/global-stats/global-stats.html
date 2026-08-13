@@ -1,8 +1,38 @@
 @if(globals|async){
-<p-fieldset legend="Stats globales" class="">
+
+<p-fieldset legend="Stats globales" [toggleable]="true">
+
+    <div class="grid grid-cols-3 gap-4 m-4">
+        <div class="col-span-1">
+            <app-pie [data]="(globalsCurrentYear|async)!" class="m-2"></app-pie>
+        </div>
+        <div class="col-span-2 pt-10">
 
 
-    <app-pie [data]="(globals|async)!"></app-pie>
+
+            <p-table [value]="(globalsAsArray|async)!" size="small" showGridlines orderable="true" [sortField]="'title'"
+                [sortOrder]="-1">
+                <ng-template #header>
+                    <tr>
+                        <th>Année</th>
+                        <th>Parties</th>
+                        <th>Gagnées</th>
+                        <th>Perdues</th>
+                        <th>Winrate</th>
+                    </tr>
+                </ng-template>
+                <ng-template #body let-stat>
+                    <tr>
+
+                        <td>{{ stat.title }}</td>
+                        <td>{{ stat.games }}</td>
+                        <td>{{ stat.wins }}</td>
+                        <td>{{ stat.losses }}</td>
+                        <td>{{ stat.winrate |percent}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
 </p-fieldset>
-
 }

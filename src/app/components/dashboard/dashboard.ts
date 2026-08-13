@@ -13,6 +13,7 @@ import { GlobalStats } from '../global-stats/global-stats';
 import { Lieu } from '../lieu/lieu';
 import _ from 'lodash';
 import { Stats } from 'app/models/game.model';
+import { ConfigService } from 'app/services/config.service';
 
 
 @Component({
@@ -25,14 +26,17 @@ import { Stats } from 'app/models/game.model';
 })
 export class Dashboard {
   public statsService = inject(StatsService);
+  public config = inject(ConfigService).config;
+
+  public currentYear = this.config.defaultYear;
 
   get perWinrate(): Observable<Stats[]> {
 
-    return this.statsService.stats.pipe(map(stats => _.filter(stats.allStats, s => s.games >= 3)));
+    return this.statsService.stats.pipe(map(stats => _.filter(stats[this.currentYear].parCommander, s => s.games >= 3)));
 
   }
 
   get perGames(): Observable<Stats[]> {
-    return this.statsService.stats.pipe(map(s => s.allStats));
+    return this.statsService.stats.pipe(map(s => s[this.currentYear].parCommander));
   }
 }

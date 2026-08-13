@@ -1,5 +1,5 @@
-<p-fieldset legend="{{title}}" class="">
-    <p-table [value]="stats" size="small" showGridlines [sortField]="sortField" [sortOrder]="sortOrder">
+<p-fieldset [legend]="title" class="" [toggleable]="true">
+    <p-table [value]="stats" size="small" showGridlines [sortField]="sortField" [sortOrder]="sortOrder" class="mt-4">
         <ng-template #header>
             <tr>
                 @if(commanderCol){

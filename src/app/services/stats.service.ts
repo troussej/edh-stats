@@ -1,19 +1,28 @@
 import { inject, Service } from "@angular/core";
 import { SheetService } from "./sheet.service";
-import { AllStats, Commander, Game, Stats } from "app/models/game.model";
-import { forkJoin, map, Observable, of, ReplaySubject } from "rxjs";
+import { Commander, Game, StatsPerCommander, StatsPerYear, Stats } from "app/models/game.model";
+import { forkJoin, map, Observable, of, ReplaySubject, pipe, mergeMap } from "rxjs";
 import _, { Dictionary } from "lodash";
+import { ConfigService } from "./config.service";
 
+
+type GameData = {
+    games: {
+        [year: number]: Game[];
+    };
+    commanders: Dictionary<Commander>;
+};
 
 @Service()
 export class StatsService {
 
-
+    private config = inject(ConfigService).config;
     private sheets = inject(SheetService)
-    private allStats = new ReplaySubject<AllStats>(1);
+    private allStats = new ReplaySubject<{ [year: number]: StatsPerYear }>(1);
 
 
-    public get stats(): Observable<AllStats> {
+
+    public get stats(): Observable<{ [year: number]: StatsPerYear }> {
         return this.allStats.asObservable();
     }
 
@@ -23,7 +32,7 @@ export class StatsService {
         return this.loadData()
             .pipe(
                 map((data) => {
-                    return this.calcStats(data);
+                    return this.calcStatsAllYears(data);
                 }),
                 map((allStats) => {
                     this.allStats.next(allStats);
@@ -34,61 +43,83 @@ export class StatsService {
 
     }
 
-    private loadData(): Observable<{ games: Game[], commanders: Dictionary<Commander> }> {
+    private loadData(): Observable<{ games: { [year: number]: Game[] }, commanders: Dictionary<Commander> }> {
 
-        return forkJoin({ games: this.sheets.getGames(), commanders: this.sheets.getCommanders() }).pipe(
-            map(data => ({
-                games: data.games,
-                commanders: _.chain(data.commanders).map(c => ([c.commander, c])).fromPairs().value()
-            }))
+        return forkJoin({
+            commanders: this.sheets.getCommanders(),
+            games: this.loadGamesData()
+        }).pipe(
+            map(data => {
+                return {
+                    games: data.games,
+                    commanders: _.chain(data['commanders']).map(c => ([c.commander, c])).fromPairs().value()
+                }
+            })
         );
     }
 
-    private calcStats(data: { games: Game[], commanders: Dictionary<Commander> }): AllStats {
+    private loadGamesData(): Observable<{ [year: number]: Game[] }> {
 
-        let cmrDictio = _.groupBy(data.games, "deck");
+        const obsMap = _.chain(this.config.years)
+            .map(y => {
+                if (y === this.config.defaultYear) {
+                    return [y, this.sheets.getGames(y)];
+                } else {
+                    return [y, of([])];
+                }
+            })
+            .fromPairs().value();
 
-        let stats = _.chain(data.commanders).map((cmr, cmrName) => this.calcStatsForCommander(cmr, '', cmrDictio[cmr.commander])).value();
+        return forkJoin(obsMap).pipe(
+            map(data => {
+                return _.chain(data).map((games, year) => [year, games]).fromPairs().value();
+            })
+        );
 
-        let globals = new Stats();
 
-        this.calcGlobals(stats, globals);
+    }
 
-        let parLieu = this.calcStatsLieux(data.games);
+    private calcStatsAllYears(data: GameData): { [year: number]: StatsPerYear } {
+        return _.chain(this.config.years)
+            .map((year) => [year, this.calcStatsPerYear(year, data.games[year], data.commanders)])
+            .fromPairs().value();
+    }
 
-        console.log('calcStats done');
-        return new AllStats(data.games, data.commanders, stats, parLieu, globals);
+    private calcStatsPerYear(year: number, gamesForYear: Game[], commanders: Dictionary<Commander>): StatsPerYear {
+
+        let gamesPerCommander = _.groupBy(gamesForYear, "deck");
+        let statsPerCommander = _.chain(commanders).map((cmr, cmrName) => this.calcStats(new StatsPerCommander(cmr), gamesPerCommander[cmr.commander])).value();
+
+        const globals = this.calcStats(new Stats(year.toString()), gamesForYear);
+
+        let parLieu = this.calcStatsLieux(gamesForYear);
+
+        console.log('calcStatsPerYear done');
+        return new StatsPerYear(year, gamesForYear, statsPerCommander, parLieu, globals);
     }
 
     calcStatsLieux(games: Game[]) {
         let lieuDictio = _.groupBy(games, "lieu");
 
-        return _.chain(lieuDictio).map((values, lieu) => this.calcStatsForCommander(undefined, lieu, lieuDictio[lieu])).value();
+        return _.chain(lieuDictio).map((values, lieu) => this.calcStats(new Stats(lieu), values)).value();
 
     }
-    private calcGlobals(stats: Stats[], res: Stats) {
 
-        _.reduce(stats, (accu, value) => {
-            accu.games += value.games;
-            accu.wins += value.wins;
-            accu.losses += value.losses;
-            return accu;
-        }, res);
-        res.winrate = res.wins / res.games;
-    }
+    private calcStats<T extends Stats>(stat: T, games: Game[]): T {
 
-    private calcStatsForCommander(cmr: Commander | undefined, lieu: string, games: Game[]): Stats {
-
-        return _.reduce(games, (stat, game) => {
+        const res = _.reduce(games, (stat, game) => {
             stat.games++;
             if (game.gagnant) {
                 stat.wins++;
             } else {
                 stat.losses++;
             }
-            stat.winrate = stat.wins / stat.games;
-
             return stat;
-        }, new Stats(cmr, lieu));
+        }, stat);
+
+        res.calcWinrate();
+        return res;
     }
+
+
 }
