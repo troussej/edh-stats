@@ -1,43 +1,32 @@
-import { Injectable } from "@angular/core";
+import { inject, Service } from "@angular/core";
 import { SheetService } from "./sheet.service";
-import { Commander, Game, Stats } from "app/models/game.model";
-import { BehaviorSubject, combineLatest, forkJoin, map, Observable, of } from "rxjs";
+import { AllStats, Commander, Game, Stats } from "app/models/game.model";
+import { forkJoin, map, Observable, of, ReplaySubject } from "rxjs";
 import _, { Dictionary } from "lodash";
 
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class StatsService {
 
-    public games: Game[] = [];
-    public commanders: { [name: string]: Commander } = {};
-    public parLieu: Stats[] = [];
-    public stats: Stats[] = [];
-    public globals: Stats = new Stats();
+
+    private sheets = inject(SheetService)
+    private allStats = new ReplaySubject<AllStats>(1);
 
 
-
-
-    private ready = new BehaviorSubject<boolean>(false);
-
-
-
-    constructor(private sheets: SheetService) {
-
-    }
-
-    public get isReady(): Observable<boolean> {
-        return this.ready.asObservable();
+    public get stats(): Observable<AllStats> {
+        return this.allStats.asObservable();
     }
 
     public initData(): Observable<boolean> {
         console.log('initData');
+        // return of(true);
         return this.loadData()
             .pipe(
-                map(() => {
-                    return this.calcStats();
+                map((data) => {
+                    return this.calcStats(data);
                 }),
-                map(() => {
-                    this.ready.next(true);
+                map((allStats) => {
+                    this.allStats.next(allStats);
                     console.log('initData done');
                     return true;
                 })
@@ -45,35 +34,36 @@ export class StatsService {
 
     }
 
-    private loadData(): Observable<boolean> {
+    private loadData(): Observable<{ games: Game[], commanders: Dictionary<Commander> }> {
 
         return forkJoin({ games: this.sheets.getGames(), commanders: this.sheets.getCommanders() }).pipe(
-            map(data => {
-                this.games = data.games;
-                this.commanders = _.chain(data.commanders).map(c => ([c.commander, c])).fromPairs().value();
-                console.log('loadData done');
-                return true;
-            })
+            map(data => ({
+                games: data.games,
+                commanders: _.chain(data.commanders).map(c => ([c.commander, c])).fromPairs().value()
+            }))
         );
     }
 
-    private calcStats(): boolean {
+    private calcStats(data: { games: Game[], commanders: Dictionary<Commander> }): AllStats {
 
-        let cmrDictio = _.groupBy(this.games, "deck");
+        let cmrDictio = _.groupBy(data.games, "deck");
 
-        this.stats = _.chain(this.commanders).map((cmr, cmrName) => this.calcStatsForCommander(cmr, '', cmrDictio[cmr.commander])).value();
+        let stats = _.chain(data.commanders).map((cmr, cmrName) => this.calcStatsForCommander(cmr, '', cmrDictio[cmr.commander])).value();
 
-        this.calcGlobals(this.stats, this.globals);
+        let globals = new Stats();
 
-        this.calcStatsLieux();
+        this.calcGlobals(stats, globals);
+
+        let parLieu = this.calcStatsLieux(data.games);
 
         console.log('calcStats done');
-        return true;
+        return new AllStats(data.games, data.commanders, stats, parLieu, globals);
     }
-    calcStatsLieux() {
-        let lieuDictio = _.groupBy(this.games, "lieu");
 
-        this.parLieu = _.chain(lieuDictio).map((values, lieu) => this.calcStatsForCommander(undefined, lieu, lieuDictio[lieu])).value();
+    calcStatsLieux(games: Game[]) {
+        let lieuDictio = _.groupBy(games, "lieu");
+
+        return _.chain(lieuDictio).map((values, lieu) => this.calcStatsForCommander(undefined, lieu, lieuDictio[lieu])).value();
 
     }
     private calcGlobals(stats: Stats[], res: Stats) {

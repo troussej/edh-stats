@@ -1,33 +1,37 @@
-import { APP_INITIALIZER, ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay, withNoIncrementalHydration } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeuix/themes/aura';
+// import { StatsService } from './services/stats.service';
+import { provideHttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
 import { StatsService } from './services/stats.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimationsAsync(),
-    provideHttpClient(withFetch()),
+    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes),
     providePrimeNG({
       ripple: true,
       theme: {
         preset: Aura,
         options: {
-          darkModeSelector: '.edh-stats-dark'
+          prefix: 'p',
+          darkModeSelector: 'system',
+
+          cssVariables: true
         }
       }
     }),
-    provideBrowserGlobalErrorListeners(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay(), withNoIncrementalHydration()),
+    provideHttpClient(),
     provideAppInitializer(() => {
+      console.log('provideAppInitializer');
+      // return of(true);
       const service = inject(StatsService);
-      service.initData().subscribe();
+      return service.initData();
     }),
   ]
 };

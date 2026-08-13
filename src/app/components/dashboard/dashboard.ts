@@ -1,7 +1,7 @@
 import { AsyncPipe, JsonPipe, PercentPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { ImageModule } from 'primeng/image';
@@ -16,28 +16,22 @@ import { Stats } from 'app/models/game.model';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [GlobalStats, Lieu, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
+  imports: [AsyncPipe, Lieu, PanelModule, CardModule, TableModule, ImageModule, Table, GlobalStats],
+  // imports: [GlobalStats, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-  public data: Observable<any> | undefined;
-  constructor(public stats: StatsService) {
+  public statsService = inject(StatsService);
+
+  get perWinrate(): Observable<Stats[]> {
+
+    return this.statsService.stats.pipe(map(stats => _.filter(stats.allStats, s => s.games >= 3)));
 
   }
-  ngOnInit(): void {
-  }
 
-  get ready(): Observable<boolean> {
-    return this.stats.isReady;
-  }
-
-  get perWinrate(): Stats[] {
-    return _.filter(this.stats.stats, s => s.games >= 3);
-  }
-
-  get perGames(): Stats[] {
-    return this.stats.stats;
+  get perGames(): Observable<Stats[]> {
+    return this.statsService.stats.pipe(map(s => s.allStats));
   }
 }

@@ -3,7 +3,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -14,22 +13,19 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
-    "baseUrl": "src",
     "paths": {
       "app/*": [
-        "app/*"
+        "./src/app/*"
       ],
       "config/*": [
-        "config/*"
+        "./src/config/*"
       ],
     }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "typeCheckHostBindings": true,
-    "strictTemplates": true
+    "strictInputAccessModifiers": true
   },
   "files": [],
   "references": [
@@ -39,5 +35,5 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ],
+  ]
 }

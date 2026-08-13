@@ -25,3 +25,14 @@ export class Stats {
     ) { }
 
 }
+
+export class AllStats {
+    constructor(
+        public games: Game[] = [],
+        public commanders: { [name: string]: Commander } = {},
+        public allStats: Stats[] = [],
+        public parLieu: Stats[] = [],
+        public globals: Stats = new Stats()
+    ) { }
+
+}

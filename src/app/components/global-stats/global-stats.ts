@@ -1,8 +1,12 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
 import { Table } from '../table/table';
+
+import { Observable } from 'rxjs/internal/Observable';
+import { Stats } from 'app/models/game.model';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-global-stats',
@@ -12,11 +16,10 @@ import { Table } from '../table/table';
   styleUrl: './global-stats.scss',
 })
 export class GlobalStats {
-  constructor(public stats: StatsService) {
+  public statsService: StatsService = inject(StatsService);
 
-  }
 
-  get globals() {
-    return [this.stats.globals];
+  get globals(): Observable<Stats[]> {
+    return this.statsService.stats.pipe(map(stats => [stats.globals]));
   }
 }

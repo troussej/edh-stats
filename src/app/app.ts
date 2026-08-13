@@ -1,15 +1,16 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Dashboard } from './components/dashboard/dashboard';
 import { MenubarModule } from 'primeng/menubar';
+import { Dashboard } from "./components/dashboard/dashboard";
+// import { Dashboard } from './components/dashboard/dashboard';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Dashboard, MenubarModule],
+  imports: [MenubarModule, RouterOutlet, Dashboard],
   templateUrl: './app.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './app.scss'
+  styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('edh-stats');
+  protected readonly title = signal('test-ng');
 }
+

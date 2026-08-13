@@ -1,22 +1,23 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import * as config from "config/config.json";
-import { map, Observable } from "rxjs";
-import { parse } from "csv-parse/sync";
+import { inject, Injectable, Service } from "@angular/core";
+import { map, Observable, of } from "rxjs";
+import * as Papa from 'papaparse';
 import { Commander, Game } from "app/models/game.model";
 import * as _ from 'lodash';
+import { ConfigService } from "./config.service";
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class SheetService {
 
-    constructor(private http: HttpClient) {
+    private http: HttpClient = inject(HttpClient);
+    private config = inject(ConfigService).config;
 
-    }
+
 
 
     public getGames(): Observable<Game[]> {
-        const index = config.defaultYear as keyof typeof config.sheets;
-        const url = config.sheets[index].games;
+        const index = this.config.defaultYear as keyof typeof this.config.sheets;
+        const url = this.config.sheets[index].games;
         console.log('getGames %s %s', index, url);
         return this.http.get(url, { responseType: "text" })
             .pipe(
@@ -37,8 +38,8 @@ export class SheetService {
     }
 
     public getCommanders(): Observable<Commander[]> {
-        const index = config.defaultYear as keyof typeof config.sheets;
-        const url = config.sheets[index].commanders;
+        const index = this.config.defaultYear as keyof typeof this.config.sheets;
+        const url = this.config.sheets[index].commanders;
         console.log('getCommanders %s %s', index, url);
         return this.http.get(url, { responseType: "text" })
             .pipe(
@@ -63,16 +64,20 @@ export class SheetService {
 
 
     public getThemes(): Observable<any> {
-        return this.http.get(config.sheets[2025].themes, { responseType: "text" })
-            .pipe(map(text => {
-                return this.parse(text);
-            }));
+        return of([]);
+        // return this.http.get(this.config.sheets[2025].themes, { responseType: "text" })
+        //     .pipe(map(text => {
+        //         return this.parse(text);
+        //     }));
     }
 
     private parse(text: string) {
-        return parse(text, {
-            columns: true,
-            skip_empty_lines: true,
-        });
+        let data = Papa.parse(text, {
+            header: true,
+            skipEmptyLines: true,
+        }).data;
+
+        console.log('parse done', data);
+        return data;
     }
 }

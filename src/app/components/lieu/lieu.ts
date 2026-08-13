@@ -1,8 +1,10 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
 import { Table } from '../table/table';
+import { map, Observable } from 'rxjs';
+import { Stats } from 'app/models/game.model';
 
 
 @Component({
@@ -13,7 +15,9 @@ import { Table } from '../table/table';
   styleUrl: './lieu.scss',
 })
 export class Lieu {
-  constructor(public stats: StatsService) {
+  public statsService: StatsService = inject(StatsService);
 
+  get parlieu(): Observable<Stats[]> {
+    return this.statsService.stats.pipe(map(stats => stats.parLieu));
   }
 }
