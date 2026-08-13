@@ -13,7 +13,7 @@ import { Popover, PopoverModule } from 'primeng/popover';
   imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule],
   templateUrl: './table.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './table.scss',
+  styleUrl: './table.css',
 })
 export class Table {
 

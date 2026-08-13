@@ -21,7 +21,7 @@ import { Stats } from 'app/models/game.model';
   // imports: [GlobalStats, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './dashboard.scss',
+  styleUrl: './dashboard.css',
 })
 export class Dashboard {
   public statsService = inject(StatsService);

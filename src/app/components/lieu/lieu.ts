@@ -12,7 +12,7 @@ import { Stats } from 'app/models/game.model';
   imports: [AsyncPipe, CardModule, Table],
   templateUrl: './lieu.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './lieu.scss',
+  styleUrl: './lieu.css',
 })
 export class Lieu {
   public statsService: StatsService = inject(StatsService);

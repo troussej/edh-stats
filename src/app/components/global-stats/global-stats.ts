@@ -13,7 +13,7 @@ import { map } from 'rxjs';
   imports: [AsyncPipe, CardModule, Table,],
   templateUrl: './global-stats.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './global-stats.scss',
+  styleUrl: './global-stats.css',
 })
 export class GlobalStats {
   public statsService: StatsService = inject(StatsService);
