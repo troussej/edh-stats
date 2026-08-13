@@ -13,12 +13,20 @@ export class SheetService {
     private config = inject(ConfigService).config;
 
 
-
-
-    public getGames(year: number): Observable<Game[]> {
+    public getGames(year: number, googlesheet = true): Observable<Game[]> {
         const index = year as keyof typeof this.config.data;
-        const url = this.config.data[index].games;
+        let url = '';
+        if (googlesheet) {
+            url = this.config.data[index].games;
+        } else {
+            url = '/cache/games-' + year + '.csv';
+        }
         console.log('getGames %s %s', index, url);
+        return this.getGamesParUrl(url);
+    }
+
+    public getGamesParUrl(url: string): Observable<Game[]> {
+
         return this.http.get(url, { responseType: "text" })
             .pipe(
                 map(text => {
@@ -58,16 +66,6 @@ export class SheetService {
                 )))
 
             );
-    }
-
-
-
-    public getThemes(): Observable<any> {
-        return of([]);
-        // return this.http.get(this.config.sheets[2025].themes, { responseType: "text" })
-        //     .pipe(map(text => {
-        //         return this.parse(text);
-        //     }));
     }
 
     private parse(text: string) {

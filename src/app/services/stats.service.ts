@@ -62,11 +62,9 @@ export class StatsService {
 
         const obsMap = _.chain(this.config.years)
             .map(y => {
-                if (y === this.config.defaultYear) {
-                    return [y, this.sheets.getGames(y)];
-                } else {
-                    return [y, of([])];
-                }
+
+                return [y, this.sheets.getGames(y, y === this.config.defaultYear)];
+
             })
             .fromPairs().value();
 
