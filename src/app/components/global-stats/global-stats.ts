@@ -41,4 +41,8 @@ export class GlobalStats {
   get globalsAsArray(): Observable<Stats[]> {
     return this.globals.pipe(map(globals => _.values(globals)));
   }
+
+  setCurrentYear(year: number) {
+    this.currentYear = year;
+  }
 }

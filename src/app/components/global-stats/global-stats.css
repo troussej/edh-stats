@@ -1,0 +1,4 @@
+ ::ng-deep .current-year {
+     font-weight: bold;
+     color: var(--primary-color);
+ }

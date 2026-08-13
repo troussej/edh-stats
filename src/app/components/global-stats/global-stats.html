@@ -5,10 +5,9 @@
     <div class="grid grid-cols-3 gap-4 m-4">
         <div class="col-span-1">
             <app-pie [data]="(globalsCurrentYear|async)!" class="m-2"></app-pie>
+            <span class="text-l font-bold center pt-4">{{ currentYear }}</span>
         </div>
         <div class="col-span-2 pt-10">
-
-
 
             <p-table [value]="(globalsAsArray|async)!" size="small" showGridlines orderable="true" [sortField]="'title'"
                 [sortOrder]="-1">
@@ -22,9 +21,14 @@
                     </tr>
                 </ng-template>
                 <ng-template #body let-stat>
-                    <tr>
+                    <tr (click)="setCurrentYear(stat.title)" [class.current-year]="stat.title === currentYear">
 
-                        <td>{{ stat.title }}</td>
+                        <td>
+                            @if(stat.title == currentYear){
+                            *
+                            }
+                            {{ stat.title }}
+                        </td>
                         <td>{{ stat.games }}</td>
                         <td>{{ stat.wins }}</td>
                         <td>{{ stat.losses }}</td>

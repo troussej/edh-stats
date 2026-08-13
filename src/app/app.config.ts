@@ -8,8 +8,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
-import Material from '@primeuix/themes/material';
+
 // import { StatsService } from './services/stats.service';
 import { provideHttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
@@ -17,23 +16,8 @@ import { of } from 'rxjs/internal/observable/of';
 import { StatsService } from './services/stats.service';
 import { definePreset } from '@primeuix/themes';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { MyPreset } from './preset';
 
-const MyPreset = definePreset(Aura, {
-  components: {
-    fieldset: {
-      legend: { background: '{primary.700}' }
-    },
-    datatable: {
-
-      headerCell: {
-        background: '{surface.700}',
-
-
-
-      }
-    }
-  }
-});
 
 export const appConfig: ApplicationConfig = {
   providers: [
