@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "test-ng": {
+    "edh-stats": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "test-ng:build:production"
+              "buildTarget": "edh-stats:build:production"
             },
             "development": {
-              "buildTarget": "test-ng:build:development"
+              "buildTarget": "edh-stats:build:development"
             }
           },
           "defaultConfiguration": "development"
