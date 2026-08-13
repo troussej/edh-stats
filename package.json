@@ -32,7 +32,7 @@
     "@angular/router": "^22.1.1",
     "@angular/ssr": "^22.1.3",
     "@google-cloud/local-auth": "^2.1.0",
-    "@primeuix/themes": "^1.2.5",
+    "@primeuix/themes": "^3.0.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/lodash": "^4.17.21",
     "csv-parse": "^6.1.0",
@@ -41,7 +41,7 @@
     "lodash": "^4.17.21",
     "postcss": "^8.5.26",
     "primeflex": "^4.0.0",
-    "primeng": "^20.3.0",
+    "primeng": "^22.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
