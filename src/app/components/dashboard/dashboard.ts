@@ -9,7 +9,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 
 import { PanelModule } from 'primeng/panel';
 import { Table } from "../table/table";
-import { GlobalStats } from '../global-stats/global-stats';
+import { GlobalStatsComponent } from '../global-stats/global-stats';
 import { Lieu } from '../lieu/lieu';
 import _ from 'lodash';
 import { Commander, Stats } from 'app/models/game.model';
@@ -18,7 +18,7 @@ import { ConfigService } from 'app/services/config.service';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStats],
+  imports: [AsyncPipe, Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent],
   // imports: [GlobalStats, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,

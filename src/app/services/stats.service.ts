@@ -1,6 +1,6 @@
 import { inject, Service } from "@angular/core";
 import { SheetService } from "./sheet.service";
-import { Commander, Game, StatsPerCommander, StatsPerYear, Stats } from "app/models/game.model";
+import { Commander, Game, StatsPerCommander, StatsPerYear, Stats, GlobalStats } from "app/models/game.model";
 import { forkJoin, map, Observable, of, ReplaySubject, pipe, mergeMap } from "rxjs";
 import _, { Dictionary } from "lodash";
 import { ConfigService } from "./config.service";
@@ -84,9 +84,11 @@ export class StatsService {
     }
 
     private calcStatsAllYears(data: GameData): { [year: number]: StatsPerYear } {
-        return _.chain(this.config.years)
+        const res = _.chain(this.config.years)
             .map((year) => [year, this.calcStatsPerYear(year, data.games[year], data.commanders)])
             .fromPairs().value();
+        this.calcMovementFromPrevYear(res);
+        return res;
     }
 
     private calcStatsPerYear(year: number, gamesForYear: Game[], commanders: Dictionary<Commander>): StatsPerYear {
@@ -94,7 +96,7 @@ export class StatsService {
         let gamesPerCommander = _.groupBy(gamesForYear, "deck");
         let statsPerCommander = _.chain(commanders).map((cmr, cmrName) => this.calcStats(new StatsPerCommander(cmr), gamesPerCommander[cmr.commander])).value();
 
-        const globals = this.calcStats(new Stats(year.toString()), gamesForYear);
+        const globals = this.calcStats(new GlobalStats(year.toString()), gamesForYear);
 
         let parLieu = this.calcStatsLieux(gamesForYear);
 
@@ -125,5 +127,21 @@ export class StatsService {
         return res;
     }
 
+    calcMovementFromPrevYear(data: { [year: number]: StatsPerYear }) {
 
+        _.forEach(this.config.years, year => {
+            if (data[year - 1]) {
+
+                const current = data[year].globals;
+                const prev = data[year - 1].globals;
+
+                current.gamesMovement = current.games > prev.games;
+                current.winMovement = current.wins > prev.wins;
+                current.lossMovement = current.losses > prev.losses;
+                current.winrateMovement = current.winrate > prev.winrate;
+            }
+        })
+
+        return data;
+    }
 }

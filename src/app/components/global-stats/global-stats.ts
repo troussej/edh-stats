@@ -5,41 +5,44 @@ import { CardModule } from 'primeng/card';
 import { Table } from '../table/table';
 
 import { Observable } from 'rxjs/internal/Observable';
-import { Stats } from 'app/models/game.model';
+import { GlobalStats, Stats } from 'app/models/game.model';
 import { map } from 'rxjs';
 import { Pie } from '../pie/pie';
 import { FieldsetModule } from "primeng/fieldset";
 import { TableModule } from "primeng/table";
 import { ConfigService } from 'app/services/config.service';
 import _ from 'lodash';
+import { ArrowDownRight, ArrowUpRight } from '@primeicons/angular';
 @Component({
   selector: 'app-global-stats',
-  imports: [AsyncPipe, CardModule, Pie, FieldsetModule, TableModule, PercentPipe, JsonPipe],
+  imports: [AsyncPipe, CardModule, Pie, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight],
   templateUrl: './global-stats.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './global-stats.css',
 })
-export class GlobalStats {
+export class GlobalStatsComponent {
   public statsService: StatsService = inject(StatsService);
   public config = inject(ConfigService).config;
 
   public currentYear = model<number>(this.config.defaultYear);
 
 
-  get globalsCurrentYear(): Observable<Stats> {
+  get globalsCurrentYear(): Observable<GlobalStats> {
     return this.globals.pipe(map(globals => globals[this.currentYear()]));
   }
 
-  get globals(): Observable<{ [year: number]: Stats }> {
+  get globals(): Observable<{ [year: number]: GlobalStats }> {
     return this.statsService.stats.pipe(
       map(stats =>
         _.chain(this.config.years).map(year => [year, stats[year].globals]).fromPairs().value()
       ));
   }
 
-  get globalsAsArray(): Observable<Stats[]> {
+  get globalsAsArray(): Observable<GlobalStats[]> {
     return this.globals.pipe(map(globals => _.values(globals)));
   }
+
+
 
   setCurrentYear(year: number) {
     this.currentYear.set(year);

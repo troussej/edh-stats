@@ -47,13 +47,20 @@ export class StatsPerCommander extends Stats {
     }
 }
 
+export class GlobalStats extends Stats {
+    public gamesMovement?: boolean;
+    public winMovement?: boolean;
+    public lossMovement?: boolean;
+    public winrateMovement?: boolean;
+}
+
 export class StatsPerYear {
     constructor(
         public year: number,
         public games: Game[] = [],
         public parCommander: StatsPerCommander[] = [],
         public parLieu: Stats[] = [],
-        public globals: Stats = new Stats()
+        public globals: GlobalStats = new GlobalStats()
     ) { }
 
 }

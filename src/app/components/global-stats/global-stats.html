@@ -29,10 +29,62 @@
                             }
                             {{ stat.title }}
                         </td>
-                        <td>{{ stat.games }}</td>
-                        <td>{{ stat.wins }}</td>
-                        <td>{{ stat.losses }}</td>
-                        <td>{{ stat.winrate |percent}}</td>
+                        <td>
+                            <div class="flex items-center gap-1">
+                                {{ stat.games }}
+                                @if(stat.gamesMovement!=undefined){
+                                @if(stat.gamesMovement){
+                                <svg data-p-icon="arrow-up-right"></svg>
+                                }@else{
+                                <svg data-p-icon="arrow-down-right"></svg>
+                                }
+                                }
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <div class="flex items-center gap-1">
+                                {{ stat.wins }}
+                                @if(stat.winMovement!=undefined){
+                                @if(stat.winMovement){
+                                <svg data-p-icon="arrow-up-right"></svg>
+                                }@else{
+                                <svg data-p-icon="arrow-down-right"></svg>
+                                }
+                                }
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <div class="flex items-center gap-1">
+                                {{ stat.losses }}
+                                @if(stat.lossMovement!=undefined){
+                                @if(stat.lossMovement){
+                                <svg data-p-icon="arrow-up-right"></svg>
+                                }@else{
+                                <svg data-p-icon="arrow-down-right"></svg>
+                                }
+                                }
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <div class="flex items-center gap-1">
+                                {{ stat.winrate |percent }}
+                                @if(stat.winrateMovement!=undefined){
+                                @if(stat.winrateMovement){
+                                <svg data-p-icon="arrow-up-right"></svg>
+                                }@else{
+                                <svg data-p-icon="arrow-down-right"></svg>
+                                }
+                                }
+                            </div>
+
+                        </td>
+
                     </tr>
                 </ng-template>
             </p-table>
