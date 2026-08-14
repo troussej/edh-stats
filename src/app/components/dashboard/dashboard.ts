@@ -1,5 +1,5 @@
 import { AsyncPipe, JsonPipe, PercentPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, OnInit, model } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { map, Observable } from 'rxjs';
 import { CardModule } from 'primeng/card';

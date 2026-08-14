@@ -1,5 +1,5 @@
 import { AsyncPipe, JsonPipe, PercentPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, inject, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, Input, model } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
 import { Table } from '../table/table';
@@ -23,12 +23,11 @@ export class GlobalStats {
   public statsService: StatsService = inject(StatsService);
   public config = inject(ConfigService).config;
 
-  @Input({ required: true })
-  public currentYear!: number;
+  public currentYear = model<number>(this.config.defaultYear);
 
 
   get globalsCurrentYear(): Observable<Stats> {
-    return this.globals.pipe(map(globals => globals[this.currentYear as number]));
+    return this.globals.pipe(map(globals => globals[this.currentYear()]));
   }
 
   get globals(): Observable<{ [year: number]: Stats }> {
@@ -43,6 +42,6 @@ export class GlobalStats {
   }
 
   setCurrentYear(year: number) {
-    this.currentYear = year;
+    this.currentYear.set(year);
   }
 }
