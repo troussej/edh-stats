@@ -19,11 +19,16 @@ export class StatsService {
     private config = inject(ConfigService).config;
     private sheets = inject(SheetService)
     private allStats = new ReplaySubject<{ [year: number]: StatsPerYear }>(1);
+    public cmrs = new ReplaySubject<_.Dictionary<Commander>>(1);
 
 
 
     public get stats(): Observable<{ [year: number]: StatsPerYear }> {
         return this.allStats.asObservable();
+    }
+
+    public get commanders(): Observable<_.Dictionary<Commander>> {
+        return this.cmrs.asObservable();
     }
 
     public initData(): Observable<boolean> {
@@ -32,6 +37,7 @@ export class StatsService {
         return this.loadData()
             .pipe(
                 map((data) => {
+                    this.cmrs.next(data.commanders);
                     return this.calcStatsAllYears(data);
                 }),
                 map((allStats) => {

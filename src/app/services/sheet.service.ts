@@ -63,6 +63,9 @@ export class SheetService {
                     bracket: line["Mon Bracket ?"],
                     creationDate: line["Création"],
                     url: line["Image"],
+                    // deckList: line["Decklist"],
+                    debut: parseInt(line["Création"]),
+                    fin: line["Fin"] ? parseInt(line["Fin"]) : undefined,
                     themes: _.split(line["Thèmes"], ','),
                 }
                 )))

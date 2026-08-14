@@ -2,7 +2,7 @@
 
 @import 'tailwindcss';
 @import "tailwindcss-primeui";
-
+@import 'primeicons/primeicons.css';
 @import './theme/colors.css';
 @import './theme/layout.css';
 @import './theme/utilities.css';

@@ -11,7 +11,10 @@ export interface Commander {
     bracket: string,
     creationDate: boolean,
     url: string,
-    themes: string[]
+    themes: string[],
+    // decklist: string,
+    debut: number,
+    fin: number | undefined
 }
 
 export class Stats {

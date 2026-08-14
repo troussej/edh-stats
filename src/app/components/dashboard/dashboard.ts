@@ -12,7 +12,7 @@ import { Table } from "../table/table";
 import { GlobalStats } from '../global-stats/global-stats';
 import { Lieu } from '../lieu/lieu';
 import _ from 'lodash';
-import { Stats } from 'app/models/game.model';
+import { Commander, Stats } from 'app/models/game.model';
 import { ConfigService } from 'app/services/config.service';
 
 
@@ -32,11 +32,20 @@ export class Dashboard {
 
   get perWinrate(): Observable<Stats[]> {
 
-    return this.statsService.stats.pipe(map(stats => _.filter(stats[this.currentYear].parCommander, s => s.games >= 3)));
+    return this.statsService.stats.pipe(map(stats => _.chain(stats[this.currentYear].parCommander)
+      .filter(s => this.isActive(this.currentYear, s.commander))
+      .filter(s => s.games >= 3).value()));
 
   }
 
   get perGames(): Observable<Stats[]> {
-    return this.statsService.stats.pipe(map(s => s[this.currentYear].parCommander));
+    return this.statsService.stats.pipe(map(s => _.chain(s[this.currentYear].parCommander)
+      .filter(s => this.isActive(this.currentYear, s.commander))
+      .value()
+    ));
+  }
+
+  private isActive(year: number, cmr: Commander): boolean {
+    return cmr.debut <= year && (_.isNil(cmr.fin) || cmr.fin >= year);
   }
 }
