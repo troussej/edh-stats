@@ -7,10 +7,11 @@ import { TableModule } from 'primeng/table';
 import { AvatarModule } from 'primeng/avatar';
 import { FieldsetModule } from 'primeng/fieldset';
 import { Popover, PopoverModule } from 'primeng/popover';
-
+import { ExternalLink } from '@primeicons/angular';
+import { TooltipModule } from 'primeng/tooltip';
 @Component({
   selector: 'app-table',
-  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule],
+  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule, ExternalLink, TooltipModule],
   templateUrl: './table.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './table.css',
@@ -21,7 +22,7 @@ export class Table {
   public stats: Stats[] = [];
 
   @Input()
-  public title = 'data';
+  public legend = 'data';
 
   @Input()
   public sortField = 'winrate';

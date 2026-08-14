@@ -12,7 +12,7 @@ export interface Commander {
     creationDate: boolean,
     url: string,
     themes: string[],
-    // decklist: string,
+    decklist: string,
     debut: number,
     fin: number | undefined
 }

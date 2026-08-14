@@ -1,4 +1,4 @@
-<p-fieldset [legend]="title" class="" [toggleable]="true">
+<p-fieldset [legend]="legend" class="" [toggleable]="true">
     <p-table [value]="stats" size="small" showGridlines [sortField]="sortField" [sortOrder]="sortOrder" class="mt-4">
         <ng-template #header>
             <tr>
@@ -18,12 +18,15 @@
             <tr>
                 @if(commanderCol){
                 <td>
-                    <div class="flex items-center gap-2">
-                        @if(stat.commander && stat.commander.url){
+                    <div class="flex items-center gap-2 p-1">
+                        @if(stat.commander.url){
                         <p-avatar [image]="stat.commander.url" shape="circle" />
-
                         }
                         <span class="text-sm"> {{ stat.commander.commander }}</span>
+                        @if(stat.commander.decklist){
+                        <a [href]="stat.commander.decklist" target="_blank"><svg data-p-icon="external-link"
+                                pTooltip="Moxfield" alt="moxfield"></svg></a>
+                        }
                     </div>
 
                 </td>

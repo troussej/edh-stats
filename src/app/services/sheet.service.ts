@@ -41,6 +41,7 @@ export class SheetService {
                     lieu: line["Lieu"],
                     deck: line["Mon deck ?"],
                     gagnant: line["Gagnant ?"] === 'Y'
+
                 })
                 ))
 
@@ -63,7 +64,7 @@ export class SheetService {
                     bracket: line["Mon Bracket ?"],
                     creationDate: line["Création"],
                     url: line["Image"],
-                    // deckList: line["Decklist"],
+                    decklist: line["Decklist"],
                     debut: parseInt(line["Création"]),
                     fin: line["Fin"] ? parseInt(line["Fin"]) : undefined,
                     themes: _.split(line["Thèmes"], ','),
