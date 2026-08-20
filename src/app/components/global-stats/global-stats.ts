@@ -13,9 +13,11 @@ import { TableModule } from "primeng/table";
 import { ConfigService } from 'app/services/config.service';
 import _ from 'lodash';
 import { ArrowDownRight, ArrowUpRight } from '@primeicons/angular';
+import { RadioButton } from "primeng/radiobutton";
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-global-stats',
-  imports: [AsyncPipe, CardModule, Pie, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight],
+  imports: [AsyncPipe, CardModule, Pie, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule],
   templateUrl: './global-stats.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './global-stats.css',
