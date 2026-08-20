@@ -8,10 +8,11 @@ import { StatsService } from 'app/services/stats.service';
 import { map, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import _ from 'lodash';
+import { FieldsetModule } from "primeng/fieldset";
 
 @Component({
   selector: 'app-commander-card',
-  imports: [TagModule, CommanderTitle, LineChart, CardModule, AsyncPipe],
+  imports: [TagModule, CommanderTitle, LineChart, CardModule, AsyncPipe, FieldsetModule],
   templateUrl: './commander-card.html',
   styleUrl: './commander-card.css',
 })
@@ -21,6 +22,9 @@ export class CommanderCard {
 
   @Input()
   cmr!: Commander;
+
+  @Input()
+  showChart = true;
 
   public getChartData(): Observable<ChartDataInput> {
 

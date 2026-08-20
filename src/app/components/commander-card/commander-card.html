@@ -6,18 +6,22 @@
         <app-commander-title [commander]="cmr" avatarSize="medium"></app-commander-title>
     </ng-template>
     <ng-template #subtitle>
-        <div class="flex items-center gap-2">
-            <p-tag severity="info" value=" {{cmr.debut}}" />
-            @if(cmr.fin){-
+        <div class="flex items-center gap-0">
+            <p-tag severity="info" value="{{cmr.debut}}" />
+            @if(cmr.fin){>
             <p-tag severity="info" value="{{cmr.fin}}" />
             }
 
         </div>
     </ng-template>
     <!--body-->
-    <div class="min-height-300px">
 
-        <app-line-chart [chartData]="getChartData()|async"></app-line-chart>
-    </div>
+    @if(showChart){
+    <app-line-chart [chartData]="getChartData()|async"></app-line-chart>
+    }
+    <!-- <div class="min-height-300px">
+
+        </div> -->
+
 
 </p-card>

@@ -21,14 +21,8 @@ export type ChartDataInput =
 })
 export class LineChart {
 
-
-
-
-
-
   @Input({ required: true })
   chartData: ChartDataInput | null = null;
-
 
   options: ChartConfiguration['options'] = {
     responsive: true,
@@ -38,9 +32,10 @@ export class LineChart {
       intersect: false,
     },
     plugins: {
+
       title: {
         display: false,
-        text: 'Stats'
+        text: 'Stats',
       }
     },
     scales: {
@@ -56,6 +51,7 @@ export class LineChart {
         type: 'linear',
         display: true,
         position: 'left',
+        beginAtZero: true,
 
         // grid line settings
         grid: {
