@@ -23,8 +23,11 @@
                 <ng-template #body let-stat>
                     <tr (click)="setCurrentYear(stat.title)" [class.current-year]="stat.title === currentYear()">
 
-                        <td>
+                        <td class="flex items-center gap-1">
                             <p-radiobutton [(ngModel)]="currentYear" [value]="stat.title" />
+                            <span class="ml-1">
+                                {{stat.title}}
+                            </span>
 
                         </td>
                         <td>
