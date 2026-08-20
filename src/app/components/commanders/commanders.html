@@ -1,29 +1,40 @@
-<div class="grid grid-cols-2 gap-4 m-4">
+<div class="m-4">
 
-    @if(commanders|async){
-    <p-table [value]="(commanders|async)!" size="small" showGridlines orderable="true" [sortField]="'commander'"
-        [sortOrder]="1">
-        <ng-template #header>
-            <tr>
-                <th>Commander</th>
-                <th>Début</th>
-                <th>Fin</th>
-            </tr>
-        </ng-template>
-        <ng-template #body let-cmr>
-            <tr class="p2">
-                <td class="m2">
-                    <div class="flex items-center gap-2">
-                        @if(cmr.url){
-                        <p-avatar [image]="cmr.url" shape="circle" />
-                        }
-                        <span class="text-sm"> {{ cmr.commander }}</span>
-                    </div>
-                </td>
-                <td>{{ cmr.debut }}</td>
-                <td>{{ cmr.fin }}</td>
-            </tr>
-        </ng-template>
-    </p-table>
-    }
+
+    <p-card class="mb-2">
+        <input pInputText [(ngModel)]="filter" type="text" name="filter" placeholder="Filter by Commander" />
+    </p-card>
+    <div class="grid sm:grid-cols-2 md:grid-cols-4  lg:grid-cols-6 gap-4 ">
+
+        @if((commanders|async) && (commandersData|async)){
+
+
+        @for (cmr of (commanders|async); track $index) {
+        <p-card>
+            <ng-template #header>
+
+            </ng-template>
+            <ng-template #title>
+                <app-commander-title [commander]="cmr" avatarSize="medium"></app-commander-title>
+            </ng-template>
+            <ng-template #subtitle>
+                <div class="flex items-center gap-2">
+                    <p-tag severity="info" value=" {{cmr.debut}}" />
+                    @if(cmr.fin){-
+                    <p-tag severity="info" value="{{cmr.fin}}" />
+                    }
+
+                </div>
+            </ng-template>
+            <!--body-->
+            <div class="min-height-300px">
+
+                <app-line-chart [chartData]="getChartData(cmr.commander)|async"></app-line-chart>
+            </div>
+
+        </p-card>
+        }
+
+        }
+    </div>
 </div>

@@ -64,3 +64,7 @@ export class StatsPerYear {
     ) { }
 
 }
+
+export class CommanderStatPerYear {
+    constructor(public commander: Commander, public stats: { [year: number]: Stats }) { }
+}

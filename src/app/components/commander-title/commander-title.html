@@ -1,0 +1,10 @@
+<div class="flex items-center gap-2">
+    @if(commander.url){
+    <p-avatar [image]="commander.url" shape="circle" [class]="avatarCss" />
+    }
+    <span class="text-sm"> {{ commander.commander }}</span>
+    @if(commander.decklist){
+    <a [href]="commander.decklist" target="_blank"><svg data-p-icon="external-link" pTooltip="Moxfield"
+            alt="moxfield"></svg></a>
+    }
+</div>

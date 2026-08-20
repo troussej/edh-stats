@@ -9,9 +9,10 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { ExternalLink } from '@primeicons/angular';
 import { TooltipModule } from 'primeng/tooltip';
+import { CommanderTitle } from "../commander-title/commander-title";
 @Component({
   selector: 'app-table',
-  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule, ExternalLink, TooltipModule],
+  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule, ExternalLink, TooltipModule, CommanderTitle],
   templateUrl: './table.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './table.css',

@@ -17,18 +17,11 @@
         <ng-template #body let-stat>
             <tr>
                 @if(commanderCol){
-                <td>
-                    <div class="flex items-center gap-2 p-1">
-                        @if(stat.commander.url){
-                        <p-avatar [image]="stat.commander.url" shape="circle" />
-                        }
-                        <span class="text-sm"> {{ stat.commander.commander }}</span>
-                        @if(stat.commander.decklist){
-                        <a [href]="stat.commander.decklist" target="_blank"><svg data-p-icon="external-link"
-                                pTooltip="Moxfield" alt="moxfield"></svg></a>
-                        }
-                    </div>
+                <td class="p-0">
+                    <div class="m-1">
 
+                        <app-commander-title [commander]="stat.commander" avatarSize="small"></app-commander-title>
+                    </div>
                 </td>
                 }
                 @if(lieuCol){
