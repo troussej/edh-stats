@@ -6,33 +6,11 @@
     </p-card>
     <div class="grid sm:grid-cols-2 md:grid-cols-4  lg:grid-cols-6 gap-4 ">
 
-        @if((commanders|async) && (commandersData|async)){
+        @if((commanders|async) ){
 
 
         @for (cmr of (commanders|async); track $index) {
-        <p-card>
-            <ng-template #header>
-
-            </ng-template>
-            <ng-template #title>
-                <app-commander-title [commander]="cmr" avatarSize="medium"></app-commander-title>
-            </ng-template>
-            <ng-template #subtitle>
-                <div class="flex items-center gap-2">
-                    <p-tag severity="info" value=" {{cmr.debut}}" />
-                    @if(cmr.fin){-
-                    <p-tag severity="info" value="{{cmr.fin}}" />
-                    }
-
-                </div>
-            </ng-template>
-            <!--body-->
-            <div class="min-height-300px">
-
-                <app-line-chart [chartData]="getChartData(cmr.commander)|async"></app-line-chart>
-            </div>
-
-        </p-card>
+        <app-commander-card [cmr]="cmr"></app-commander-card>
         }
 
         }

@@ -6,11 +6,17 @@ import _, { Dictionary } from "lodash";
 import { ConfigService } from "./config.service";
 
 
-type GameData = {
+export type GameData = {
     games: {
         [year: number]: Game[];
     };
     commanders: Dictionary<Commander>;
+};
+
+export type StatPerCmrPerYear = {
+    [cmr: string]: {
+        [year: number]: StatsPerCommander;
+    };
 };
 
 @Service()
@@ -20,7 +26,7 @@ export class StatsService {
     private sheets = inject(SheetService)
     private allStats = new ReplaySubject<{ [year: number]: StatsPerYear }>(1);
     public cmrs = new ReplaySubject<_.Dictionary<Commander>>(1);
-
+    private statsPerYear = new ReplaySubject<StatPerCmrPerYear>(1);
 
 
     public get stats(): Observable<{ [year: number]: StatsPerYear }> {
@@ -30,6 +36,11 @@ export class StatsService {
     public get commanders(): Observable<_.Dictionary<Commander>> {
         return this.cmrs.asObservable();
     }
+
+    get commandersData() {
+        return this.statsPerYear.asObservable();
+    }
+
 
     public initData(): Observable<boolean> {
         console.log('initData');
@@ -42,6 +53,7 @@ export class StatsService {
                 }),
                 map((allStats) => {
                     this.allStats.next(allStats);
+                    this.statsPerYear.next(this.buildCommanderStats(allStats));
                     console.log('initData done');
                     return true;
                 })
@@ -143,5 +155,26 @@ export class StatsService {
         })
 
         return data;
+    }
+
+    // transpose data cmr -> year -> stat
+    private buildCommanderStats(stats: { [year: number]: StatsPerYear }): StatPerCmrPerYear {
+
+        const accuRes: StatPerCmrPerYear = {};
+
+        _.reduce(stats, (accu, stat) => {
+            _.each(stat.parCommander, parCmr => {
+                if (!accu[parCmr.title]) {
+                    accu[parCmr.title] = {};
+                }
+                if (parCmr.commander.debut <= stat.year
+                    && (parCmr.commander.fin == null || parCmr.commander.fin >= stat.year)) {
+                    accu[parCmr.title][stat.year] = parCmr;
+                }
+            });
+            return accu
+        }, accuRes);
+
+        return accuRes;
     }
 }
