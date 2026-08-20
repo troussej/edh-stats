@@ -23,9 +23,6 @@ export class CommanderCard {
   @Input()
   cmr!: Commander;
 
-  @Input()
-  showChart = true;
-
   public getChartData(): Observable<ChartDataInput> {
 
     return this.statsService.commandersData.pipe(map(data => {
