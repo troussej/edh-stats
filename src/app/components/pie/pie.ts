@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Stats } from 'app/models/game.model';
-import { ChartData } from 'chart.js';
+import { ChartData, ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 @Component({
   selector: 'app-pie',
   imports: [BaseChartDirective],
@@ -13,7 +15,22 @@ export class Pie {
   @Input({ required: true })
   public data!: Stats;
 
-  public barChartOptions = {
+  public plugins: ChartConfiguration['plugins'] = [ChartDataLabels];
+
+  public barChartOptions: ChartConfiguration['options'] = {
+
+    plugins: {
+      datalabels: {
+        display: true,
+        formatter: (value, ctx) => {
+          const datapoints = ctx.chart.data.datasets[0].data
+          const total = datapoints.reduce((total, datapoint) => (total as number) + (datapoint as number), 0)
+          const percentage = value / (total as number) * 100
+          return percentage.toFixed(2) + "%";
+        },
+        color: '#fff',
+      }
+    }
   };
 
 
