@@ -4,6 +4,7 @@
 
     <div class="grid grid-cols-3 gap-4 m-4">
         <div class="col-span-1">
+
             <app-pie-chart [data]="(globalsCurrentYear|async)!" class="m-2"></app-pie-chart>
             <span class="text-l font-bold center pt-4">{{ currentYear() }}</span>
         </div>

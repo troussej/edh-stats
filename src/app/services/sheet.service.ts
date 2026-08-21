@@ -68,6 +68,7 @@ export class SheetService {
                     debut: parseInt(line["Création"]),
                     fin: line["Fin"] ? parseInt(line["Fin"]) : undefined,
                     themes: _.split(line["Thèmes"], ','),
+                    colors: line["Colors"]
                 }
                 )))
 

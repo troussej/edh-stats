@@ -3,6 +3,10 @@
     <p-avatar [image]="commander.url" shape="circle" [class]="avatarCss" />
     }
     <span class="text-sm"> {{ commander.commander }}</span>
+    <span>
+        <app-mana [manaString]="commander.colors"></app-mana>
+    </span>
+
     @if(commander.decklist){
     <a [href]="commander.decklist" target="_blank"><svg data-p-icon="external-link" pTooltip="Moxfield"
             alt="moxfield"></svg></a>

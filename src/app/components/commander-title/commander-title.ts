@@ -3,10 +3,11 @@ import { ExternalLink } from '@primeicons/angular/external-link';
 import { Commander } from 'app/models/game.model';
 import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
+import { Mana } from '../mana/mana';
 
 @Component({
   selector: 'app-commander-title',
-  imports: [AvatarModule, ExternalLink, TooltipModule],
+  imports: [AvatarModule, ExternalLink, TooltipModule, Mana],
   templateUrl: './commander-title.html',
   styleUrl: './commander-title.css',
 })

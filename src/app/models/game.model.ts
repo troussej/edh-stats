@@ -14,7 +14,8 @@ export interface Commander {
     themes: string[],
     decklist: string,
     debut: number,
-    fin: number | undefined
+    fin: number | undefined,
+    colors: string
 }
 
 export class Stats {
