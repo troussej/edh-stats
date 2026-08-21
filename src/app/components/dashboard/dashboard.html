@@ -3,13 +3,22 @@
 
         <app-global-stats [(currentYear)]="currentYear"></app-global-stats>
     </div>
-    <app-lieu [currentYear]="currentYear"></app-lieu>
+    <p-fieldset legend="Par lieu" class="" [toggleable]="true">
+        <app-lieu [currentYear]="currentYear"></app-lieu>
+    </p-fieldset>
 
     @if(perWinrate|async){
-    <app-table [stats]="(perWinrate|async)??[]" sortField="winrate" [sortOrder]="-1"
-        legend="Par winrate (plus de 3 parties)"></app-table>
+    <p-fieldset legend="Par winrate (plus de 3 parties)" class="" [toggleable]="true">
+        <app-bar-chart [chartData]="getBarChartData((perWinrate|async)!,'winrate')"></app-bar-chart>
+        <app-table [stats]="(perWinrate|async)??[]" sortField="winrate" [sortOrder]="-1"></app-table>
+    </p-fieldset>
+
     }
     @if(perGames|async){
-    <app-table [stats]="(perGames|async)??[]" sortField="games" [sortOrder]="-1" legend="Nombre de parties"></app-table>
+    <p-fieldset legend="Nombre de parties" class="" [toggleable]="true">
+        <app-bar-chart [chartData]="getBarChartData((perGames|async)!,'games')"></app-bar-chart>
+        <app-table [stats]="(perGames|async)??[]" sortField="games" [sortOrder]="-1"
+            legend="Nombre de parties"></app-table>
+    </p-fieldset>
     }
 </div>

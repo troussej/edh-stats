@@ -14,17 +14,19 @@ import { Lieu } from '../lieu/lieu';
 import _ from 'lodash';
 import { Commander, Stats } from 'app/models/game.model';
 import { ConfigService } from 'app/services/config.service';
+import { BarChart, BarChartDataInput } from "../bar-chart/bar-chart";
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent],
+  imports: [AsyncPipe, Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart, AsyncPipe],
   // imports: [GlobalStats, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
+
   public statsService = inject(StatsService);
   public config = inject(ConfigService).config;
 
@@ -48,4 +50,19 @@ export class Dashboard {
   private isActive(year: number, cmr: Commander): boolean {
     return cmr.debut <= year && (_.isNil(cmr.fin) || cmr.fin >= year);
   }
+
+  getBarChartData(stats: Stats[], sortProp: keyof Stats): BarChartDataInput {
+
+    let data = _.chain(stats).sortBy(s => -s[sortProp]).slice(0, 5).value();
+
+    return {
+      labels: _.map(data, d => d.title),
+      datasets: {
+        winrate: _.map(data, d => _.round(d.winrate * 100, 1)),
+        games: _.map(data, d => d.games)
+      }
+    }
+  }
+
+
 }

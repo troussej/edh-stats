@@ -1,37 +1,35 @@
-<p-fieldset [legend]="legend" class="" [toggleable]="true">
-    <p-table [value]="stats" size="small" showGridlines [sortField]="sortField" [sortOrder]="sortOrder" class="mt-4">
-        <ng-template #header>
-            <tr>
-                @if(commanderCol){
-                <th>Commandeur</th>
-                }
-                @if(lieuCol){
-                <th>Lieu</th>
-                }
-                <th>Parties</th>
-                <th>Gagnées</th>
-                <th>Perdues</th>
-                <th>Winrate</th>
-            </tr>
-        </ng-template>
-        <ng-template #body let-stat>
-            <tr>
-                @if(commanderCol){
-                <td class="p-0">
-                    <div class="m-1">
+<p-table [value]="stats" size="small" showGridlines [sortField]="sortField" [sortOrder]="sortOrder" class="mt-4">
+    <ng-template #header>
+        <tr>
+            @if(commanderCol){
+            <th>Commandeur</th>
+            }
+            @if(lieuCol){
+            <th>Lieu</th>
+            }
+            <th>Parties</th>
+            <th>Gagnées</th>
+            <th>Perdues</th>
+            <th>Winrate</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-stat>
+        <tr>
+            @if(commanderCol){
+            <td class="p-0">
+                <div class="m-1">
 
-                        <app-commander-title [commander]="stat.commander" avatarSize="small"></app-commander-title>
-                    </div>
-                </td>
-                }
-                @if(lieuCol){
-                <td>{{ stat.title }}</td>
-                }
-                <td>{{ stat.games }}</td>
-                <td>{{ stat.wins }}</td>
-                <td>{{ stat.losses }}</td>
-                <td>{{ stat.winrate |percent}}</td>
-            </tr>
-        </ng-template>
-    </p-table>
-</p-fieldset>
+                    <app-commander-title [commander]="stat.commander" avatarSize="small"></app-commander-title>
+                </div>
+            </td>
+            }
+            @if(lieuCol){
+            <td>{{ stat.title }}</td>
+            }
+            <td>{{ stat.games }}</td>
+            <td>{{ stat.wins }}</td>
+            <td>{{ stat.losses }}</td>
+            <td>{{ stat.winrate |percent}}</td>
+        </tr>
+    </ng-template>
+</p-table>
