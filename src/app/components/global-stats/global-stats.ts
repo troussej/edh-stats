@@ -7,7 +7,7 @@ import { Table } from '../table/table';
 import { Observable } from 'rxjs/internal/Observable';
 import { GlobalStats, Stats } from 'app/models/game.model';
 import { map } from 'rxjs';
-import { Pie } from '../pie/pie';
+import { PieChart } from '../pie/pie-chart';
 import { FieldsetModule } from "primeng/fieldset";
 import { TableModule } from "primeng/table";
 import { ConfigService } from 'app/services/config.service';
@@ -17,7 +17,7 @@ import { RadioButton } from "primeng/radiobutton";
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-global-stats',
-  imports: [AsyncPipe, CardModule, Pie, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule],
+  imports: [AsyncPipe, CardModule, PieChart, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule],
   templateUrl: './global-stats.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './global-stats.css',

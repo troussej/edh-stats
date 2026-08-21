@@ -5,12 +5,12 @@ import { BaseChartDirective } from 'ng2-charts';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
-  selector: 'app-pie',
+  selector: 'app-pie-chart',
   imports: [BaseChartDirective],
-  templateUrl: './pie.html',
-  styleUrl: './pie.css',
+  templateUrl: './pie-chart.html',
+  styleUrl: './pie-chart.css',
 })
-export class Pie {
+export class PieChart {
 
   @Input({ required: true })
   public data!: Stats;
