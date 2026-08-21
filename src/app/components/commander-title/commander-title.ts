@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { ExternalLink } from '@primeicons/angular/external-link';
 import { Commander } from 'app/models/game.model';
 import { AvatarModule } from 'primeng/avatar';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-commander-title',
-  imports: [AvatarModule, ExternalLink],
+  imports: [AvatarModule, ExternalLink, TooltipModule],
   templateUrl: './commander-title.html',
   styleUrl: './commander-title.css',
 })
