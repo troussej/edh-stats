@@ -40,7 +40,7 @@ export class CommanderCard {
       labels: _.keys(data),
       datasets: {
         games: _.map(data, (stat) => stat.games),
-        winrate: _.chain(data).map((stat) => stat.winrate * 100).map(n => _.round(n, 100)).value(),
+        winrate: _.chain(data).map((stat) => stat.winrate * 100).map(n => _.round(n, 0)).value(),
       }
     };
   }

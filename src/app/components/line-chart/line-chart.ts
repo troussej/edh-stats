@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 export type ChartDataInput =
   {
@@ -24,7 +24,10 @@ export class LineChart {
   @Input({ required: true })
   chartData: ChartDataInput | null = null;
 
+  public plugins: ChartConfiguration['plugins'] = [ChartDataLabels];
+
   options: ChartConfiguration['options'] = {
+
     responsive: true,
     maintainAspectRatio: false,
     interaction: {
@@ -32,6 +35,12 @@ export class LineChart {
       intersect: false,
     },
     plugins: {
+      datalabels: {
+        color: '#fff',
+        align: 'right',
+        offset: 5,
+
+      },
 
       title: {
         display: false,
@@ -40,14 +49,14 @@ export class LineChart {
     },
     scales: {
       //winrate
-      y: {
+      winrate: {
         type: 'linear',
         display: true,
         position: 'right',
         min: 0,
         max: 100,
       },
-      y1: {
+      games: {
         type: 'linear',
         display: true,
         position: 'left',
@@ -70,12 +79,18 @@ export class LineChart {
         {
           label: 'Winrate',
           data: this.chartData?.datasets.winrate ?? [],
-          yAxisID: 'y',
+          yAxisID: 'winrate',
+          datalabels: {
+            formatter(value, context) {
+              return value + '%'
+            },
+          }
         },
         {
           label: 'Games',
           data: this.chartData?.datasets.games ?? [],
-          yAxisID: 'y1',
+          yAxisID: 'games',
+
         }
       ]
     }
