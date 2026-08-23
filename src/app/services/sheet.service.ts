@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { inject, Injectable, Service } from "@angular/core";
 import { map, Observable, of } from "rxjs";
 import * as Papa from 'papaparse';
-import { Commander, Game } from "app/models/game.model";
+import { Commander, Game } from "app/models/model";
 import * as _ from 'lodash';
 import { ConfigService } from "./config.service";
 import { LocationStrategy } from "@angular/common";

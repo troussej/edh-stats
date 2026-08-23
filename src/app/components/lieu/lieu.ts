@@ -4,7 +4,7 @@ import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
 import { Table } from '../table/table';
 import { map, Observable } from 'rxjs';
-import { Stats } from 'app/models/game.model';
+import { Stats } from 'app/models/model';
 
 
 @Component({

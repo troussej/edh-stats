@@ -1,6 +1,6 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { StatsPerCommander, StatsPerYear } from 'app/models/game.model';
+import { StatsPerCommander, StatsPerYear } from 'app/models/model';
 import { StatPerCmrPerYear, StatsService } from 'app/services/stats.service';
 import { map, Observable, ReplaySubject } from 'rxjs';
 import { TableModule } from "primeng/table";

@@ -12,7 +12,7 @@ import { Table } from "../table/table";
 import { GlobalStatsComponent } from '../global-stats/global-stats';
 import { Lieu } from '../lieu/lieu';
 import _ from 'lodash';
-import { Commander, Stats } from 'app/models/game.model';
+import { Commander, Stats } from 'app/models/model';
 import { ConfigService } from 'app/services/config.service';
 import { BarChart, BarChartDataInput } from "../bar-chart/bar-chart";
 

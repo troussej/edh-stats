@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ExternalLink } from '@primeicons/angular/external-link';
-import { Commander } from 'app/models/game.model';
+import { Commander } from 'app/models/model';
 import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
 import { Mana } from '../mana/mana';

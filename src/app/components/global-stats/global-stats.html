@@ -2,13 +2,13 @@
 
 <p-fieldset legend="Stats globales" [toggleable]="true">
 
-    <div class="grid lg:grid-cols-2 gap-2">
-        <div class="">
+    <div class="grid lg:grid-cols-3 gap-2">
+        <div class="col-span-1">
 
             <app-pie-chart [data]="(globalsCurrentYear|async)!" class=""></app-pie-chart>
             <span class="text-l font-bold center pt-4">{{ currentYear() }}</span>
         </div>
-        <div class=" ">
+        <div class=" col-span-2">
 
             <p-table [value]="(globalsAsArray|async)!" size="small" showGridlines orderable="true" [sortField]="'title'"
                 [sortOrder]="-1" [scrollable]="true">
