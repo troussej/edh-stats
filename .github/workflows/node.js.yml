@@ -28,7 +28,7 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build:gh --if-present
-
+      - run: cp dist/edh-stats/browser/index.html dist/edh-stats/browser/404.html    
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v5 # or specific "vX.X.X" version tag for this action
