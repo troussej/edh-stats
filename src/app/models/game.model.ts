@@ -1,12 +1,12 @@
 export interface Game {
-    // date: Date,
+    date: Date,
     lieu: string,
     deck: string,
     gagnant: boolean
 }
 
 export interface Commander {
-    // date: Date,
+
     commander: string,
     bracket: string,
     creationDate: boolean,

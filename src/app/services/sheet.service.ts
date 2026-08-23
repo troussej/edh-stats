@@ -34,15 +34,18 @@ export class SheetService {
                 map(text => {
                     return this.parse(text);
                 }),
-                map(csv => _.map(csv, (line: any) =>
-                ({
+                map(csv => _.map(csv, (line: any) => {
 
-                    // date: new Date(Date.parse(line["Date"])),
-                    lieu: line["Lieu"],
-                    deck: line["Mon deck ?"],
-                    gagnant: line["Gagnant ?"] === 'Y'
+                    let dateString = line["Date"].split('/');
+                    return {
 
-                })
+                        date: new Date(dateString[2], dateString[1], dateString[0]),
+                        lieu: line["Lieu"],
+                        deck: line["Mon deck ?"],
+                        gagnant: line["Gagnant ?"] === 'Y'
+
+                    }
+                }
                 ))
 
             );
@@ -59,7 +62,7 @@ export class SheetService {
                 ,
                 map(csv => _.map(csv, (line: any) => ({
 
-                    // date: new Date(Date.parse(line["Date"])),
+
                     commander: line["Commander"],
                     bracket: line["Bracket"],
                     creationDate: line["Création"],
