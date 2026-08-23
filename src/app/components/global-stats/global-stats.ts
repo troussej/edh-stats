@@ -5,7 +5,7 @@ import { CardModule } from 'primeng/card';
 import { Table } from '../table/table';
 
 import { Observable } from 'rxjs/internal/Observable';
-import { GlobalStats, Stats } from 'app/models/model';
+import { GlobalStats, Stats } from 'app/models/game.model';
 import { map } from 'rxjs';
 import { PieChart } from '../pie/pie-chart';
 import { FieldsetModule } from "primeng/fieldset";

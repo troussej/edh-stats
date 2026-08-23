@@ -3,6 +3,7 @@
     <p-avatar [image]="commander.url" shape="circle" [class]="avatarCss" />
     }
     <span class="text-sm"> {{ commander.commander }}</span>
+    <app-bracket [value]="commander.bracket"></app-bracket>
     <span>
         <app-mana [manaString]="commander.colors"></app-mana>
     </span>

@@ -1,6 +1,6 @@
 import { JsonPipe, AsyncPipe, PercentPipe } from '@angular/common';
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Stats } from 'app/models/model';
+import { Stats } from 'app/models/game.model';
 import { CardModule } from 'primeng/card';
 import { ImageModule } from 'primeng/image';
 import { TableModule } from 'primeng/table';

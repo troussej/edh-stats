@@ -36,6 +36,14 @@ export class App implements OnInit {
         }
 
       },
+      {
+        label: 'Timeline',
+        icon: 'pi pi-shield',
+        command: () => {
+          this.router.navigate(['/timeline']);
+        }
+
+      },
     ];
   }
 

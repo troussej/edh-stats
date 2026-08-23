@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Stats } from 'app/models/model';
+import { Stats } from 'app/models/game.model';
 import { ChartData, ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import ChartDataLabels from 'chartjs-plugin-datalabels';

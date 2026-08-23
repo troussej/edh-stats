@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { ExternalLink } from '@primeicons/angular/external-link';
-import { Commander } from 'app/models/model';
+import { Commander } from 'app/models/game.model';
 import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
 import { Mana } from '../mana/mana';
+import { Bracket } from "app/bracket/bracket";
 
 @Component({
   selector: 'app-commander-title',
-  imports: [AvatarModule, ExternalLink, TooltipModule, Mana],
+  imports: [AvatarModule, ExternalLink, TooltipModule, Mana, Bracket],
   templateUrl: './commander-title.html',
   styleUrl: './commander-title.css',
 })
