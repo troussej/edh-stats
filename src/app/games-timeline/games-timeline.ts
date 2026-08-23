@@ -8,10 +8,12 @@ import _ from 'lodash';
 import { BaseChartDirective } from 'ng2-charts';
 import { CardModule } from 'primeng/card';
 import { map, Observable } from 'rxjs';
+import { RadioButton } from "primeng/radiobutton";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-games-timeline',
-  imports: [BaseChartDirective, CardModule, AsyncPipe, JsonPipe],
+  imports: [BaseChartDirective, CardModule, AsyncPipe, JsonPipe, RadioButton, FormsModule],
   templateUrl: './games-timeline.html',
   styleUrl: './games-timeline.css',
 })
@@ -25,7 +27,7 @@ export class GamesTimeline {
     return this.statsService.stats.pipe(map(a => {
       const yearData = a[this.currentYear];
 
-      const indexOfMonths = Array.from({ length: 12 }, (e, i) => i + 1);
+      const indexOfMonths = Array.from({ length: 12 }, (e, i) => i);
 
       return _.chain(yearData.games).map(g => (
         { lieu: g.lieu, mois: g.date.getMonth() }

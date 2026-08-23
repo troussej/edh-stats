@@ -34,21 +34,27 @@ export class SheetService {
                 map(text => {
                     return this.parse(text);
                 }),
-                map(csv => _.map(csv, (line: any) => {
+                map(csv => _.map(csv, (line: any) =>
 
-                    let dateString = line["Date"].split('/');
-                    return {
+                ({
 
-                        date: new Date(dateString[2], dateString[1], dateString[0]),
-                        lieu: line["Lieu"],
-                        deck: line["Mon deck ?"],
-                        gagnant: line["Gagnant ?"] === 'Y'
+                    date: this.parseDate(line["Date"]),
+                    lieu: line["Lieu"],
+                    deck: line["Mon deck ?"],
+                    gagnant: line["Gagnant ?"] === 'Y'
 
-                    }
-                }
+                })
+
                 ))
 
             );
+    }
+
+    private parseDate(dateString: string): Date {
+        let dateElems = dateString.split('/');
+        return new Date(Number.parseInt(dateElems[2]),
+            Number.parseInt(dateElems[1]) - 1,
+            Number.parseInt(dateElems[0]))
     }
 
     public getCommanders(): Observable<Commander[]> {

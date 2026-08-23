@@ -1,5 +1,25 @@
-<div class="grid grid-cols-2">
+<div>
+    <div class="flex justify-center">
+        <div class="flex flex-wrap gap-4">
+            @for(year of config.years ;track year){
+            <div class="flex items-center">
+                <p-radiobutton name="year" [value]="year" [(ngModel)]="currentYear" />
+                <label pLabel for="year" class="text-sm ml-2">{{year}}</label>
+            </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-8 flex justify-center">
     <div class="col-span-1">
+    </div>
+
+    <div class="col-span-6">
+
+
 
         <p-card class="m-4 ">
             <canvas baseChart [data]="(chartData()|async)!" [type]="'bar'" [options]="barChartOptions"
