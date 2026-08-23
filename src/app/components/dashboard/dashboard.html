@@ -1,5 +1,5 @@
-<div class="grid lg:grid-cols-2 gap-4 m-4">
-    <div class="col-span-1">
+<div class=" grid xl:grid-cols-2 gap-4 m-4 ">
+    <div class="">
 
         <app-global-stats [(currentYear)]="currentYear"></app-global-stats>
     </div>
@@ -9,14 +9,14 @@
 
     @if(perWinrate|async){
     <p-fieldset legend="Par winrate (plus de 3 parties)" class="" [toggleable]="true">
-        <app-bar-chart [chartData]="getBarChartData((perWinrate|async)!,'winrate')"></app-bar-chart>
+        <!-- <app-bar-chart [chartData]="getBarChartData((perWinrate|async)!,'winrate')"></app-bar-chart> -->
         <app-table [stats]="(perWinrate|async)??[]" sortField="winrate" [sortOrder]="-1"></app-table>
     </p-fieldset>
 
     }
     @if(perGames|async){
     <p-fieldset legend="Nombre de parties" class="" [toggleable]="true">
-        <app-bar-chart [chartData]="getBarChartData((perGames|async)!,'games')"></app-bar-chart>
+        <!-- <app-bar-chart [chartData]="getBarChartData((perGames|async)!,'games')"></app-bar-chart> -->
         <app-table [stats]="(perGames|async)??[]" sortField="games" [sortOrder]="-1"
             legend="Nombre de parties"></app-table>
     </p-fieldset>

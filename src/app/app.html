@@ -1,14 +1,14 @@
-<div class="layout-topbar m-2">
-    <div class=" flex justify-center  items-center gap-2 mb-2">
-        <svg data-p-icon="calculator" [size]="24"></svg>EDH STATS
+<div class="">
+    <div class="layout-topbar m-2">
+        <div class=" flex justify-center  items-center gap-2 mb-2">
+            <svg data-p-icon="calculator" [size]="24"></svg>EDH STATS
+        </div>
+        <p-menubar [model]="menuData" class="m-2" />
     </div>
-    <p-menubar [model]="menuData" class="m-2" />
-</div>
 
-<div class="layout-main-container">
-    <div class="layout-main">
 
-        <router-outlet />
-    </div>
+
+    <router-outlet />
+
 
 </div>

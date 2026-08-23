@@ -2,16 +2,16 @@
 
 <p-fieldset legend="Stats globales" [toggleable]="true">
 
-    <div class="grid grid-cols-3 gap-4 m-4">
-        <div class="col-span-1">
+    <div class="grid lg:grid-cols-2 gap-2">
+        <div class="">
 
-            <app-pie-chart [data]="(globalsCurrentYear|async)!" class="m-2"></app-pie-chart>
+            <app-pie-chart [data]="(globalsCurrentYear|async)!" class=""></app-pie-chart>
             <span class="text-l font-bold center pt-4">{{ currentYear() }}</span>
         </div>
-        <div class="col-span-2 pt-10">
+        <div class=" ">
 
             <p-table [value]="(globalsAsArray|async)!" size="small" showGridlines orderable="true" [sortField]="'title'"
-                [sortOrder]="-1">
+                [sortOrder]="-1" [scrollable]="true">
                 <ng-template #header>
                     <tr>
                         <th>Année</th>
