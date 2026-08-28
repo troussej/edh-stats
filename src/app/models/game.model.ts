@@ -1,4 +1,5 @@
 export interface Game {
+    year: number,
     date: Date,
     lieu: string,
     deck: string,

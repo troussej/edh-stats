@@ -24,10 +24,10 @@ export class SheetService {
             url = 'cache/games-' + year + '.csv';
         }
         console.log('getGames %s %s', index, url);
-        return this.getGamesParUrl(url);
+        return this.getGamesParUrl(url, year);
     }
 
-    public getGamesParUrl(url: string): Observable<Game[]> {
+    public getGamesParUrl(url: string, year: number): Observable<Game[]> {
 
         return this.http.get(url, { responseType: "text" })
             .pipe(
@@ -37,7 +37,7 @@ export class SheetService {
                 map(csv => _.map(csv, (line: any) =>
 
                 ({
-
+                    year,
                     date: this.parseDate(line["Date"]),
                     lieu: line["Lieu"],
                     deck: line["Mon deck ?"],

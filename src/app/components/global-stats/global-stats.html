@@ -1,16 +1,15 @@
-@if(globals|async){
-
+@if(globals()){
 <p-fieldset legend="Stats globales" [toggleable]="true">
 
     <div class="grid lg:grid-cols-3 gap-2">
         <div class="col-span-1">
 
-            <app-pie-chart [data]="(globalsCurrentYear|async)!" class=""></app-pie-chart>
+            <app-pie-chart [data]="chartData()" class=""></app-pie-chart>
             <span class="text-l font-bold center pt-4">{{ currentYear() }}</span>
         </div>
         <div class=" col-span-2">
 
-            <p-table [value]="(globalsAsArray|async)!" size="small" showGridlines orderable="true" [sortField]="'title'"
+            <p-table [value]="globalsAsArray()" size="small" showGridlines orderable="true" [sortField]="'title'"
                 [sortOrder]="-1" [scrollable]="true">
                 <ng-template #header>
                     <tr>
@@ -22,7 +21,7 @@
                     </tr>
                 </ng-template>
                 <ng-template #body let-stat>
-                    <tr (click)="setCurrentYear(stat.title)" [class.current-year]="stat.title === currentYear()">
+                    <tr [class.current-year]="stat.title === currentYear()">
 
                         <td class="flex items-center gap-1">
                             <p-radiobutton [(ngModel)]="currentYear" [value]="stat.title" />

@@ -1,4 +1,4 @@
-import { inject, Service } from "@angular/core";
+import { inject, Service, signal } from "@angular/core";
 import { SheetService } from "./sheet.service";
 import { Commander, Game, StatsPerCommander, StatsPerYear, Stats, GlobalStats } from "app/models/game.model";
 import { forkJoin, map, Observable, of, ReplaySubject, pipe, mergeMap } from "rxjs";
@@ -24,6 +24,11 @@ export class StatsService {
 
     private config = inject(ConfigService).config;
     private sheets = inject(SheetService)
+
+    public games = signal<Game[]>([]);
+    public commandersS = signal<_.Dictionary<Commander>>({});
+
+    // depreacted
     private allStats = new ReplaySubject<{ [year: number]: StatsPerYear }>(1);
     public cmrs = new ReplaySubject<_.Dictionary<Commander>>(1);
     private statsPerYear = new ReplaySubject<StatPerCmrPerYear>(1);
@@ -49,6 +54,10 @@ export class StatsService {
             .pipe(
                 map((data) => {
                     this.cmrs.next(data.commanders);
+                    this.commandersS.set(data.commanders);
+                    _.forEach(data.games, (games, year) => {
+                        this.games.update(values => ([...values, ...games]))
+                    });
                     return this.calcStatsAllYears(data);
                 }),
                 map((allStats) => {
@@ -99,7 +108,7 @@ export class StatsService {
         const res = _.chain(this.config.years)
             .map((year) => [year, this.calcStatsPerYear(year, data.games[year], data.commanders)])
             .fromPairs().value();
-        this.calcMovementFromPrevYear(res);
+
         return res;
     }
 
@@ -123,7 +132,7 @@ export class StatsService {
 
     }
 
-    private calcStats<T extends Stats>(stat: T, games: Game[]): T {
+    public calcStats<T extends Stats>(stat: T, games: Game[]): T {
 
         const res = _.reduce(games, (stat, game) => {
             stat.games++;
@@ -139,23 +148,7 @@ export class StatsService {
         return res;
     }
 
-    calcMovementFromPrevYear(data: { [year: number]: StatsPerYear }) {
 
-        _.forEach(this.config.years, year => {
-            if (data[year - 1]) {
-
-                const current = data[year].globals;
-                const prev = data[year - 1].globals;
-
-                current.gamesMovement = current.games > prev.games;
-                current.winMovement = current.wins > prev.wins;
-                current.lossMovement = current.losses > prev.losses;
-                current.winrateMovement = current.winrate > prev.winrate;
-            }
-        })
-
-        return data;
-    }
 
     // transpose data cmr -> year -> stat
     private buildCommanderStats(stats: { [year: number]: StatsPerYear }): StatPerCmrPerYear {
