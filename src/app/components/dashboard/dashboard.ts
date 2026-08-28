@@ -1,7 +1,5 @@
-import { AsyncPipe, JsonPipe, PercentPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, inject, OnInit, model, computed, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, computed } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
-import { map, Observable } from 'rxjs';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { ImageModule } from 'primeng/image';
@@ -12,17 +10,14 @@ import { Table } from "../table/table";
 import { GlobalStatsComponent } from '../global-stats/global-stats';
 import { Lieu } from '../lieu/lieu';
 import _ from 'lodash';
-import { Commander, GlobalStats, Stats, StatsPerCommander } from 'app/models/game.model';
-import { ConfigService } from 'app/services/config.service';
+import { Commander, Stats, StatsPerCommander } from 'app/models/game.model';
 import { BarChart, BarChartDataInput } from "../bar-chart/bar-chart";
-import { Debug } from "app/debug/debug";
 import { SettingsService } from 'app/settings.service';
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart, AsyncPipe, Debug],
-  // imports: [GlobalStats, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
+  imports: [Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',

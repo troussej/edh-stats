@@ -1,12 +1,9 @@
-import { AsyncPipe, JsonPipe, PercentPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, inject, Input, model, computed, Signal } from '@angular/core';
+import { AsyncPipe, PercentPipe } from '@angular/common';
+import { Component, ChangeDetectionStrategy, inject, computed, Signal } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
-import { Table } from '../table/table';
 
-import { Observable } from 'rxjs/internal/Observable';
-import { Commander, GlobalStats, Stats, StatsPerYear } from 'app/models/game.model';
-import { map } from 'rxjs';
+import { GlobalStats } from 'app/models/game.model';
 import { PieChart } from '../pie/pie-chart';
 import { FieldsetModule } from "primeng/fieldset";
 import { TableModule } from "primeng/table";
@@ -15,11 +12,10 @@ import _ from 'lodash';
 import { ArrowDownRight, ArrowUpRight } from '@primeicons/angular';
 import { RadioButton } from "primeng/radiobutton";
 import { FormsModule } from '@angular/forms';
-import { Debug } from 'app/debug/debug';
 import { SettingsService } from 'app/settings.service';
 @Component({
   selector: 'app-global-stats',
-  imports: [AsyncPipe, CardModule, PieChart, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule, Debug],
+  imports: [CardModule, PieChart, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule],
   templateUrl: './global-stats.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './global-stats.css',

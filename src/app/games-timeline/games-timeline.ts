@@ -1,4 +1,3 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { ConfigService } from 'app/services/config.service';
 import { StatsService } from 'app/services/stats.service';
@@ -7,14 +6,13 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import _ from 'lodash';
 import { BaseChartDirective } from 'ng2-charts';
 import { CardModule } from 'primeng/card';
-import { map, Observable } from 'rxjs';
 import { RadioButton } from "primeng/radiobutton";
 import { FormsModule } from '@angular/forms';
 import { SettingsService } from 'app/settings.service';
 
 @Component({
   selector: 'app-games-timeline',
-  imports: [BaseChartDirective, CardModule, AsyncPipe, JsonPipe, RadioButton, FormsModule],
+  imports: [BaseChartDirective, CardModule, RadioButton, FormsModule],
   templateUrl: './games-timeline.html',
   styleUrl: './games-timeline.css',
 })

@@ -1,6 +1,5 @@
-import { JsonPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ChartConfiguration, ChartData } from 'chart.js';
+import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
@@ -15,7 +14,7 @@ export type ChartDataInput =
 
 @Component({
   selector: 'app-line-chart',
-  imports: [BaseChartDirective, JsonPipe],
+  imports: [BaseChartDirective],
   templateUrl: './line-chart.html',
   styleUrl: './line-chart.css',
 })

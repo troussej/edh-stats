@@ -1,7 +1,5 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
-import { map } from 'rxjs';
 import { TableModule } from "primeng/table";
 import _ from 'lodash';
 import { AvatarModule } from "primeng/avatar";
@@ -17,7 +15,7 @@ import { CommanderCard } from "../commander-card/commander-card";
 
 @Component({
   selector: 'app-commanders',
-  imports: [AsyncPipe, TableModule, AvatarModule, FormsModule, CardModule, InputTextModule, TagModule, CommanderCard],
+  imports: [TableModule, AvatarModule, FormsModule, CardModule, InputTextModule, TagModule, CommanderCard],
   templateUrl: './commanders.html',
   styleUrl: './commanders.css',
 })

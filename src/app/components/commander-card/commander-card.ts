@@ -5,14 +5,12 @@ import { CommanderTitle } from '../commander-title/commander-title';
 import { ChartDataInput, LineChart } from "../line-chart/line-chart";
 import { CardModule } from "primeng/card";
 import { StatsService } from 'app/services/stats.service';
-import { map, Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import _ from 'lodash';
 import { FieldsetModule } from "primeng/fieldset";
 
 @Component({
   selector: 'app-commander-card',
-  imports: [TagModule, CommanderTitle, LineChart, CardModule, AsyncPipe, FieldsetModule],
+  imports: [TagModule, CommanderTitle, LineChart, CardModule, FieldsetModule],
   templateUrl: './commander-card.html',
   styleUrl: './commander-card.css',
 })

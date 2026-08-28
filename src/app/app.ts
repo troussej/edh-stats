@@ -1,15 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MenubarModule } from 'primeng/menubar';
-import { Dashboard } from "./components/dashboard/dashboard";
 import { BreadcrumbModule } from "primeng/breadcrumb";
-import { Shield, Home, Calculator } from '@primeicons/angular';
+import { Calculator } from '@primeicons/angular';
 import { MenuItem } from 'primeng/api';
-// import { Dashboard } from './components/dashboard/dashboard';
 
 @Component({
   selector: 'app-root',
-  imports: [MenubarModule, RouterOutlet, Dashboard, BreadcrumbModule, Shield, Home, Calculator],
+  imports: [MenubarModule, RouterOutlet, BreadcrumbModule, Calculator],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

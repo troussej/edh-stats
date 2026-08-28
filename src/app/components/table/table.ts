@@ -1,4 +1,4 @@
-import { JsonPipe, AsyncPipe, PercentPipe } from '@angular/common';
+import { PercentPipe } from '@angular/common';
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Stats } from 'app/models/game.model';
 import { CardModule } from 'primeng/card';
@@ -6,13 +6,12 @@ import { ImageModule } from 'primeng/image';
 import { TableModule } from 'primeng/table';
 import { AvatarModule } from 'primeng/avatar';
 import { FieldsetModule } from 'primeng/fieldset';
-import { Popover, PopoverModule } from 'primeng/popover';
-import { ExternalLink } from '@primeicons/angular';
+import { PopoverModule } from 'primeng/popover';
 import { TooltipModule } from 'primeng/tooltip';
 import { CommanderTitle } from "../commander-title/commander-title";
 @Component({
   selector: 'app-table',
-  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule, ExternalLink, TooltipModule, CommanderTitle],
+  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule, TooltipModule, CommanderTitle],
   templateUrl: './table.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './table.css',
