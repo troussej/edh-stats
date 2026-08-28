@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { MessageModule } from "primeng/message";
+import { TagModule, TagSeverity } from 'primeng/tag';
 import { MessageSeverity } from 'primeng/types/message';
 
 @Component({
   selector: 'app-bracket',
-  imports: [MessageModule],
+  imports: [TagModule],
   templateUrl: './bracket.html',
   styleUrl: './bracket.css',
 })
@@ -13,7 +14,7 @@ export class Bracket {
   @Input()
   value = '';
 
-  public severity(): MessageSeverity {
+  public severity(): TagSeverity {
     switch (this.value) {
       case ('1'):
         return 'contrast';
@@ -23,7 +24,7 @@ export class Bracket {
       case ('3+'):
         return 'warn';
       case ('4'):
-        return 'error';
+        return 'danger';
       default:
         return 'contrast';
     }

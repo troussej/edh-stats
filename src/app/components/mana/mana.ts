@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { MessageModule } from 'primeng/message';
 import _ from 'lodash';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-mana',
-  imports: [MessageModule],
+  imports: [TagModule],
   templateUrl: './mana.html',
   styleUrl: './mana.css',
 })

@@ -70,7 +70,7 @@ export class SheetService {
 
 
                     commander: line["Commander"],
-                    bracket: line["Bracket"],
+                    bracket: _.trim(line["Bracket"]),
                     creationDate: line["Création"],
                     url: line["Image"],
                     decklist: line["Decklist"],
