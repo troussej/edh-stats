@@ -1,12 +1,10 @@
 <div class=" grid xl:grid-cols-2 gap-4 m-4 ">
 
     <div class="">
-        {{settings.currentYear()}}
-        <app-debug [data]="perWinrate()"></app-debug>
         <app-global-stats></app-global-stats>
     </div>
     <p-fieldset legend="Par lieu" class="" [toggleable]="true">
-        <app-lieu [currentYear]="settings.currentYear()"></app-lieu>
+        <app-lieu></app-lieu>
     </p-fieldset>
 
 

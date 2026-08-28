@@ -29,25 +29,10 @@ export class GlobalStatsComponent {
   public settings: SettingsService = inject(SettingsService);
   public config = inject(ConfigService).config;
 
-
-  // get globalsCurrentYear(): Observable<GlobalStats> {
-  //   return this.globals.pipe(map(globals => globals[this.currentYear()]));
-  // }
-
-  get globals_old(): Observable<{ [year: number]: GlobalStats }> {
-    return this.statsService.stats.pipe(
-      map(stats =>
-        _.chain(this.config.years).map(year => [year, stats[year].globals]).fromPairs().value()
-      ));
-  }
-
   public globals: Signal<{ [x: string]: GlobalStats }> = computed(() => {
     const data = _.chain(this.statsService.games())
       .groupBy('year')
       .mapValues((gamesForYear, year) => this.statsService.calcStats(new GlobalStats(year), gamesForYear))
-      .each((gamesForYear, year) => {
-
-      })
       .value();
 
     this.calcMovementFromPrevYear(data);

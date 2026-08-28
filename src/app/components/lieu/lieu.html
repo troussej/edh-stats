@@ -1,8 +1,2 @@
-@if(parlieu|async ){
-
-<app-table [commanderCol]="false" [lieuCol]="true" [stats]="(parlieu|async)??[]" sortField="games" [sortOrder]="-1"
+<app-table [commanderCol]="false" [lieuCol]="true" [stats]="parlieu()" sortField="games" [sortOrder]="-1"
     legend="Par lieu"></app-table>
-
-
-
-}

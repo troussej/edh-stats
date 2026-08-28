@@ -30,7 +30,6 @@ import { SettingsService } from 'app/settings.service';
 export class Dashboard {
 
   public statsService = inject(StatsService);
-  public config = inject(ConfigService).config;
   public settings: SettingsService = inject(SettingsService);
 
 
