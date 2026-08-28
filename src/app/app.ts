@@ -42,6 +42,14 @@ export class App implements OnInit {
         }
 
       },
+      {
+        label: 'Themes',
+        icon: 'pi pi-palette',
+        command: () => {
+          this.router.navigate(['/themes']);
+        }
+
+      },
     ];
   }
 

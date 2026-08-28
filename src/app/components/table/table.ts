@@ -3,7 +3,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Stats } from 'app/models/game.model';
 import { CardModule } from 'primeng/card';
 import { ImageModule } from 'primeng/image';
-import { TableModule } from 'primeng/table';
+import { SortableColumn, TableModule } from 'primeng/table';
 import { AvatarModule } from 'primeng/avatar';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PopoverModule } from 'primeng/popover';
@@ -11,7 +11,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CommanderTitle } from "../commander-title/commander-title";
 @Component({
   selector: 'app-table',
-  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule, TooltipModule, CommanderTitle],
+  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule, TooltipModule, CommanderTitle, SortableColumn],
   templateUrl: './table.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './table.css',
@@ -34,6 +34,6 @@ export class Table {
   public commanderCol = true;
 
   @Input()
-  public lieuCol = false;
+  public title = '';
 
 }

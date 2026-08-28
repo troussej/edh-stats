@@ -3,15 +3,16 @@
     <ng-template #header>
         <tr>
             @if(commanderCol){
-            <th>Commandeur</th>
+            <th pSortableColumn="title">Commandeur <p-sort-icon field="title" /> </th>
             }
-            @if(lieuCol){
-            <th>Lieu</th>
+            @else(){
+            <th pSortableColumn="title">{{title}} <p-sort-icon field="title" />
+            </th>
             }
-            <th>Parties</th>
-            <th>Gagnées</th>
-            <th>Perdues</th>
-            <th>Winrate</th>
+            <th pSortableColumn="games">Parties <p-sort-icon field="games" /></th>
+            <th pSortableColumn="wins">Gagnées <p-sort-icon field="wins" /></th>
+            <th pSortableColumn="losses">Perdues <p-sort-icon field="losses" /></th>
+            <th pSortableColumn="winrate">Winrate <p-sort-icon field="winrate" /></th>
         </tr>
     </ng-template>
     <ng-template #body let-stat>
@@ -20,11 +21,12 @@
             <td class="p-0">
                 <div class="m-1">
 
-                    <app-commander-title [commander]="stat.commander" avatarSize="small"></app-commander-title>
+                    <app-commander-title [commander]="stat.commander" avatarSize="small"
+                        [useLink]="true"></app-commander-title>
                 </div>
             </td>
             }
-            @if(lieuCol){
+            @else(){
             <td>{{ stat.title }}</td>
             }
             <td>{{ stat.games }}</td>

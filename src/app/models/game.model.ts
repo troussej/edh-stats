@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 export interface Game {
     year: number,
     date: Date,
@@ -6,17 +8,28 @@ export interface Game {
     gagnant: boolean
 }
 
-export interface Commander {
+export class Commander {
 
-    commander: string,
-    bracket: string,
-    creationDate: boolean,
-    url: string,
-    themes: string[],
-    decklist: string,
-    debut: number,
-    fin: number | undefined,
-    colors: string
+    constructor(
+        public commander = '',
+        public bracket = '',
+        public url = '',
+        public themes: string[] = [],
+        public decklist = '',
+        public debut = 0,
+        public fin: number | undefined = undefined,
+        public colors: string = ''
+
+    ) {
+    }
+
+    public static from(other: any): Commander {
+        return _.merge(new Commander(), other);
+    }
+
+    public isActive(year: number): boolean {
+        return this.debut <= year && (_.isNil(this.fin) || this.fin >= year);
+    }
 }
 
 export class Stats {

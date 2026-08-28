@@ -66,19 +66,18 @@ export class SheetService {
                     return this.parse(text);
                 })
                 ,
-                map(csv => _.map(csv, (line: any) => ({
-
-
-                    commander: line["Commander"],
-                    bracket: _.trim(line["Bracket"]),
-                    creationDate: line["Création"],
-                    url: line["Image"],
-                    decklist: line["Decklist"],
-                    debut: parseInt(line["Création"]),
-                    fin: line["Fin"] ? parseInt(line["Fin"]) : undefined,
-                    themes: _.split(line["Thèmes"], ','),
-                    colors: line["Colors"]
-                }
+                map(csv => _.map(csv, (line: any) => Commander.from(
+                    {
+                        commander: line["Commander"],
+                        bracket: _.trim(line["Bracket"]),
+                        creationDate: line["Création"],
+                        url: line["Image"],
+                        decklist: line["Decklist"],
+                        debut: parseInt(line["Création"]),
+                        fin: line["Fin"] ? parseInt(line["Fin"]) : undefined,
+                        themes: _.split(line["Thèmes"], ','),
+                        colors: line["Colors"]
+                    }
                 )))
 
             );

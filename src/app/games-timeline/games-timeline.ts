@@ -9,10 +9,11 @@ import { CardModule } from 'primeng/card';
 import { RadioButton } from "primeng/radiobutton";
 import { FormsModule } from '@angular/forms';
 import { SettingsService } from 'app/settings.service';
+import { YearSelector } from 'app/year-selector/year-selector';
 
 @Component({
   selector: 'app-games-timeline',
-  imports: [BaseChartDirective, CardModule, RadioButton, FormsModule],
+  imports: [BaseChartDirective, CardModule, FormsModule, YearSelector],
   templateUrl: './games-timeline.html',
   styleUrl: './games-timeline.css',
 })

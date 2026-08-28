@@ -1,0 +1,14 @@
+<div>
+    <div class="flex justify-center">
+        <div class="flex flex-wrap gap-4">
+            @for(year of config.years ;track year){
+            <div class="flex items-center">
+                <p-radiobutton name="year" [value]="year" [(ngModel)]="this.settings.currentYear" />
+                <label pLabel for="year" class="text-sm ml-2">{{year}}</label>
+            </div>
+
+            }
+
+        </div>
+    </div>
+</div>
