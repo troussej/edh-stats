@@ -1,25 +1,23 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { StatsPerCommander, StatsPerYear } from 'app/models/game.model';
-import { StatPerCmrPerYear, StatsService } from 'app/services/stats.service';
-import { map, Observable, ReplaySubject } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
+import { StatsService } from 'app/services/stats.service';
+import { map } from 'rxjs';
 import { TableModule } from "primeng/table";
 import _ from 'lodash';
 import { AvatarModule } from "primeng/avatar";
-import { ChartDataInput, LineChart } from '../line-chart/line-chart';
 import { FormsModule } from '@angular/forms';
 import { ConfigService } from 'app/services/config.service';
 import { CardModule } from "primeng/card";
 import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
-import { CommanderTitle } from '../commander-title/commander-title';
+
 import { CommanderCard } from "../commander-card/commander-card";
 
 
 
 @Component({
   selector: 'app-commanders',
-  imports: [AsyncPipe, TableModule, AvatarModule, LineChart, JsonPipe, FormsModule, CardModule, InputTextModule, TagModule, CommanderTitle, CommanderCard],
+  imports: [AsyncPipe, TableModule, AvatarModule, FormsModule, CardModule, InputTextModule, TagModule, CommanderCard],
   templateUrl: './commanders.html',
   styleUrl: './commanders.css',
 })
@@ -31,14 +29,15 @@ export class Commanders {
   public config = inject(ConfigService).config;
 
 
-  get commanders() {
-    return this.statsService.commanders.pipe(map(data =>
-      _.chain(data).values().filter(c => c.commander.indexOf(this.filter) >= 0).value()
-    ));
-
+  public commanders = computed(() => {
+    return _.chain(this.statsService.commanders()).values().filter(c => c.commander.indexOf(this.filter) >= 0).value();
   }
-
-
+  );
 
 
 }
+
+
+
+
+

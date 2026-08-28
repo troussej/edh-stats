@@ -3,7 +3,7 @@
         <div class="flex flex-wrap gap-4">
             @for(year of config.years ;track year){
             <div class="flex items-center">
-                <p-radiobutton name="year" [value]="year" [(ngModel)]="currentYear" />
+                <p-radiobutton name="year" [value]="year" [(ngModel)]="this.settings.currentYear" />
                 <label pLabel for="year" class="text-sm ml-2">{{year}}</label>
             </div>
 
@@ -22,8 +22,7 @@
 
 
         <p-card class="m-4 ">
-            <canvas baseChart [data]="(chartData()|async)!" [type]="'bar'" [options]="barChartOptions"
-                [plugins]="plugins!">
+            <canvas baseChart [data]="chartData()" [type]="'bar'" [options]="barChartOptions" [plugins]="plugins!">
             </canvas>
         </p-card>
     </div>

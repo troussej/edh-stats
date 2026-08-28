@@ -1,5 +1,5 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ConfigService } from 'app/services/config.service';
 import { StatsService } from 'app/services/stats.service';
 import { ChartConfiguration, ChartData } from 'chart.js';
@@ -10,6 +10,7 @@ import { CardModule } from 'primeng/card';
 import { map, Observable } from 'rxjs';
 import { RadioButton } from "primeng/radiobutton";
 import { FormsModule } from '@angular/forms';
+import { SettingsService } from 'app/settings.service';
 
 @Component({
   selector: 'app-games-timeline',
@@ -19,53 +20,43 @@ import { FormsModule } from '@angular/forms';
 })
 export class GamesTimeline {
   public statsService = inject(StatsService);
+  public settings = inject(SettingsService);
   public config = inject(ConfigService).config;
-  public currentYear = this.config.defaultYear;
 
-  public getData() {
+  public data = computed(() => {
 
-    return this.statsService.stats.pipe(map(a => {
-      const yearData = a[this.currentYear];
+    let games = _.chain(this.statsService.games())
+      .filter({ year: this.settings.currentYear() })
+      .value();
 
-      const indexOfMonths = Array.from({ length: 12 }, (e, i) => i);
+    const indexOfMonths = Array.from({ length: 12 }, (e, i) => i);
 
-      return _.chain(yearData.games).map(g => (
-        { lieu: g.lieu, mois: g.date.getMonth() }
-      ))
-        .groupBy('lieu')
-        .mapValues(val => _.countBy(val, 'mois'))
-        .mapValues(val => {
-          return _.map(indexOfMonths, i => val[i] ?? 0);
-        })
-        .map((val, lieu) =>
-        ({
-          label: lieu,
-          data: val,
-          borderRadius: 5,
-          borderWidth: 3
+    return _.chain(games).map(g => (
+      { lieu: g.lieu, mois: g.date.getMonth() }
+    ))
+      .groupBy('lieu')
+      .mapValues(val => _.countBy(val, 'mois'))
+      .mapValues(val => {
+        return _.map(indexOfMonths, i => val[i] ?? 0);
+      })
+      .map((val, lieu) =>
+      ({
+        label: lieu,
+        data: val,
+        borderRadius: 5,
+        borderWidth: 3
 
-        })
-        )
-        .value();
-    }))
-  }
+      })
+      )
+      .value();
+  })
 
-  public chartData(): Observable<ChartData<'pie', number[], string | string[]>> {
-
-    return this.getData().pipe(map(data => {
-
-
-
-      return {
-        labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'],
-        datasets: data
-      };
-    }));
-
-
-  };
-
-
+  public chartData = computed<ChartData<'pie', number[], string | string[]>>(() => {
+    return {
+      labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'],
+      datasets: this.data()
+    };
+  });
 
   public plugins: ChartConfiguration['plugins'] = [ChartDataLabels];
 

@@ -35,7 +35,7 @@ export class Dashboard {
 
 
   public activeCommanders = computed<_.Dictionary<Commander>>(() => {
-    return _.chain(this.statsService.commandersS())
+    return _.chain(this.statsService.commanders())
       .filter((cmr, name) => this.isActive(this.settings.currentYear(), cmr))
       .map(cmr => [cmr.commander, cmr])
       .fromPairs()
@@ -70,7 +70,7 @@ export class Dashboard {
     console.log('statPerCommanderCurYear', filteredGames, this.statsService.games(), this.settings.currentYear(), typeof this.settings.currentYear())
 
     const statsPerCmr = _.chain(filteredGames)
-      .mapValues(((games, deck) => this.statsService.calcStats(new StatsPerCommander(this.statsService.commandersS()[deck]), games)))
+      .mapValues(((games, deck) => this.statsService.calcStats(new StatsPerCommander(this.statsService.commanders()[deck]), games)))
       .value();
 
     return _.chain(this.activeCommanders())
