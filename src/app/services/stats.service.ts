@@ -1,4 +1,4 @@
-import { inject, Service, signal } from "@angular/core";
+import { computed, inject, Service, signal } from "@angular/core";
 import { SheetService } from "./sheet.service";
 import { Commander, Game, StatsPerCommander, StatsPerYear, Stats, GlobalStats } from "app/models/game.model";
 import { forkJoin, map, Observable, of, ReplaySubject, pipe, mergeMap } from "rxjs";
@@ -32,7 +32,6 @@ export class StatsService {
     private allStats = new ReplaySubject<{ [year: number]: StatsPerYear }>(1);
     public cmrs = new ReplaySubject<_.Dictionary<Commander>>(1);
     private statsPerYear = new ReplaySubject<StatPerCmrPerYear>(1);
-
 
     public get stats(): Observable<{ [year: number]: StatsPerYear }> {
         return this.allStats.asObservable();

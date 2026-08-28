@@ -1,5 +1,5 @@
 import { AsyncPipe, JsonPipe, PercentPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, inject, OnInit, model } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, OnInit, model, computed, signal } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { map, Observable } from 'rxjs';
 import { CardModule } from 'primeng/card';
@@ -12,14 +12,16 @@ import { Table } from "../table/table";
 import { GlobalStatsComponent } from '../global-stats/global-stats';
 import { Lieu } from '../lieu/lieu';
 import _ from 'lodash';
-import { Commander, Stats } from 'app/models/game.model';
+import { Commander, GlobalStats, Stats, StatsPerCommander } from 'app/models/game.model';
 import { ConfigService } from 'app/services/config.service';
 import { BarChart, BarChartDataInput } from "../bar-chart/bar-chart";
+import { Debug } from "app/debug/debug";
+import { SettingsService } from 'app/settings.service';
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart, AsyncPipe],
+  imports: [AsyncPipe, Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart, AsyncPipe, Debug],
   // imports: [GlobalStats, AsyncPipe, PanelModule, CardModule, TableModule, ImageModule, Table],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -29,23 +31,56 @@ export class Dashboard {
 
   public statsService = inject(StatsService);
   public config = inject(ConfigService).config;
+  public settings: SettingsService = inject(SettingsService);
 
-  public currentYear = this.config.defaultYear;
 
-  get perWinrate(): Observable<Stats[]> {
 
-    return this.statsService.stats.pipe(map(stats => _.chain(stats[this.currentYear].parCommander)
-      .filter(s => this.isActive(this.currentYear, s.commander))
-      .filter(s => s.games >= 3).value()));
+  public activeCommanders = computed<_.Dictionary<Commander>>(() => {
+    return _.chain(this.statsService.commandersS())
+      .filter((cmr, name) => this.isActive(this.settings.currentYear(), cmr))
+      .map(cmr => [cmr.commander, cmr])
+      .fromPairs()
+      .value();
+  });
 
-  }
+  public perWinrate = computed<Stats[]>(() => {
+    return _.chain(this.statPerCommanderCurYear())
+      .values()
+      .filter(s => !_.isNil(s))
+      .filter(s => s.games > 3)
+      .orderBy('winrate')
+      .value();
 
-  get perGames(): Observable<Stats[]> {
-    return this.statsService.stats.pipe(map(s => _.chain(s[this.currentYear].parCommander)
-      .filter(s => this.isActive(this.currentYear, s.commander))
+  });
+
+  public perGames = computed(() => {
+    return _.chain(this.statPerCommanderCurYear())
+      .values()
+      .filter(s => !_.isNil(s))
+      .orderBy('games')
+      .value();
+  });
+
+  public statPerCommanderCurYear = computed(() => {
+    const year = this.settings.currentYear();
+    const filteredGames = _.chain(this.statsService.games())
+      .filter({ 'year': year })
+      .groupBy('deck')
+      .value();
+
+    console.log('statPerCommanderCurYear', filteredGames, this.statsService.games(), this.settings.currentYear(), typeof this.settings.currentYear())
+
+    const statsPerCmr = _.chain(filteredGames)
+      .mapValues(((games, deck) => this.statsService.calcStats(new StatsPerCommander(this.statsService.commandersS()[deck]), games)))
+      .value();
+
+    return _.chain(this.activeCommanders())
+      .mapValues((cmr, name) =>
+        statsPerCmr[name] ?? new StatsPerCommander(cmr)
+      )
       .value()
-    ));
-  }
+  })
+
 
   private isActive(year: number, cmr: Commander): boolean {
     return cmr.debut <= year && (_.isNil(cmr.fin) || cmr.fin >= year);

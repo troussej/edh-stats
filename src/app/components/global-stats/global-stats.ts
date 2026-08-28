@@ -5,7 +5,7 @@ import { CardModule } from 'primeng/card';
 import { Table } from '../table/table';
 
 import { Observable } from 'rxjs/internal/Observable';
-import { GlobalStats, Stats, StatsPerYear } from 'app/models/game.model';
+import { Commander, GlobalStats, Stats, StatsPerYear } from 'app/models/game.model';
 import { map } from 'rxjs';
 import { PieChart } from '../pie/pie-chart';
 import { FieldsetModule } from "primeng/fieldset";
@@ -16,6 +16,7 @@ import { ArrowDownRight, ArrowUpRight } from '@primeicons/angular';
 import { RadioButton } from "primeng/radiobutton";
 import { FormsModule } from '@angular/forms';
 import { Debug } from 'app/debug/debug';
+import { SettingsService } from 'app/settings.service';
 @Component({
   selector: 'app-global-stats',
   imports: [AsyncPipe, CardModule, PieChart, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule, Debug],
@@ -25,9 +26,8 @@ import { Debug } from 'app/debug/debug';
 })
 export class GlobalStatsComponent {
   public statsService: StatsService = inject(StatsService);
+  public settings: SettingsService = inject(SettingsService);
   public config = inject(ConfigService).config;
-
-  public currentYear = model<number>(this.config.defaultYear);
 
 
   // get globalsCurrentYear(): Observable<GlobalStats> {
@@ -60,7 +60,7 @@ export class GlobalStatsComponent {
   });
 
   public chartData = computed(() => {
-    return this.globals()[this.currentYear()];
+    return this.globals()[this.settings.currentYear()];
   });
 
   calcMovementFromPrevYear(data: { [x: string]: GlobalStats }) {

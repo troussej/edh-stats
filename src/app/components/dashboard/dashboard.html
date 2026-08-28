@@ -1,24 +1,23 @@
 <div class=" grid xl:grid-cols-2 gap-4 m-4 ">
-    <div class="">
 
-        <app-global-stats [(currentYear)]="currentYear"></app-global-stats>
+    <div class="">
+        {{settings.currentYear()}}
+        <app-debug [data]="perWinrate()"></app-debug>
+        <app-global-stats></app-global-stats>
     </div>
     <p-fieldset legend="Par lieu" class="" [toggleable]="true">
-        <app-lieu [currentYear]="currentYear"></app-lieu>
+        <app-lieu [currentYear]="settings.currentYear()"></app-lieu>
     </p-fieldset>
 
-    @if(perWinrate|async){
+
     <p-fieldset legend="Par winrate (plus de 3 parties)" class="" [toggleable]="true">
-        <app-bar-chart [chartData]="getBarChartData((perWinrate|async)!,'winrate')"></app-bar-chart>
-        <app-table [stats]="(perWinrate|async)??[]" sortField="winrate" [sortOrder]="-1"></app-table>
+        <app-bar-chart [chartData]="getBarChartData(perWinrate(),'winrate')"></app-bar-chart>
+        <app-table [stats]="perWinrate()" sortField="winrate" [sortOrder]="-1"></app-table>
     </p-fieldset>
 
-    }
-    @if(perGames|async){
+
     <p-fieldset legend="Nombre de parties" class="" [toggleable]="true">
-        <app-bar-chart [chartData]="getBarChartData((perGames|async)!,'games')"></app-bar-chart>
-        <app-table [stats]="(perGames|async)??[]" sortField="games" [sortOrder]="-1"
-            legend="Nombre de parties"></app-table>
+        <app-bar-chart [chartData]="getBarChartData(perGames(),'games')"></app-bar-chart>
+        <app-table [stats]="perGames()" sortField="games" [sortOrder]="-1" legend="Nombre de parties"></app-table>
     </p-fieldset>
-    }
 </div>

@@ -50,10 +50,15 @@ export class StatsPerCommander extends Stats {
 }
 
 export class GlobalStats extends Stats {
+
     public gamesMovement?: boolean;
     public winMovement?: boolean;
     public lossMovement?: boolean;
     public winrateMovement?: boolean;
+
+    get year(): number {
+        return parseInt(this.title);
+    }
 }
 
 export class StatsPerYear {
