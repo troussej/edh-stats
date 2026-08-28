@@ -1,15 +1,31 @@
-<div class="flex items-center gap-2">
-    @if(commander.url){
-    <p-avatar [image]="commander.url" shape="circle" [class]="avatarCss" />
-    }
-    <span class="text-sm"> {{ commander.commander }}</span>
-    <app-bracket [value]="commander.bracket"></app-bracket>
-    <span>
-        <app-mana [manaString]="commander.colors"></app-mana>
-    </span>
+<div class="grid grid-cols-2 grid-rows-2">
+    <div class="row-span-2 flex items-center gap-2">
+        @if(commander.url){
+        <p-avatar [image]="commander.url" shape="circle" [class]="avatarCss" />
+        }
+        <div>
+            <span class="text-sm"> {{ commander.commander }}</span>
+        </div>
+        @if(commander.decklist){
+        <div>
+            <a [href]="commander.decklist" target="_blank"><svg data-p-icon="external-link" pTooltip="Moxfield"
+                    alt="moxfield"></svg></a>
+        </div>
+        }
+    </div>
+    <div class=" flex gap-1 flex items-center mb-1">
+        <app-bracket [value]="commander.bracket"></app-bracket>
+        <span>
+            <app-mana [manaString]="commander.colors"></app-mana>
+        </span>
+    </div>
+    <div class="">
+        <div class="flex gap-1 items-center">
+            @for(theme of commander.themes;track theme){
+            <p-tag>{{theme}}</p-tag>
+            }
 
-    @if(commander.decklist){
-    <a [href]="commander.decklist" target="_blank"><svg data-p-icon="external-link" pTooltip="Moxfield"
-            alt="moxfield"></svg></a>
-    }
+        </div>
+    </div>
+
 </div>

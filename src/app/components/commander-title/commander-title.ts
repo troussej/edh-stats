@@ -5,10 +5,11 @@ import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
 import { Mana } from '../mana/mana';
 import { Bracket } from "app/bracket/bracket";
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-commander-title',
-  imports: [AvatarModule, ExternalLink, TooltipModule, Mana, Bracket],
+  imports: [AvatarModule, ExternalLink, TooltipModule, Mana, Bracket, TagModule],
   templateUrl: './commander-title.html',
   styleUrl: './commander-title.css',
 })
