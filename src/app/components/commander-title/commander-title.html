@@ -1,7 +1,9 @@
 <div id="{{commander.commander}}" class="grid grid-cols-2 grid-rows-2">
     <div class="row-span-2 flex items-center gap-2">
         @if(commander.url){
-        <p-avatar [image]="commander.url" shape="circle" [class]="avatarCss" />
+        <a [routerLink]="['/commander',commander.commander]">
+            <p-avatar [image]="commander.url" shape="circle" [class]="avatarCss" />
+        </a>
         }
         <a [routerLink]="['/commander',commander.commander]">
             <div>
