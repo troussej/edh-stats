@@ -4,7 +4,7 @@ import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
 
 import { GlobalStats } from 'app/models/game.model';
-import { PieChart } from '../pie/pie-chart';
+import { PieChart } from '../charts/pie/pie-chart';
 import { FieldsetModule } from "primeng/fieldset";
 import { TableModule } from "primeng/table";
 import { ConfigService } from 'app/services/config.service';

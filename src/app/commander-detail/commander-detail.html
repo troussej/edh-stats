@@ -1,0 +1,15 @@
+<div class="m-4">
+
+    <app-year-selector></app-year-selector>
+    <div class="grid grid-cols-2 mt-4 gap-4">
+
+        <p-card class="">
+            <app-commander-card [cmr]="commander()"></app-commander-card>
+        </p-card>
+        <div>
+            <p-card>
+                <app-per-location [filters]="filterPerLocation()"></app-per-location>
+            </p-card>
+        </div>
+    </div>
+</div>

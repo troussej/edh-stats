@@ -6,11 +6,11 @@ import { ImageModule } from 'primeng/image';
 import { FieldsetModule } from 'primeng/fieldset';
 
 import { PanelModule } from 'primeng/panel';
-import { Table } from "../table/table";
+import { Table } from "../charts/stats-table/stats-table";
 import { GlobalStatsComponent } from '../global-stats/global-stats';
 import { Lieu } from '../lieu/lieu';
 import _ from 'lodash';
-import { Commander, Stats, StatsPerCommander } from 'app/models/game.model';
+import { Stats, StatsPerCommander } from 'app/models/game.model';
 import { BarChart, BarChartDataInput } from "../bar-chart/bar-chart";
 import { SettingsService } from 'app/settings.service';
 
@@ -26,16 +26,6 @@ export class Dashboard {
 
   public statsService = inject(StatsService);
   public settings: SettingsService = inject(SettingsService);
-
-
-
-  public activeCommanders = computed<_.Dictionary<Commander>>(() => {
-    return _.chain(this.statsService.commanders())
-      .filter((cmr, name) => this.isActive(this.settings.currentYear(), cmr))
-      .map(cmr => [cmr.commander, cmr])
-      .fromPairs()
-      .value();
-  });
 
   public perWinrate = computed<Stats[]>(() => {
     return _.chain(this.statPerCommanderCurYear())
@@ -68,17 +58,12 @@ export class Dashboard {
       .mapValues(((games, deck) => this.statsService.calcStats(new StatsPerCommander(this.statsService.commanders()[deck]), games)))
       .value();
 
-    return _.chain(this.activeCommanders())
+    return _.chain(this.statsService.activeCommanders())
       .mapValues((cmr, name) =>
         statsPerCmr[name] ?? new StatsPerCommander(cmr)
       )
       .value()
   })
-
-
-  private isActive(year: number, cmr: Commander): boolean {
-    return cmr.debut <= year && (_.isNil(cmr.fin) || cmr.fin >= year);
-  }
 
   getBarChartData(stats: Stats[], sortProp: keyof Stats): BarChartDataInput {
 

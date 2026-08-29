@@ -2,7 +2,7 @@ import { Component, computed, inject, Input } from '@angular/core';
 import { Commander, StatsPerCommander } from 'app/models/game.model';
 import { TagModule } from 'primeng/tag';
 import { CommanderTitle } from '../commander-title/commander-title';
-import { ChartDataInput, LineChart } from "../line-chart/line-chart";
+import { ChartDataInput, LineChart } from "../charts/line-chart/line-chart";
 import { CardModule } from "primeng/card";
 import { StatsService } from 'app/services/stats.service';
 import _ from 'lodash';

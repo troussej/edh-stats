@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Table } from './table';
+import { Table } from './stats-table';
 
 describe('Table', () => {
   let component: Table;
@@ -10,7 +10,7 @@ describe('Table', () => {
     await TestBed.configureTestingModule({
       imports: [Table]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(Table);
     component = fixture.componentInstance;

@@ -3,7 +3,7 @@
         @if(commander.url){
         <p-avatar [image]="commander.url" shape="circle" [class]="avatarCss" />
         }
-        <a [routerLink]="useLink()?'/commanders':null" [fragment]="commander.commander">
+        <a [routerLink]="['/commander',commander.commander]">
             <div>
                 <span class="text-sm"> {{ commander.commander }}</span>
             </div>

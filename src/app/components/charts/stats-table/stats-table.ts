@@ -8,13 +8,13 @@ import { AvatarModule } from 'primeng/avatar';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PopoverModule } from 'primeng/popover';
 import { TooltipModule } from 'primeng/tooltip';
-import { CommanderTitle } from "../commander-title/commander-title";
+import { CommanderTitle } from "../../commander-title/commander-title";
 @Component({
   selector: 'app-table',
   imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule, TooltipModule, CommanderTitle, SortableColumn],
-  templateUrl: './table.html',
+  templateUrl: './stats-table.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './table.css',
+  styleUrl: './stats-table.css',
 })
 export class Table {
 
@@ -35,5 +35,7 @@ export class Table {
 
   @Input()
   public title = '';
+
+
 
 }

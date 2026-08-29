@@ -4,26 +4,14 @@ import { Commander, Game, StatsPerCommander, StatsPerYear, Stats, GlobalStats } 
 import { forkJoin, map, Observable, of, ReplaySubject, pipe, mergeMap } from "rxjs";
 import _, { Dictionary } from "lodash";
 import { ConfigService } from "./config.service";
-
-
-export type GameData = {
-    games: {
-        [year: number]: Game[];
-    };
-    commanders: Dictionary<Commander>;
-};
-
-export type StatPerCmrPerYear = {
-    [cmr: string]: {
-        [year: number]: StatsPerCommander;
-    };
-};
+import { SettingsService } from "app/settings.service";
 
 @Service()
 export class StatsService {
 
     private config = inject(ConfigService).config;
-    private sheets = inject(SheetService)
+    private sheets = inject(SheetService);
+    private settings = inject(SettingsService);
 
     public games = signal<Game[]>([]);
     public commanders = signal<_.Dictionary<Commander>>({});
@@ -93,5 +81,13 @@ export class StatsService {
         res.calcWinrate();
         return res;
     }
+
+    public activeCommanders = computed<_.Dictionary<Commander>>(() => {
+        return _.chain(this.commanders())
+            .filter((cmr, name) => cmr.isActive(this.settings.currentYear()))
+            .map(cmr => [cmr.commander, cmr])
+            .fromPairs()
+            .value();
+    });
 
 }

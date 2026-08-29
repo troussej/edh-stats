@@ -89,3 +89,6 @@ export class CommanderStatPerYear {
     constructor(public commander: Commander, public stats: { [year: number]: Stats }) { }
 }
 
+export type Filters = {
+    [key: string]: string
+}

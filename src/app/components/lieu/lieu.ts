@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, inject, computed } from '@angular/core';
 import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
-import { Table } from '../table/table';
+import { Table } from '../charts/stats-table/stats-table';
 import { Stats } from 'app/models/game.model';
 import { SettingsService } from 'app/settings.service';
 import _ from 'lodash';

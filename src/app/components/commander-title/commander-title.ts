@@ -16,8 +16,6 @@ import { RouterLink } from "@angular/router";
 })
 export class CommanderTitle {
 
-  useLink = input<boolean>(false);
-
   @Input()
   public commander!: Commander;
 
