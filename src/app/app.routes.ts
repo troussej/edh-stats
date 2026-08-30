@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { Dashboard } from './components/dashboard/dashboard';
-import { Commanders } from './components/commanders/commanders';
-import { GamesTimeline } from './games-timeline/games-timeline';
+import { Dashboard } from './pages/dashboard/dashboard';
+import { Commanders } from './pages/commanders/commanders';
+import { GamesTimeline } from './pages/games-timeline/games-timeline';
 import { Themes } from './themes/themes';
-import { CommanderDetail } from './commander-detail/commander-detail';
+import { CommanderDetail } from './pages/commander-detail/commander-detail';
 
 export const routes: Routes = [
     { path: '', component: Dashboard, },

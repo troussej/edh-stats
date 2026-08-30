@@ -8,7 +8,7 @@ import { CardModule } from "primeng/card";
 import { Table } from "app/components/charts/stats-table/stats-table";
 import { TableModule } from 'primeng/table';
 import { Debug } from 'app/debug/debug';
-import { YearSelector } from "app/year-selector/year-selector";
+import { YearSelector } from "app/components/year-selector/year-selector";
 
 @Component({
   selector: 'app-themes',

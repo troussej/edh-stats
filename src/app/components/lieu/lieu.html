@@ -1,2 +1,6 @@
-<app-table [commanderCol]="false" title="Lieu" [stats]="parlieu()" sortField="games" [sortOrder]="-1"
-    legend="Par lieu"></app-table>
+<app-bar-chart [stats]="parlieu()" [maxSize]="8" sortProp="games" sortOrder="desc"></app-bar-chart>
+<p-panel header="Details" [toggleable]="true" [collapsed]="true" class="mt-2 ">
+
+    <app-table [commanderCol]="false" title="Lieu" [stats]="parlieu()" sortField="games" [sortOrder]="-1"
+        legend="Par lieu"></app-table>
+</p-panel>

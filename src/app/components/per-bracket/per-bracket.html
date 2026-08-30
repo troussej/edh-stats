@@ -1,5 +1,8 @@
 <p-fieldset legend="Brackets" class="" [toggleable]="true">
-    <app-bar-chart [chartData]="getBarChartData(perBracket())"></app-bar-chart>
-    <app-table [commanderCol]="false" title="Bracket" [stats]="perBracket()" sortField="games"
-        [sortOrder]="-1"></app-table>
+    <app-bar-chart [stats]="perBracket()" [maxSize]="8"></app-bar-chart>
+    <p-panel header="Details" [toggleable]="true" [collapsed]="true" class="mt-2">
+
+        <app-table [commanderCol]="false" title="Bracket" [stats]="perBracket()" sortField="games"
+            [sortOrder]="-1"></app-table>
+    </p-panel>
 </p-fieldset>

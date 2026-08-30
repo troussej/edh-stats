@@ -8,8 +8,8 @@ import { ConfigService } from 'app/services/config.service';
 import { CardModule } from "primeng/card";
 import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
+import { CommanderCard } from 'app/components/commander-card/commander-card';
 
-import { CommanderCard } from "../commander-card/commander-card";
 
 
 

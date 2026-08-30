@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { YearSelector } from "app/year-selector/year-selector";
+import { YearSelector } from "app/components/year-selector/year-selector";
 import { CardModule } from "primeng/card";
 import { CommanderCard } from "app/components/commander-card/commander-card";
 import { StatsService } from 'app/services/stats.service';

@@ -6,19 +6,20 @@ import { ImageModule } from 'primeng/image';
 import { FieldsetModule } from 'primeng/fieldset';
 
 import { PanelModule } from 'primeng/panel';
-import { Table } from "../charts/stats-table/stats-table";
-import { GlobalStatsComponent } from '../global-stats/global-stats';
-import { Lieu } from '../lieu/lieu';
+import { Table } from "../../components/charts/stats-table/stats-table";
+import { GlobalStatsComponent } from '../../components/global-stats/global-stats';
+import { Lieu } from '../../components/lieu/lieu';
 import _ from 'lodash';
 import { Stats, StatsPerCommander } from 'app/models/game.model';
-import { BarChart, BarChartDataInput } from "../bar-chart/bar-chart";
+import { BarChart, BarChartDataInput } from "../../components/charts/bar-chart/bar-chart";
 import { SettingsService } from 'app/settings.service';
-import { PerBracket } from '../per-bracket/per-bracket';
+import { PerBracket } from '../../components/per-bracket/per-bracket';
+import { YearSelector } from "app/components/year-selector/year-selector";
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart, PerBracket],
+  imports: [Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart, PerBracket, YearSelector],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',
@@ -66,9 +67,11 @@ export class Dashboard {
       .value()
   })
 
-  getBarChartData(stats: Stats[], sortProp: keyof Stats): BarChartDataInput {
+  getBarChartData(stats: Stats[], max: number | undefined, sortProp: keyof Stats): BarChartDataInput {
 
-    let data = _.chain(stats).sortBy(s => -s[sortProp]).slice(0, 5).value();
+    max = max ?? stats.length;
+
+    let data = _.chain(stats).sortBy(s => -s[sortProp]).slice(0, max).value();
 
     return {
       labels: _.map(data, d => d.title),

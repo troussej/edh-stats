@@ -1,15 +1,16 @@
 import { Component, computed, inject } from '@angular/core';
 import { Table } from "../charts/stats-table/stats-table";
-import { BarChart, BarChartDataInput } from "../bar-chart/bar-chart";
+import { BarChart, BarChartDataInput } from "../charts/bar-chart/bar-chart";
 import { FieldsetModule } from "primeng/fieldset";
 import { Stats } from 'app/models/game.model';
 import { StatsService } from 'app/services/stats.service';
 import { SettingsService } from 'app/settings.service';
 import _ from 'lodash';
+import { PanelModule } from "primeng/panel";
 
 @Component({
   selector: 'app-per-bracket',
-  imports: [Table, BarChart, FieldsetModule],
+  imports: [Table, BarChart, FieldsetModule, PanelModule],
   templateUrl: './per-bracket.html',
   styleUrl: './per-bracket.css',
 })

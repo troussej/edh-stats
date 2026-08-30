@@ -13,9 +13,11 @@ import { ArrowDownRight, ArrowUpRight } from '@primeicons/angular';
 import { RadioButton } from "primeng/radiobutton";
 import { FormsModule } from '@angular/forms';
 import { SettingsService } from 'app/settings.service';
+import { PanelModule } from "primeng/panel";
+import { BarChart } from '../charts/bar-chart/bar-chart';
 @Component({
   selector: 'app-global-stats',
-  imports: [CardModule, PieChart, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule],
+  imports: [CardModule, PieChart, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule, PanelModule, BarChart],
   templateUrl: './global-stats.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './global-stats.css',

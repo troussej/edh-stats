@@ -6,3 +6,8 @@
 @import './theme/colors.css';
 @import './theme/layout.css';
 @import './theme/utilities.css';
+
+:root {
+    --p-panel-title-font-size: small;
+
+}
