@@ -1,0 +1,5 @@
+<p-fieldset legend="Brackets" class="" [toggleable]="true">
+    <app-bar-chart [chartData]="getBarChartData(perBracket())"></app-bar-chart>
+    <app-table [commanderCol]="false" title="Bracket" [stats]="perBracket()" sortField="games"
+        [sortOrder]="-1"></app-table>
+</p-fieldset>

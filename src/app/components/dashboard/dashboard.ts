@@ -13,11 +13,12 @@ import _ from 'lodash';
 import { Stats, StatsPerCommander } from 'app/models/game.model';
 import { BarChart, BarChartDataInput } from "../bar-chart/bar-chart";
 import { SettingsService } from 'app/settings.service';
+import { PerBracket } from '../per-bracket/per-bracket';
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart],
+  imports: [Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart, PerBracket],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',
