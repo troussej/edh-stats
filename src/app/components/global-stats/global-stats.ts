@@ -29,10 +29,10 @@ export class GlobalStatsComponent {
 
   public globals: Signal<{ [x: string]: GlobalStats }> = computed(() => {
     const data = _.chain(this.statsService.games())
-      .filter(g => {
-        const cmr = this.statsService.commanders()[g.deck];
-        return this.settings.filterCommanders()(cmr);
-      })
+      // .filter(g => {
+      //   const cmr = this.statsService.commanders()[g.deck];
+      //   return this.settings.filterCommanders()(cmr);
+      // })
       .groupBy('year')
       .mapValues((gamesForYear, year) => this.statsService.calcStats(new GlobalStats(year), gamesForYear))
       .value();
