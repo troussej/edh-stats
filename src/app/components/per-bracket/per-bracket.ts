@@ -31,6 +31,10 @@ export class PerBracket {
   public perBracket = computed<Stats[]>(() => {
     return _.chain(this.statsService.games())
       .filter({ year: this.settings.currentYear() })
+      .filter(g => {
+        const cmr = this.statsService.commanders()[g.deck];
+        return this.settings.filterCommanders()(cmr);
+      })
       .groupBy(g => this.statsService.commanders()[g.deck]?.bracket ?? g.deck)
       .mapValues((games, bracket) => this.statsService.calcStats(new Stats(bracket), games))
       .values()

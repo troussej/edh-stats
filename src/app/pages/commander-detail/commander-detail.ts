@@ -1,15 +1,15 @@
 import { Component, computed, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { YearSelector } from "app/components/year-selector/year-selector";
 import { CardModule } from "primeng/card";
 import { CommanderCard } from "app/components/commander-card/commander-card";
 import { StatsService } from 'app/services/stats.service';
 import { Commander, Filters } from 'app/models/game.model';
 import { PerLocation } from "app/components/charts/per-location/per-location";
+import { Options } from 'app/components/options/options';
 
 @Component({
   selector: 'app-commander-detail',
-  imports: [YearSelector, CardModule, CommanderCard, PerLocation],
+  imports: [Options, CardModule, CommanderCard, PerLocation],
   templateUrl: './commander-detail.html',
   styleUrl: './commander-detail.css',
 })

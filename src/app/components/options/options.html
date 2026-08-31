@@ -1,0 +1,29 @@
+<p-card class="flex gap-4 mt-4 mx-4 mb-2">
+    <div class="flex justify-center">
+
+        <input pInputText [(ngModel)]="this.settings.commanderName" type="text" name="filter" pSize="small"
+            placeholder="Commander" />
+
+        <!-- <p-iftalabel>
+            <input pInputText [(ngModel)]="this.settings.commanderName" type="text" name="filter" pSize="small" />
+            <label for="filter">Commander</label>
+        </p-iftalabel> -->
+
+
+        <p-selectbutton [options]="this.settings.brackets" [(ngModel)]="this.settings.bracketFilter" [multiple]="true"
+            class="ml-4" optionValue="value" optionLabel="name" size="small" />
+
+        <div class="flex flex-wrap gap-2 ml-4">
+            @for(year of config.years ;track year){
+            <div class="flex items-center">
+                <p-radiobutton name="year" [value]="year" [(ngModel)]="this.settings.currentYear" size="small" />
+                <label pLabel for="year" class="text-sm ml-2">{{year}}</label>
+            </div>
+
+            }
+
+        </div>
+
+        <button pButton (click)="settings.reset()" class="ml-4" size="small">Reset</button>
+    </div>
+</p-card>

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { YearSelector } from './year-selector';
+import { Options } from './options';
 
-describe('YearSelector', () => {
-  let component: YearSelector;
-  let fixture: ComponentFixture<YearSelector>;
+describe('Options', () => {
+  let component: Options;
+  let fixture: ComponentFixture<Options>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [YearSelector],
+      imports: [Options],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(YearSelector);
+    fixture = TestBed.createComponent(Options);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

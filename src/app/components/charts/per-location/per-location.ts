@@ -28,6 +28,10 @@ export class PerLocation {
     let games = _.chain(this.statsService.games())
       .filter({ year: this.settings.currentYear() })
       .filter(this.filters())
+      .filter(g => {
+        const cmr = this.statsService.commanders()[g.deck];
+        return this.settings.filterCommanders()(cmr);
+      })
       .value();
 
     const indexOfMonths = Array.from({ length: 12 }, (e, i) => i);

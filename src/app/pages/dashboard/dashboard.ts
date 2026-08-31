@@ -14,12 +14,12 @@ import { Stats, StatsPerCommander } from 'app/models/game.model';
 import { BarChart, BarChartDataInput } from "../../components/charts/bar-chart/bar-chart";
 import { SettingsService } from 'app/settings.service';
 import { PerBracket } from '../../components/per-bracket/per-bracket';
-import { YearSelector } from "app/components/year-selector/year-selector";
+import { Options } from "app/components/options/options";
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart, PerBracket, YearSelector],
+  imports: [Lieu, PanelModule, FieldsetModule, CardModule, TableModule, ImageModule, Table, GlobalStatsComponent, BarChart, PerBracket, Options, Options],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',
@@ -48,9 +48,13 @@ export class Dashboard {
   });
 
   public statPerCommanderCurYear = computed(() => {
-    const year = this.settings.currentYear();
+
     const filteredGames = _.chain(this.statsService.games())
-      .filter({ 'year': year })
+      .filter({ year: this.settings.currentYear() })
+      .filter(g => {
+        const cmr = this.statsService.commanders()[g.deck];
+        return this.settings.filterCommanders()(cmr);
+      })
       .groupBy('deck')
       .value();
 

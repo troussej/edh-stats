@@ -8,11 +8,11 @@ import { CardModule } from "primeng/card";
 import { Table } from "app/components/charts/stats-table/stats-table";
 import { TableModule } from 'primeng/table';
 import { Debug } from 'app/debug/debug';
-import { YearSelector } from "app/components/year-selector/year-selector";
+import { Options } from 'app/components/options/options';
 
 @Component({
   selector: 'app-themes',
-  imports: [CardModule, Table, Debug, YearSelector],
+  imports: [CardModule, Table, Debug, Options],
   templateUrl: './themes.html',
   styleUrl: './themes.css',
 })

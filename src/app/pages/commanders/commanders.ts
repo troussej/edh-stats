@@ -10,50 +10,30 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
 import { CommanderCard } from 'app/components/commander-card/commander-card';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { Options } from "app/components/options/options";
+import { SettingsService } from 'app/settings.service';
 
 
 
 
 @Component({
   selector: 'app-commanders',
-  imports: [TableModule, AvatarModule, FormsModule, CardModule, InputTextModule, TagModule, CommanderCard, SelectButtonModule],
+  imports: [TableModule, AvatarModule, FormsModule, CardModule, InputTextModule, TagModule, CommanderCard, SelectButtonModule, Options],
   templateUrl: './commanders.html',
   styleUrl: './commanders.css',
 })
 export class Commanders {
 
-  public filter = '';
-
   public statsService = inject(StatsService);
   public config = inject(ConfigService).config;
+  public settings = inject(SettingsService);
 
-  public brackets = [
-    {
-      name: 'B2',
-      value: '2'
-    },
-    {
-      name: 'B3',
-      value: '3'
-    },
-    {
-      name: 'B3+',
-      value: '3+'
-    },
-    {
-      name: 'B4',
-      value: '4'
-    },
 
-  ]
-  public bracketFilter = model<string[]>(['2', '3', '3+', '4',]);
 
 
   public commanders = computed(() => {
     return _.chain(this.statsService.commanders()).values()
-      .filter(c => c.commander.indexOf(this.filter) >= 0)
-      .filter(c => this.bracketFilter().includes(c.bracket)
-      )
+      .filter(this.settings.filterCommanders())
       .value();
   }
   );

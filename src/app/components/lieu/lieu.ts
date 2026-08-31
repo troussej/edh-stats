@@ -25,6 +25,10 @@ export class Lieu {
   public parlieu = computed<Stats[]>(() => {
     return _.chain(this.statsService.games())
       .filter({ year: this.settings.currentYear() })
+      .filter(g => {
+        const cmr = this.statsService.commanders()[g.deck];
+        return this.settings.filterCommanders()(cmr);
+      })
       .groupBy('lieu')
       .mapValues((games, lieu) => this.statsService.calcStats(new Stats(lieu), games))
       .values()
