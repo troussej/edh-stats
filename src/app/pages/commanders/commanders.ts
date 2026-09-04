@@ -12,13 +12,14 @@ import { CommanderCard } from 'app/components/commander-card/commander-card';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { Options } from "app/components/options/options";
 import { SettingsService } from 'app/services/settings.service';
+import { DecksTimeline } from "app/components/decks-timeline/decks-timeline";
 
 
 
 
 @Component({
   selector: 'app-commanders',
-  imports: [TableModule, AvatarModule, FormsModule, CardModule, InputTextModule, TagModule, CommanderCard, SelectButtonModule, Options],
+  imports: [TableModule, AvatarModule, FormsModule, CardModule, InputTextModule, TagModule, CommanderCard, SelectButtonModule, Options, DecksTimeline],
   templateUrl: './commanders.html',
   styleUrl: './commanders.css',
 })

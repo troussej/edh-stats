@@ -1,0 +1,63 @@
+<p-togglebutton [(ngModel)]="extend" onLabel="" offLabel="" class="min-w-16 float-left">
+    <ng-template #icon let-checked>
+        @if (checked) {
+        <svg data-p-icon="chevron-down"></svg>
+        } @else {
+        <svg data-p-icon="chevron-right"></svg>
+        }
+    </ng-template>
+</p-togglebutton>
+
+<p-timeline [value]="events()">
+    <ng-template #content let-event>
+        @if(event.destructions.length > 0){
+        <div class="m-2">
+            <div class="flex flex-row gap-2">
+                <svg data-p-icon="minus-circle" [size]="32" class="mt-2 text-red-400"></svg>
+                @for(commander of event.destructions;track commander){
+                <ng-container *ngTemplateOutlet="myFragment; context: { commander: commander }"></ng-container>
+                }
+            </div>
+
+        </div>
+        }
+    </ng-template>
+    <ng-template #marker let-event>
+        <span class="flex items-center justify-center  h-8 rounded-full shadow-lg bg-cyan-600">
+            <div class="w-12 max-w-12 text-center text-[16px] text-white font-bold">
+                {{event.date}}
+            </div>
+
+        </span>
+    </ng-template>
+    <ng-template #opposite let-event>
+        @if(event.creations.length > 0){
+        <div class="m-2">
+            <div class="flex flex-row gap-2 flex-row-reverse ">
+                @for(commander of event.creations;track commander){
+                <ng-container *ngTemplateOutlet="myFragment; context: { commander: commander }"></ng-container>
+
+                }
+
+                <svg data-p-icon="plus-circle" [size]="32" class="mt-2 text-green-300"></svg>
+
+            </div>
+        </div>
+        }
+    </ng-template>
+</p-timeline>
+
+<ng-template #myFragment let-commander="commander">
+    <div class="flex flex-col items-center ">
+        @if(commander.url){
+        <a [routerLink]="['/commander',commander.commander]">
+            <p-avatar [image]="commander.url" shape="circle" class="w-10! h-10!" />
+        </a>
+        }
+        <a [routerLink]="['/commander',commander.commander]">
+            <div class="w-12 max-w-12 text-center text-[10px] leading-[1.2] break-words">
+                <span> {{ commander.commander }}</span>
+            </div>
+        </a>
+    </div>
+</ng-template>
