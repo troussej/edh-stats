@@ -1,7 +1,9 @@
 <p-tag severity="secondary" variant="outlined" size="small">
-    <span class="flex gap-1 mt-1 mb-1">
+    <span class="flex gap-1 pb-1 pl-1">
         @for (item of symbols;track $index) {
-        <i class="ms ms-{{item}}"></i>
+        <span [class]="colorClass(item)">
+            <i class="ms ms-{{item}}"></i>
+        </span>
         }
     </span>
 </p-tag>

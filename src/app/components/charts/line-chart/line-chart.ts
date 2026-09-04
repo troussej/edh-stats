@@ -79,6 +79,7 @@ export class LineChart {
           label: 'Winrate',
           data: this.chartData?.datasets.winrate ?? [],
           yAxisID: 'winrate',
+          cubicInterpolationMode: 'monotone',
           datalabels: {
             formatter(value, context) {
               return value + '%'
@@ -89,7 +90,7 @@ export class LineChart {
           label: 'Games',
           data: this.chartData?.datasets.games ?? [],
           yAxisID: 'games',
-
+          cubicInterpolationMode: 'monotone',
         }
       ]
     }
