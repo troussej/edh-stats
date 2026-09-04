@@ -32,7 +32,6 @@ export class Dashboard {
 
   public perWinrate = computed<Stats[]>(() => {
     return _.chain(this.statPerCommanderCurYear())
-      .values()
       .filter(s => !_.isNil(s))
       .filter(s => s.games > 3)
       .orderBy('winrate')
@@ -42,7 +41,6 @@ export class Dashboard {
 
   public perGames = computed(() => {
     return _.chain(this.statPerCommanderCurYear())
-      .values()
       .filter(s => !_.isNil(s))
       .orderBy('games')
       .value();
@@ -52,10 +50,6 @@ export class Dashboard {
 
     const filteredGames = _.chain(this.statsService.games())
       .filter({ year: this.settings.currentYear() })
-      .filter(g => {
-        const cmr = this.statsService.commanders()[g.deck];
-        return this.settings.filterCommanders()(cmr);
-      })
       .groupBy('deck')
       .value();
 
@@ -66,8 +60,11 @@ export class Dashboard {
       .value();
 
     return _.chain(this.statsService.activeCommanders())
-      .mapValues((cmr, name) =>
-        statsPerCmr[name] ?? new StatsPerCommander(cmr)
+      .filter(cmr => {
+        return this.settings.filterCommanders()(cmr);
+      })
+      .map((cmr) =>
+        statsPerCmr[cmr.commander] ?? new StatsPerCommander(cmr)
       )
       .value()
   })
