@@ -1,5 +1,5 @@
 import { Component, computed, inject, model } from '@angular/core';
-import { ExternalLink, PlusCircle, MinusCircle, ChevronDown, ChevronRight } from '@primeicons/angular';
+import { ExternalLink, PlusCircle, MinusCircle, ChevronDown, ChevronRight, Minus, Plus } from '@primeicons/angular';
 import { TimelineModule } from 'primeng/timeline';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { StatsService } from 'app/services/stats.service';
@@ -14,7 +14,7 @@ import { ConfigService } from 'app/services/config.service';
 import { SettingsService } from 'app/services/settings.service';
 @Component({
   selector: 'app-decks-timeline',
-  imports: [TimelineModule, PlusCircle, MinusCircle, PanelModule, CardModule, RouterLink,
+  imports: [TimelineModule, PlusCircle, MinusCircle, Minus, Plus, PanelModule, CardModule, RouterLink,
     AvatarModule, NgTemplateOutlet, ToggleButtonModule, FormsModule,
     ChevronDown, ChevronRight],
   templateUrl: './decks-timeline.html',
