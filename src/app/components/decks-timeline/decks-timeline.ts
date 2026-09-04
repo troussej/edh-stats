@@ -11,6 +11,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConfigService } from 'app/services/config.service';
+import { SettingsService } from 'app/services/settings.service';
 @Component({
   selector: 'app-decks-timeline',
   imports: [TimelineModule, PlusCircle, MinusCircle, PanelModule, CardModule, RouterLink,
@@ -23,28 +24,34 @@ export class DecksTimeline {
 
   public statsService = inject(StatsService);
   public config = inject(ConfigService).config;
+  public settings = inject(SettingsService);
 
   public extend = model(false);
 
   events = computed(() => {
     const commanders = this.statsService.commanders();
-    let dates = [this.config.defaultYear];
+    let dates = [this.settings.currentYear()];
 
     if (this.extend()) {
       dates = _.chain(commanders).values()
-
         .flatMap(c => [c.debut, c.fin])
         .filter(date => undefined !== date && date !== null)
         .uniq()
         .orderBy(date => date, 'desc')
         .value();
     }
-    const byDebut = _.chain(commanders).values()
+
+    const filteredCommanders = _.chain(commanders).values()
+      .filter(this.settings.filterCommandersByBracket())
+      .filter(this.settings.filterCommandersByName())
+      .value();
+
+    const byDebut = _.chain(filteredCommanders)
       .filter(c => undefined !== c.debut && c.debut !== null)
       .groupBy('debut')
       .value();
 
-    const byFin = _.chain(commanders).values()
+    const byFin = _.chain(filteredCommanders)
       .filter(c => undefined !== c.fin && c.fin !== null)
       .groupBy('fin')
       .value();

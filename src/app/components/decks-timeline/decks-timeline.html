@@ -1,4 +1,4 @@
-<p-togglebutton [(ngModel)]="extend" onLabel="" offLabel="" class="min-w-16 float-left">
+<p-togglebutton [(ngModel)]="extend" onLabel="" offLabel="" class="min-w-16 absolute top-0 left-0">
     <ng-template #icon let-checked>
         @if (checked) {
         <svg data-p-icon="chevron-down"></svg>
@@ -13,7 +13,7 @@
         @if(event.destructions.length > 0){
         <div class="m-2">
             <div class="flex flex-row gap-2">
-                <svg data-p-icon="minus-circle" [size]="32" class="mt-2 text-red-400"></svg>
+                <svg data-p-icon="minus-circle" [size]="32" class="mt-1 text-red-400"></svg>
                 @for(commander of event.destructions;track commander){
                 <ng-container *ngTemplateOutlet="myFragment; context: { commander: commander }"></ng-container>
                 }
@@ -39,7 +39,7 @@
 
                 }
 
-                <svg data-p-icon="plus-circle" [size]="32" class="mt-2 text-green-300"></svg>
+                <svg data-p-icon="plus-circle" [size]="32" class="mt-1 text-green-300"></svg>
 
             </div>
         </div>

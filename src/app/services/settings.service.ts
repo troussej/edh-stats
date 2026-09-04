@@ -48,11 +48,32 @@ export class SettingsService {
 
     public filterCommanders = computed<(cmr: Commander) => boolean>(() => ((cmr: Commander) => {
 
-        let res = cmr.isActive(this.currentYear());
+        return this.filterActiveCommander()(cmr)
+            && this.filterCommandersByName()(cmr)
+            && this.filterCommandersByBracket()(cmr);
+    }));
+
+    public filterActiveCommander = computed<(cmr: Commander) => boolean>(() => ((cmr: Commander) => {
+
+        return cmr.isActive(this.currentYear());
+    }));
+
+    public filterCommandersByName = computed<(cmr: Commander) => boolean>(() => ((cmr: Commander) => {
+
+        let res = true;
         const cmrFilter = this.commanderName();
         if (!_.isNil(cmrFilter) && _.trim(cmrFilter) !== '') {
             res = res && cmr.commander.toLowerCase().indexOf(cmrFilter.toLowerCase()) >= 0;
         }
+
+        return res;
+    }));
+
+
+    public filterCommandersByBracket = computed<(cmr: Commander) => boolean>(() => ((cmr: Commander) => {
+
+        let res = true
+
         const bracketFilter = this.bracketFilter();
         if (bracketFilter) {
             res = res && bracketFilter.includes(cmr.bracket);
@@ -60,6 +81,7 @@ export class SettingsService {
 
         return res;
     }));
+
 
     public reset() {
         this.currentYear.set(this.config.defaultYear);
