@@ -1,4 +1,4 @@
-<div class="flex flex-row">
+<div class="">
     <p-togglebutton [(ngModel)]="extend" onLabel="" offLabel="" class="min-w-12">
         <ng-template #icon let-checked>
             @if (checked) {
@@ -12,35 +12,39 @@
         <p-timeline [value]="events()" [align]="'left'">
             <ng-template #content let-event>
                 <div class="flex flex-row gap-4">
-                    @if(event.creations.length > 0){
-                    <div class="mb-2 border border-green-200 rounded p-2">
-                        <div class="flex flex-row flex-wrap gap-2 ">
-                            <div class="w-12 max-w-12 flex  justify-center items-center">
-                                <svg data-p-icon="plus-circle" [size]="32" class=" text-green-300"></svg>
-                            </div>
-                            @for(commander of event.creations;track commander){
-                            <ng-container
-                                *ngTemplateOutlet="myFragment; context: { commander: commander }"></ng-container>
 
-                            }
-                        </div>
-                    </div>
-                    }
                     @if(event.destructions.length > 0){
-                    <div class="mb-2 border border-red-300 rounded p-2">
-                        <div class="flex flex-row flex-wrap gap-2 justify-start items-center">
+                    <div class="mb-2">
+                        <div class="flex flex-row flex-wrap gap-2   border-t border-red-300  p-2">
                             <div class="w-12 max-w-12 flex  justify-center">
-                                <svg data-p-icon="minus-circle" [size]="32" class="mt-[0.3rem] text-red-400"></svg>
+                                <svg data-p-icon="minus-circle" [size]="32" class=" text-red-400"></svg>
                             </div>
                             @for(commander of event.destructions;track commander){
+
                             <ng-container
                                 *ngTemplateOutlet="myFragment; context: { commander: commander }"></ng-container>
                             }
+
                         </div>
 
                     </div>
                     }
                 </div>
+            </ng-template>
+            <ng-template #opposite let-event>
+                @if(event.creations.length > 0){
+                <div class="mb-2  flex  justify-end ">
+                    <div class="flex flex-row flex-wrap gap-2 p-2 border-t border-green-200 ">
+                        <div class="w-12 max-w-12 flex  justify-center">
+                            <svg data-p-icon="plus-circle" [size]="32" class=" text-green-300"></svg>
+                        </div>
+                        @for(commander of event.creations;track commander){
+                        <ng-container *ngTemplateOutlet="myFragment; context: { commander: commander }"></ng-container>
+
+                        }
+                    </div>
+                </div>
+                }
             </ng-template>
             <ng-template #marker let-event>
                 <span class="flex items-center justify-center  h-8 w-14 rounded-full shadow-lg bg-cyan-600">
