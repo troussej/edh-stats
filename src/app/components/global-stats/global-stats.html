@@ -14,8 +14,8 @@
                     <tr>
                         <th>Année</th>
                         <th>Parties</th>
-                        <th>Gagnées</th>
-                        <th>Perdues</th>
+                        <th class="hidden md:table-cell">Gagnées</th>
+                        <th class="hidden md:table-cell">Perdues</th>
                         <th>Winrate</th>
                     </tr>
                 </ng-template>
@@ -43,7 +43,7 @@
 
                         </td>
 
-                        <td>
+                        <td class="hidden md:table-cell">
                             <div class="flex items-center gap-1">
                                 {{ stat.wins }}
                                 @if(stat.winMovement!=undefined){
@@ -57,7 +57,7 @@
 
                         </td>
 
-                        <td>
+                        <td class="hidden md:table-cell">
                             <div class="flex items-center gap-1">
                                 {{ stat.losses }}
                                 @if(stat.lossMovement!=undefined){

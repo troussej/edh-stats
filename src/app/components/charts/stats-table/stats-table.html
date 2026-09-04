@@ -4,30 +4,30 @@
         <tr>
             @if(commanderCol){
             <th pSortableColumn="title">
-                <span class="invisible sm:visible">Commandeur</span>
-                <span class="invisible max-sm:visible">Cmr</span>
+                <span>Commandeur</span>
+
                 <p-sort-icon field="title" />
             </th>
             }
             @else(){
             <th pSortableColumn="title"><span>{{title}}</span>
-                <span class="invisible max-sm:visible">Cmr</span>
+
                 <p-sort-icon field="title" />
             </th>
             }
-            <th pSortableColumn="games"><span class="invisible sm:visible">Parties</span>
-                <span class="invisible max-sm:visible">Par.</span><p-sort-icon field="games" />
+            <th pSortableColumn="games"><span class="">Parties</span>
+
             </th>
-            <th pSortableColumn="wins"><span class="invisible sm:visible">Gagnées</span>
-                <span class="invisible max-sm:visible">G</span>
+            <th pSortableColumn="wins" class="hidden md:table-cell"><span class="">Gagnées</span>
+                <!-- <span class="invisible max-sm:visible">G</span> -->
                 <p-sort-icon field="wins" />
             </th>
-            <th pSortableColumn="losses"><span class="invisible sm:visible">Perdues</span>
-                <span class="invisible max-sm:visible">P</span>
+            <th pSortableColumn="losses" class="hidden md:table-cell"><span class="">Perdues</span>
+                <!-- <span class="invisible max-sm:visible">P</span> -->
                 <p-sort-icon field="losses" />
             </th>
-            <th pSortableColumn="winrate"><span class="invisible sm:visible"> Winrate</span>
-                <span class="invisible max-sm:visible">W%</span>
+            <th pSortableColumn="winrate"><span class="invisible md:visible">Winrate</span>
+                <span class="invisible max-md:visible">W%</span>
                 <p-sort-icon field="winrate" />
             </th>
         </tr>
@@ -46,8 +46,8 @@
             <td>{{ stat.title }}</td>
             }
             <td>{{ stat.games }}</td>
-            <td>{{ stat.wins }}</td>
-            <td>{{ stat.losses }}</td>
+            <td class="hidden md:table-cell">{{ stat.wins }}</td>
+            <td class="hidden md:table-cell">{{ stat.losses }}</td>
             <td>{{ stat.winrate |percent}}</td>
         </tr>
     </ng-template>
