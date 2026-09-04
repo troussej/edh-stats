@@ -1,7 +1,7 @@
 <app-options></app-options>
-<div class=" grid xl:grid-cols-2 gap-4 m-4 ">
+<div class="grid grid-cols-1 gap-4 m-4 ">
 
-    <div class=" grid xl:grid-cols-3 col-span-2 gap-4">
+    <div class="grid lg:grid-cols-3 col-span-2 gap-4">
 
 
         <app-global-stats></app-global-stats>
@@ -14,21 +14,30 @@
     </div>
 
 
-    <p-fieldset legend="Par winrate (plus de 3 parties)" [toggleable]="true">
-        <app-bar-chart [stats]="perWinrate()" [maxSize]="8" sortProp="winrate" sortOrder="desc"></app-bar-chart>
-        <p-panel header="Details" [toggleable]="true" [collapsed]="false">
 
-            <app-table [stats]="perWinrate()" sortField="winrate" [sortOrder]="-1"></app-table>
-        </p-panel>
-    </p-fieldset>
+    <div class="grid xl:grid-cols-2 gap-4">
+        <div>
 
 
-    <p-fieldset legend="Nombre de parties" [toggleable]="true">
-        <app-bar-chart [stats]="perWinrate()" [maxSize]="8" sortProp="games" sortOrder="desc"></app-bar-chart>
-        <p-panel header="Details" [toggleable]="true" [collapsed]="false">
+            <p-fieldset legend=" Par winrate (plus de 3 parties)" [toggleable]="true">
+                <app-bar-chart [stats]="perWinrate()" [maxSize]="8" sortProp="winrate" sortOrder="desc"></app-bar-chart>
+                <p-panel header="Details" [toggleable]="true" [collapsed]="false">
 
-            <app-table [stats]="perGames()" sortField="games" [sortOrder]="-1" legend="Nombre de parties"></app-table>
-        </p-panel>
+                    <app-table [stats]="perWinrate()" sortField="winrate" [sortOrder]="-1"></app-table>
+                </p-panel>
+            </p-fieldset>
+        </div>
+        <div>
 
-    </p-fieldset>
+            <p-fieldset legend="Nombre de parties" [toggleable]="true">
+                <app-bar-chart [stats]="perWinrate()" [maxSize]="8" sortProp="games" sortOrder="desc"></app-bar-chart>
+                <p-panel header="Details" [toggleable]="true" [collapsed]="false">
+
+                    <app-table [stats]="perGames()" sortField="games" [sortOrder]="-1"
+                        legend="Nombre de parties"></app-table>
+                </p-panel>
+
+            </p-fieldset>
+        </div>
+    </div>
 </div>
