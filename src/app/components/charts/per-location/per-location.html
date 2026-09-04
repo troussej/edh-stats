@@ -1,2 +1,4 @@
 <canvas baseChart [data]="chartData()" [type]="'bar'" [options]="barChartOptions" [plugins]="plugins!">
+    <app-debug [data]="this.winratePerMonth()"></app-debug>
+    <app-debug [data]="this.gamesData()"></app-debug>
 </canvas>

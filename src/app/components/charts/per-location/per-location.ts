@@ -7,11 +7,13 @@ import _ from 'lodash';
 import { BaseChartDirective } from 'ng2-charts';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Filters } from 'app/models/game.model';
+import { Debug } from "app/debug/debug";
 
+const monthLabels = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'];
 
 @Component({
   selector: 'app-per-location',
-  imports: [BaseChartDirective],
+  imports: [BaseChartDirective, Debug],
   templateUrl: './per-location.html',
   styleUrl: './per-location.css',
 })
@@ -23,7 +25,7 @@ export class PerLocation {
 
   public filters = input<Filters>({});
 
-  public data = computed(() => {
+  public gamesData = computed(() => {
 
     let games = _.chain(this.statsService.games())
       .filter({ year: this.settings.currentYear() })
@@ -49,17 +51,58 @@ export class PerLocation {
         label: lieu,
         data: val,
         borderRadius: 5,
-        borderWidth: 3
+        borderWidth: 3,
+        yAxisID: 'games',
+        stack: 'games',
 
       })
       )
       .value();
   })
 
+
+
+  public winratePerMonth = computed(() => {
+
+    let games = _.chain(this.statsService.games())
+      .filter({ year: this.settings.currentYear() })
+      .filter(this.filters())
+      .filter(g => {
+        const cmr = this.statsService.commanders()[g.deck];
+        return this.settings.filterCommanders()(cmr);
+      })
+      .value();
+
+    const indexOfMonths = Array.from({ length: 12 }, (e, i) => i);
+
+    const winratePerMonth = _.chain(games).map(g => (
+      { lieu: g.lieu, mois: g.date.getMonth(), win: g.gagnant ? 1 : 0 }
+    ))
+      .groupBy('mois')
+      .mapValues(val => _.round(_.meanBy(val, 'win') * 100, 0))
+      .value();
+    return {
+      label: 'Winrate',
+      data: _.map(indexOfMonths, val => winratePerMonth[val] ?? 0),
+      borderRadius: 5,
+      borderWidth: 3,
+      stack: 'winrate',
+      yAxisID: 'winrate',
+      datalabels: {
+        formatter(value: string, context: any) {
+          if (value) {
+            return value + '%';
+          }
+          return '';
+        },
+      },
+    };
+  })
+
   public chartData = computed<ChartData<'pie', number[], string | string[]>>(() => {
     return {
-      labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'],
-      datasets: this.data()
+      labels: monthLabels,
+      datasets: [...this.gamesData(), this.winratePerMonth()]
     };
   });
 
@@ -70,8 +113,28 @@ export class PerLocation {
       x: {
         stacked: true,
       },
-      y: {
-        stacked: true
+      // y: {
+      //   stacked: true,
+      // },
+      // y2: {
+      //   stacked: false,
+      // },
+      winrate: {
+        stacked: false,
+        //   type: 'linear'
+        // display: true,
+        position: 'right',
+        min: 0,
+        max: 100,
+      },
+      games: {
+        //  type: 'linear',
+        stacked: true,
+        // display: true,
+        // position: 'left',
+        // beginAtZero: true,
+
+
       },
     },
     plugins: {
