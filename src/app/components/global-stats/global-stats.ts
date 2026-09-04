@@ -12,9 +12,9 @@ import _ from 'lodash';
 import { ArrowDownRight, ArrowUpRight } from '@primeicons/angular';
 import { RadioButton } from "primeng/radiobutton";
 import { FormsModule } from '@angular/forms';
-import { SettingsService } from 'app/settings.service';
 import { PanelModule } from "primeng/panel";
 import { BarChart } from '../charts/bar-chart/bar-chart';
+import { SettingsService } from 'app/services/settings.service';
 @Component({
   selector: 'app-global-stats',
   imports: [CardModule, PieChart, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule, PanelModule, BarChart],

@@ -1,7 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { ConfigService } from 'app/services/config.service';
 import { StatsService } from 'app/services/stats.service';
-import { SettingsService } from 'app/settings.service';
+import { SettingsService } from 'app/services/settings.service';
 import { ChartData, ChartConfiguration } from 'chart.js';
 import _ from 'lodash';
 import { BaseChartDirective } from 'ng2-charts';

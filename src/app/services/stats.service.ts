@@ -4,7 +4,7 @@ import { Commander, Game, StatsPerCommander, StatsPerYear, Stats, GlobalStats } 
 import { forkJoin, map, Observable, of, ReplaySubject, pipe, mergeMap } from "rxjs";
 import _, { Dictionary } from "lodash";
 import { ConfigService } from "./config.service";
-import { SettingsService } from "app/settings.service";
+import { SettingsService } from 'app/services/settings.service';
 
 @Service()
 export class StatsService {

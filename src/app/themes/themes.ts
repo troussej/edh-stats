@@ -2,7 +2,7 @@ import { Component, computed, inject, Signal } from '@angular/core';
 import { Game, GlobalStats, Stats } from 'app/models/game.model';
 import { ConfigService } from 'app/services/config.service';
 import { StatsService } from 'app/services/stats.service';
-import { SettingsService } from 'app/settings.service';
+import { SettingsService } from 'app/services/settings.service';
 import _ from 'lodash';
 import { CardModule } from "primeng/card";
 import { Table } from "app/components/charts/stats-table/stats-table";

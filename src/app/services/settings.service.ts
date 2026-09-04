@@ -1,8 +1,8 @@
 import { computed, inject, model, Service, signal } from '@angular/core';
-import { ConfigService } from './services/config.service';
 import _ from 'lodash';
-import { Commander, Game } from './models/game.model';
-import { StatsService } from './services/stats.service';
+import { Commander, Game } from '../models/game.model';
+import { StatsService } from './stats.service';
+import { ConfigService } from './config.service';
 
 @Service()
 export class SettingsService {

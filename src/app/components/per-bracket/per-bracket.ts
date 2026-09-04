@@ -4,7 +4,7 @@ import { BarChart, BarChartDataInput } from "../charts/bar-chart/bar-chart";
 import { FieldsetModule } from "primeng/fieldset";
 import { Stats } from 'app/models/game.model';
 import { StatsService } from 'app/services/stats.service';
-import { SettingsService } from 'app/settings.service';
+import { SettingsService } from 'app/services/settings.service';
 import _ from 'lodash';
 import { PanelModule } from "primeng/panel";
 

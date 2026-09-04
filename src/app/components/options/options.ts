@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ConfigService } from 'app/services/config.service';
-import { SettingsService } from 'app/settings.service';
+import { SettingsService } from 'app/services/settings.service';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { Card, CardModule } from "primeng/card";

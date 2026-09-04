@@ -3,7 +3,7 @@ import { StatsService } from 'app/services/stats.service';
 import { CardModule } from 'primeng/card';
 import { Table } from '../charts/stats-table/stats-table';
 import { Stats } from 'app/models/game.model';
-import { SettingsService } from 'app/settings.service';
+import { SettingsService } from 'app/services/settings.service';
 import _ from 'lodash';
 import { PanelModule } from "primeng/panel";
 import { BarChart } from '../charts/bar-chart/bar-chart';

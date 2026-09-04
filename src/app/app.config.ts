@@ -31,7 +31,7 @@ export const appConfig: ApplicationConfig = {
         preset: MyPreset,
         options: {
           prefix: 'p',
-          darkModeSelector: 'system',
+          darkModeSelector: '.dark',
 
           cssVariables: true,
 

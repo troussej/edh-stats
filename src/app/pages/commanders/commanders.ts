@@ -11,7 +11,7 @@ import { TagModule } from 'primeng/tag';
 import { CommanderCard } from 'app/components/commander-card/commander-card';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { Options } from "app/components/options/options";
-import { SettingsService } from 'app/settings.service';
+import { SettingsService } from 'app/services/settings.service';
 
 
 

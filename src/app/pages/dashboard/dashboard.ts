@@ -12,9 +12,10 @@ import { Lieu } from '../../components/lieu/lieu';
 import _ from 'lodash';
 import { Stats, StatsPerCommander } from 'app/models/game.model';
 import { BarChart, BarChartDataInput } from "../../components/charts/bar-chart/bar-chart";
-import { SettingsService } from 'app/settings.service';
+
 import { PerBracket } from '../../components/per-bracket/per-bracket';
 import { Options } from "app/components/options/options";
+import { SettingsService } from 'app/services/settings.service';
 
 
 @Component({
