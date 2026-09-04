@@ -1,5 +1,5 @@
 <p-card class="flex gap-4 mt-4 mx-4 mb-2">
-    <div class="flex justify-center">
+    <div class="flex justify-center gap-4">
 
         <input pInputText [(ngModel)]="this.settings.commanderName" type="text" name="filter" pSize="small"
             placeholder="Commander" />
@@ -13,7 +13,7 @@
         <p-selectbutton [options]="this.settings.brackets" [(ngModel)]="this.settings.bracketFilter" [multiple]="true"
             class="ml-4" optionValue="value" optionLabel="name" size="small" />
 
-        <div class="flex flex-wrap gap-2 ml-4">
+        <div class="flex flex-wrap gap-2">
             @for(year of config.years ;track year){
             <div class="flex items-center">
                 <p-radiobutton name="year" [value]="year" [(ngModel)]="this.settings.currentYear" size="small" />
@@ -23,6 +23,9 @@
             }
 
         </div>
+
+        <p-select [options]="this.lieux()" [(ngModel)]="this.settings.lieu" [multiple]="true" [showClear]="true"
+            placeholder="Lieu"></p-select>
 
         <button pButton (click)="settings.reset()" class="ml-4" size="small">Reset</button>
     </div>

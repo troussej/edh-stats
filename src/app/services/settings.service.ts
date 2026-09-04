@@ -9,6 +9,8 @@ export class SettingsService {
     public config = inject(ConfigService).config;
     public currentYear = signal<number>(this.config.defaultYear);
     public commanderName = signal<string>('');
+    public lieu = signal<string[]>([]);
+
 
     public brackets = [
         {
@@ -31,6 +33,19 @@ export class SettingsService {
     ]
     public bracketFilter = signal<string[]>(['2', '3', '3+', '4',]);
 
+    public filterGames = computed<(game: Game) => boolean>(() => ((game: Game) => {
+        const curYear = this.currentYear();
+        const lieuFilter = this.lieu();
+        let res = true;
+        if (curYear) {
+            res = res && game.year === curYear;
+        }
+        if (lieuFilter && lieuFilter.length > 0) {
+            res = res && lieuFilter.includes(game.lieu);
+        }
+        return res;
+    }));
+
     public filterCommanders = computed<(cmr: Commander) => boolean>(() => ((cmr: Commander) => {
 
         let res = cmr.isActive(this.currentYear());
@@ -49,6 +64,7 @@ export class SettingsService {
     public reset() {
         this.currentYear.set(this.config.defaultYear);
         this.commanderName.set('');
+        this.lieu.set([]);
         this.bracketFilter.set(['2', '3', '3+', '4',])
     }
 }

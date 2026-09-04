@@ -28,7 +28,7 @@ export class PerLocation {
   public gamesData = computed(() => {
 
     let games = _.chain(this.statsService.games())
-      .filter({ year: this.settings.currentYear() })
+      .filter(this.settings.filterGames())
       .filter(this.filters())
       .filter(g => {
         const cmr = this.statsService.commanders()[g.deck];
@@ -65,7 +65,7 @@ export class PerLocation {
   public winratePerMonth = computed(() => {
 
     let games = _.chain(this.statsService.games())
-      .filter({ year: this.settings.currentYear() })
+      .filter(this.settings.filterGames())
       .filter(this.filters())
       .filter(g => {
         const cmr = this.statsService.commanders()[g.deck];

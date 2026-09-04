@@ -49,7 +49,7 @@ export class Dashboard {
   public statPerCommanderCurYear = computed(() => {
 
     const filteredGames = _.chain(this.statsService.games())
-      .filter({ year: this.settings.currentYear() })
+      .filter(this.settings.filterGames())
       .groupBy('deck')
       .value();
 
