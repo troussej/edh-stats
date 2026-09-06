@@ -54,6 +54,9 @@ export class LineChart {
         position: 'right',
         min: 0,
         max: 100,
+        ticks: {
+          callback: (value) => value + '%'
+        }
       },
       games: {
         type: 'linear',
