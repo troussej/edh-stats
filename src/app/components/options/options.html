@@ -1,8 +1,11 @@
 <p-card class="flex gap-4 mt-4 mx-4 mb-2">
     <div class="flex justify-center gap-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
 
-        <input pInputText [(ngModel)]="this.settings.commanderName" type="text" name="filter" pSize="small"
-            placeholder="Commander" />
+
+        <p-select [options]="this.commanders()" [(ngModel)]="this.settings.commanderName" [showClear]="true"
+            placeholder="Commander" filter="true"></p-select>
+
+
 
         <!-- <p-iftalabel>
             <input pInputText [(ngModel)]="this.settings.commanderName" type="text" name="filter" pSize="small" />
@@ -22,7 +25,7 @@
         </div>
 
         <p-select [options]="this.lieux()" [(ngModel)]="this.settings.lieu" [multiple]="true" [showClear]="true"
-            placeholder="Lieu"></p-select>
+            placeholder="Lieu" filter="true"></p-select>
 
         <div>
 

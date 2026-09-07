@@ -24,10 +24,18 @@ export class Options {
   public config = inject(ConfigService).config;
   public statsService = inject(StatsService);
 
+  public commanders = computed(() => {
+    return _.chain(this.statsService.commanders())
+      .map(g => g.commander)
+      .sort()
+      .uniq()
+      .value();
+  });
 
   public lieux = computed(() => {
     return _.chain(this.statsService.games())
       .map(g => g.lieu)
+      .sort()
       .uniq()
       .value();
   });
