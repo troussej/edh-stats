@@ -1,35 +1,35 @@
-import { Component, input, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ExternalLink } from '@primeicons/angular/external-link';
 import { Commander } from 'app/models/game.model';
 import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
 import { Mana } from '../mana/mana';
 import { Bracket } from "app/bracket/bracket";
-import { TagModule } from 'primeng/tag';
+import { TagModule, TagSeverity } from 'primeng/tag';
 import { RouterLink } from "@angular/router";
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
 
 @Component({
   selector: 'app-commander-title',
-  imports: [AvatarModule, ExternalLink, TooltipModule, Mana, Bracket, TagModule, RouterLink],
+  imports: [AvatarModule, ExternalLink, TooltipModule, Mana, Bracket, TagModule, RouterLink, OverlayBadgeModule],
   templateUrl: './commander-title.html',
   styleUrl: './commander-title.css',
 })
 export class CommanderTitle {
 
-  @Input()
-  public commander!: Commander;
 
-  @Input()
-  public avatarSize = 'big';
+  public commander = input.required<Commander>();
+
+  public readonly avatarSize = input('big');
 
   get avatarCss(): string {
     let res;
-    switch (this.avatarSize) {
+    switch (this.avatarSize()) {
       case 'small':
-        res = "h-8! w-8!";
+        res = "h-12! w-12!";
         break;
       case 'medium':
-        res = "h-12! w-12!";
+        res = "h-16! w-16!";
         break;
       case 'big':
       default:
@@ -37,6 +37,22 @@ export class CommanderTitle {
         break;
     }
     return res;
+  }
+
+  public bracketSeverity(bracket: string): TagSeverity {
+    switch (bracket) {
+      case ('1'):
+        return 'contrast';
+      case ('2'):
+        return 'info';
+      case ('3'):
+      case ('3+'):
+        return 'warn';
+      case ('4'):
+        return 'danger';
+      default:
+        return 'contrast';
+    }
   }
 
 }

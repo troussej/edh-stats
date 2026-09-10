@@ -1,31 +1,36 @@
-<div id="{{commander.commander}}" class="grid grid-cols-1 md:grid-cols-2 grid-rows-2">
+<div id="{{commander().commander}}" class="grid grid-cols-1 md:grid-cols-2 grid-rows-2">
     <div class="row-span-2 flex items-center gap-2">
-        @if(commander.url){
-        <a [routerLink]="['/commander',commander.commander]">
-            <p-avatar [image]="commander.url" shape="circle" [class]="avatarCss" />
+        @if(commander().url){
+        <a [routerLink]="['/commander',commander().commander]">
+            <p-overlay-badge [value]="commander().bracket" [severity]="bracketSeverity(commander().bracket)">
+                <p-avatar [image]="commander().url" shape="circle" [class]="avatarCss">
+
+                </p-avatar>
+            </p-overlay-badge>
+
+
         </a>
         }
-        <a [routerLink]="['/commander',commander.commander]">
+        <a [routerLink]="['/commander',commander().commander]">
             <div>
-                <span class="text-sm"> {{ commander.commander }}</span>
+                <span class="text-sm"> {{ commander().commander }}</span>
             </div>
         </a>
-        @if(commander.decklist){
+        @if(commander().decklist){
         <div>
-            <a [href]="commander.decklist" target="_blank"><svg data-p-icon="external-link" pTooltip="Moxfield"
+            <a [href]="commander().decklist" target="_blank"><svg data-p-icon="external-link" pTooltip="Moxfield"
                     alt="moxfield"></svg></a>
         </div>
         }
     </div>
     <div class=" flex gap-1 flex items-center mb-1">
-        <app-bracket [value]="commander.bracket"></app-bracket>
         <span>
-            <app-mana [manaString]="commander.colors"></app-mana>
+            <app-mana [manaString]="commander().colors"></app-mana>
         </span>
     </div>
     <div class="">
         <div class="flex gap-1 items-center">
-            @for(theme of commander.themes;track theme){
+            @for(theme of commander().themes; track theme){
             <p-tag>{{theme}}</p-tag>
             }
 
