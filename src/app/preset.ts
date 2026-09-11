@@ -9,12 +9,12 @@ export const MyPreset = definePreset(Aura, {
         },
         datatable: {
 
-            headerCell: {
-                background: '{surface.700}',
+            // headerCell: {
+            //     background: '{surface.700}',
 
 
 
-            },
+            // },
 
 
 
