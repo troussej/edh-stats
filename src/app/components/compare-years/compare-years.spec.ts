@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Bracket } from './bracket';
+import { CompareYears } from './compare-years';
 
-describe('Bracket', () => {
-  let component: Bracket;
-  let fixture: ComponentFixture<Bracket>;
+describe('CompareYears', () => {
+  let component: CompareYears;
+  let fixture: ComponentFixture<CompareYears>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Bracket],
+      imports: [CompareYears],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Bracket);
+    fixture = TestBed.createComponent(CompareYears);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

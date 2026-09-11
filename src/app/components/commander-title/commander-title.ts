@@ -4,14 +4,14 @@ import { Commander } from 'app/models/game.model';
 import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
 import { Mana } from '../mana/mana';
-import { Bracket } from "app/bracket/bracket";
+
 import { TagModule, TagSeverity } from 'primeng/tag';
 import { RouterLink } from "@angular/router";
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 
 @Component({
   selector: 'app-commander-title',
-  imports: [AvatarModule, ExternalLink, TooltipModule, Mana, Bracket, TagModule, RouterLink, OverlayBadgeModule],
+  imports: [AvatarModule, ExternalLink, TooltipModule, Mana, TagModule, RouterLink, OverlayBadgeModule],
   templateUrl: './commander-title.html',
   styleUrl: './commander-title.css',
 })

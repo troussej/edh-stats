@@ -35,14 +35,12 @@ export class SettingsService {
 
     public filterGames = computed<(game: Game) => boolean>(() => ((game: Game) => {
         const curYear = this.currentYear();
-        const lieuFilter = this.lieu();
+
         let res = true;
         if (curYear) {
             res = res && game.year === curYear;
         }
-        if (lieuFilter && lieuFilter.length > 0) {
-            res = res && lieuFilter.includes(game.lieu);
-        }
+        res = res && this.filterByLieu()(game);
         return res;
     }));
 
@@ -82,6 +80,15 @@ export class SettingsService {
         return res;
     }));
 
+
+    public filterByLieu = computed<(game: Game) => boolean>(() => ((game: Game) => {
+        const lieuFilter = this.lieu();
+
+        if (lieuFilter && lieuFilter.length > 0) {
+            return lieuFilter.includes(game.lieu);
+        }
+        return true;
+    }));
 
     public reset() {
         this.currentYear.set(this.config.defaultYear);

@@ -138,6 +138,13 @@ export class PerLocation {
       },
     },
     plugins: {
+
+      // Tooltip
+      tooltip: {
+        mode: 'index',
+        filter: (tooltipItem) => tooltipItem.raw as number > 0,
+      },
+
       datalabels: {
         display: true,
         formatter: (value, ctx) => {

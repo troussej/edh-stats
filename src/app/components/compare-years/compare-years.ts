@@ -1,0 +1,210 @@
+import { Component, computed, inject } from '@angular/core';
+import { BaseChartDirective } from 'ng2-charts';
+import { SettingsService } from 'app/services/settings.service';
+import { StatsService } from 'app/services/stats.service';
+import _ from 'lodash';
+import { Game } from '../../models/game.model';
+import { Debug } from 'app/debug/debug';
+import { ChartData, ChartConfiguration, ChartDataset, plugins, Tooltip } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
+const monthLabels = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'];
+
+type AccumulatedMonthStat = {
+  accumulatedGames: number;
+  accumulatedWins: number;
+  accumulatedWinrate: number;
+  games: number;
+  wins: number;
+  month: number;
+};
+
+@Component({
+  selector: 'app-compare-years',
+  imports: [Debug, BaseChartDirective],
+  templateUrl: './compare-years.html',
+  styleUrl: './compare-years.css',
+})
+export class CompareYears {
+
+
+  public statsService = inject(StatsService);
+  settings = inject(SettingsService);
+
+  public filteredGames = computed(() => {
+    return _.chain(this.statsService.games())
+      .filter(this.settings.filterByLieu())
+      .filter(g => {
+        const cmr = this.statsService.commanders()[g.deck];
+
+        return this.settings.filterCommandersByName()(cmr)
+          && this.settings.filterCommandersByBracket()(cmr);
+
+      })
+      .value();
+  });
+
+
+  public data = computed(() => {
+    return _.chain(this.filteredGames())
+      .groupBy(game => game.date.getFullYear())
+      .mapValues(this.calcCumulatedStat)
+      .value()
+  });
+
+  calcCumulatedStat(games: Game[]) {
+
+    const resultPerMonth = _.chain(games)
+      .groupBy(g => g.date.getMonth())
+      .mapValues((games: Game[]) => {
+        return {
+          games: games.length,
+          wins: _.sumBy(games, g => g.gagnant ? 1 : 0),
+          winrate: Math.round((games.length > 0 ? _.sumBy(games, g => g.gagnant ? 1 : 0) / games.length : 0) * 100) || 0
+        }
+      })
+      .map((val, month) => ({ month: parseInt(month), ...val }))
+
+      .value();
+
+    return _.chain(resultPerMonth).reduce((acc, v) => {
+      const last = _.last(acc);
+
+      const accuForMonth = {
+        accumulatedGames: (last?.accumulatedGames || 0) + (v.games),
+        accumulatedWins: (last?.accumulatedWins || 0) + v.wins,
+        accumulatedWinrate: 0,
+        ...v
+      }
+      accuForMonth.accumulatedWinrate = accuForMonth.accumulatedGames > 0 ? Math.round((accuForMonth.accumulatedWins / accuForMonth.accumulatedGames) * 100) : 0;
+      acc.push(accuForMonth);
+      return acc;
+    }, [] as AccumulatedMonthStat[])
+      .value();
+  }
+
+  public gamesChartData = computed(() => {
+    const data = this.data();
+    const years = Object.keys(data);
+    const datasets: ChartDataset[] = [];
+
+    years.forEach(year => {
+      const yearData = data[year];
+      datasets.push(this.buildGamesDataset(parseInt(year), yearData.map((v: AccumulatedMonthStat) => v.accumulatedGames)));
+    });
+
+    return {
+      labels: monthLabels,
+      datasets
+    };
+  });
+
+  public winrateChartData = computed(() => {
+    const data = this.data();
+    const years = Object.keys(data);
+    const datasets: ChartDataset[] = [];
+
+    years.forEach(year => {
+      const yearData = data[year];
+      datasets.push(this.buildWinrateDataset(parseInt(year), yearData.map((v: AccumulatedMonthStat) => v.accumulatedWinrate)));
+    });
+
+    return {
+      labels: monthLabels,
+      datasets,
+
+      plugins: {
+        // Tooltip
+      }
+    };
+  });
+
+
+  public buildWinrateDataset(year: number, data: number[]): ChartDataset {
+
+    return {
+      label: '' + year,
+
+      data: data,
+      yAxisID: 'winrate',
+      cubicInterpolationMode: 'monotone',
+      datalabels: {
+        formatter(value, context) {
+          return value + '%'
+        },
+      }
+    }
+  }
+
+  public buildGamesDataset(year: number, data: number[]): ChartDataset {
+    return {
+      label: '' + year,
+      data: data,
+      yAxisID: 'games',
+      cubicInterpolationMode: 'monotone',
+    };
+  }
+
+
+  public plugins: ChartConfiguration['plugins'] = []// [ChartDataLabels];
+
+  public optionsWinrate: ChartConfiguration['options'] = {
+
+    plugins: {
+      title: {
+        display: true,
+        text: 'Winrate au cours des mois',
+      },
+      // Tooltip
+      tooltip: {
+        mode: 'index',
+      }
+    },
+    scales: {
+      //winrate
+      winrate: {
+        type: 'linear',
+        display: true,
+        position: 'right',
+        // min: 0,
+        // max: 100,
+        ticks: {
+          callback: (value) => value + '%'
+        }
+
+      }
+
+    }
+
+  };
+
+  public optionsGames: ChartConfiguration['options'] = {
+
+    plugins: {
+      title: {
+        display: true,
+        text: 'Parties, accumulées',
+      },
+      // Tooltip
+      tooltip: {
+        intersect: false,
+        mode: 'index',
+        axis: 'x'
+      }
+    },
+    scales: {
+      games: {
+
+        type: 'linear',
+        display: true,
+        position: 'left',
+        beginAtZero: true,
+
+        // grid line settings
+        grid: {
+          // drawOnChartArea: false, // only want the grid lines for one axis to show up
+        },
+      },
+    }
+  };
+}
