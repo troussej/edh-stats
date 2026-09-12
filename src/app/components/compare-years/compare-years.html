@@ -1,8 +1,27 @@
-<div class="grid grid-rows-2">
+<div class="grid grid-cols-1  md:grid-cols-2 gap-4">
+    <div>
 
-    <canvas baseChart [data]="gamesChartData()" [type]="'line'" [options]="optionsGames" class="" [plugins]="plugins!">
-    </canvas>
-    <canvas baseChart [data]="winrateChartData()" [type]="'line'" [options]="optionsWinrate " class=""
-        [plugins]="plugins!">
-    </canvas>
+        <canvas baseChart [data]="gamesChartData()" [type]="'line'" [options]="optionsGames('Parties mensuelles')"
+            class="" [plugins]="plugins!">
+        </canvas>
+    </div>
+    <div>
+
+        <canvas baseChart [data]="gamesAccuChartData()" [type]="'line'" [options]="optionsGames('Parties totales')"
+            class="" [plugins]="plugins!">
+        </canvas>
+    </div>
+    <div>
+
+        <canvas baseChart [data]="winrateChartData()" [type]="'line'" [options]="optionsWinrate('Winrate mensuel')"
+            class="" [plugins]="plugins!">
+        </canvas>
+    </div>
+    <div>
+        <canvas baseChart [data]="winrateAccuChartData()" [type]="'line'" [options]="optionsWinrate('Winrate total')"
+            class="" [plugins]="plugins!">
+        </canvas>
+    </div>
+
+
 </div>

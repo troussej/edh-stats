@@ -16,6 +16,7 @@ type AccumulatedMonthStat = {
   accumulatedWinrate: number;
   games: number;
   wins: number;
+  winrate: number;
   month: number;
 };
 
@@ -83,41 +84,45 @@ export class CompareYears {
       .value();
   }
 
+  public gamesAccuChartData = computed(() => {
+    return this.getChartData(this.data(),
+      (year: number, yearData: AccumulatedMonthStat[]) =>
+        this.buildGamesDataset(year, yearData.map((v: AccumulatedMonthStat) => v.accumulatedGames)));
+  });
+
+  public winrateAccuChartData = computed(() => {
+    return this.getChartData(this.data(),
+      (year: number, yearData: AccumulatedMonthStat[]) =>
+        this.buildWinrateDataset(year, yearData.map((v: AccumulatedMonthStat) => v.accumulatedWinrate)));
+  });
+
   public gamesChartData = computed(() => {
-    const data = this.data();
+    return this.getChartData(this.data(),
+      (year: number, yearData: AccumulatedMonthStat[]) =>
+        this.buildGamesDataset(year, yearData.map((v: AccumulatedMonthStat) => v.games)));
+  });
+
+  public winrateChartData = computed(() => {
+    return this.getChartData(this.data(),
+      (year: number, yearData: AccumulatedMonthStat[]) =>
+        this.buildWinrateDataset(year, yearData.map((v: AccumulatedMonthStat) => v.winrate)));
+  });
+
+  public getChartData(data: Record<string, AccumulatedMonthStat[]>, dataSetFc: (year: number, yearData: AccumulatedMonthStat[]) => ChartDataset): { labels: string[]; datasets: ChartDataset[] } {
+    // const data = this.data();
     const years = Object.keys(data);
     const datasets: ChartDataset[] = [];
 
     years.forEach(year => {
       const yearData = data[year];
-      datasets.push(this.buildGamesDataset(parseInt(year), yearData.map((v: AccumulatedMonthStat) => v.accumulatedGames)));
+      datasets.push(dataSetFc(parseInt(year), yearData));
     });
 
     return {
       labels: monthLabels,
       datasets
     };
-  });
-
-  public winrateChartData = computed(() => {
-    const data = this.data();
-    const years = Object.keys(data);
-    const datasets: ChartDataset[] = [];
-
-    years.forEach(year => {
-      const yearData = data[year];
-      datasets.push(this.buildWinrateDataset(parseInt(year), yearData.map((v: AccumulatedMonthStat) => v.accumulatedWinrate)));
-    });
-
-    return {
-      labels: monthLabels,
-      datasets,
-
-      plugins: {
-        // Tooltip
-      }
-    };
-  });
+  };
 
 
   public buildWinrateDataset(year: number, data: number[]): ChartDataset {
@@ -148,63 +153,69 @@ export class CompareYears {
 
   public plugins: ChartConfiguration['plugins'] = []// [ChartDataLabels];
 
-  public optionsWinrate: ChartConfiguration['options'] = {
-
-    plugins: {
-      title: {
-        display: true,
-        text: 'Winrate au cours des mois',
+  public optionsWinrate: (title: string) => ChartConfiguration['options'] = (title: string) => {
+    return {
+      responsive: true,
+      keepAspectRatio: true,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
+        },
+        // Tooltip
+        tooltip: {
+          mode: 'index',
+        }
       },
-      // Tooltip
-      tooltip: {
-        mode: 'index',
-      }
-    },
-    scales: {
-      //winrate
-      winrate: {
-        type: 'linear',
-        display: true,
-        position: 'right',
-        // min: 0,
-        // max: 100,
-        ticks: {
-          callback: (value) => value + '%'
+      scales: {
+        //winrate
+        winrate: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          // min: 0,
+          // max: 100,
+          ticks: {
+            callback: (value) => value + '%'
+          }
+
         }
 
       }
 
-    }
-
+    };
   };
 
-  public optionsGames: ChartConfiguration['options'] = {
-
-    plugins: {
-      title: {
-        display: true,
-        text: 'Parties, accumulées',
-      },
-      // Tooltip
-      tooltip: {
-        intersect: false,
-        mode: 'index',
-        axis: 'x'
-      }
-    },
-    scales: {
-      games: {
-
-        type: 'linear',
-        display: true,
-        position: 'left',
-        beginAtZero: true,
-
-        // grid line settings
-        grid: {
-          // drawOnChartArea: false, // only want the grid lines for one axis to show up
+  public optionsGames: (title: string) => ChartConfiguration['options'] = (title: string) => {
+    return {
+      responsive: true,
+      keepAspectRatio: true,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
         },
+        // Tooltip
+        tooltip: {
+          intersect: false,
+          mode: 'index',
+          axis: 'x'
+        }
       },
+      scales: {
+        games: {
+
+          type: 'linear',
+          display: true,
+          position: 'left',
+          beginAtZero: true,
+
+          // grid line settings
+          grid: {
+            // drawOnChartArea: false, // only want the grid lines for one axis to show up
+          },
+        },
+      }
     }
   };
-}
+};  
