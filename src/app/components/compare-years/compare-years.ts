@@ -55,7 +55,7 @@ export class CompareYears {
 
   calcCumulatedStat(games: Game[]) {
 
-    const resultPerMonth = _.chain(games)
+    let resultPerMonth = _.chain(games)
       .groupBy(g => g.date.getMonth())
       .mapValues((games: Game[]) => {
         return {
@@ -64,16 +64,21 @@ export class CompareYears {
           winrate: Math.round((games.length > 0 ? _.sumBy(games, g => g.gagnant ? 1 : 0) / games.length : 0) * 100) || 0
         }
       })
-      .map((val, month) => ({ month: parseInt(month), ...val }))
+      //  .map((val, month) => ({ month: parseInt(month), ...val }))
 
       .value();
+    const indexOfMonths = Array.from({ length: 12 }, (e, i) => i);
 
-    return _.chain(resultPerMonth).reduce((acc, v) => {
+    const resultPerMonthArray = _.chain(indexOfMonths)
+      .map((month) => ({ month, ...resultPerMonth[month] }))
+      .value();
+
+    return _.chain(resultPerMonthArray).reduce((acc, v) => {
       const last = _.last(acc);
 
       const accuForMonth = {
-        accumulatedGames: (last?.accumulatedGames || 0) + (v.games),
-        accumulatedWins: (last?.accumulatedWins || 0) + v.wins,
+        accumulatedGames: (last?.accumulatedGames || 0) + (v.games ?? 0),
+        accumulatedWins: (last?.accumulatedWins || 0) + (v.wins ?? 0),
         accumulatedWinrate: 0,
         ...v
       }
@@ -133,6 +138,7 @@ export class CompareYears {
       data: data,
       yAxisID: 'winrate',
       cubicInterpolationMode: 'monotone',
+      spanGaps: true,
       datalabels: {
         formatter(value, context) {
           return value + '%'
@@ -147,6 +153,7 @@ export class CompareYears {
       data: data,
       yAxisID: 'games',
       cubicInterpolationMode: 'monotone',
+      spanGaps: true,
     };
   }
 
@@ -157,6 +164,7 @@ export class CompareYears {
     return {
       responsive: true,
       keepAspectRatio: true,
+
       plugins: {
         title: {
           display: true,
@@ -173,6 +181,7 @@ export class CompareYears {
           type: 'linear',
           display: true,
           position: 'right',
+
           // min: 0,
           // max: 100,
           ticks: {
