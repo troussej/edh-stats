@@ -1,9 +1,9 @@
 Horodateur,Date,Lieu,Mon deck ?,Gagnant ?
 09/01/2025 23:31:57,07/01/2025,Mauvais Joueurs,Pako / Haldan,N
 09/01/2025 23:32:08,07/01/2025,Mauvais Joueurs,Shroofus,N
-11/01/2025 19:55:44,11/01/2025,@Joël,Captain America,Y
-11/01/2025 21:00:35,11/01/2025,@Joël,Eleven / Will,N
-11/01/2025 23:11:29,11/01/2025,@Joël,Yuriko,N
+11/01/2025 19:55:44,11/01/2025,Chez Joël,Captain America,Y
+11/01/2025 21:00:35,11/01/2025,Chez Joël,Eleven / Will,N
+11/01/2025 23:11:29,11/01/2025,Chez Joël,Yuriko,N
 23/02/2025 17:38:56,23/02/2025,Playin Rivoli,Captain America,N
 23/02/2025 19:22:30,23/02/2025,Playin Rivoli,Shroofus,Y
 23/02/2025 19:22:57,23/02/2025,Playin Rivoli,Meren,N
@@ -13,7 +13,7 @@ Horodateur,Date,Lieu,Mon deck ?,Gagnant ?
 03/03/2025 22:58:12,03/03/2025,Playin Rivoli,Etali,N
 09/03/2025 20:53:31,09/03/2025,Playin Rivoli,Amalia,N
 09/03/2025 20:53:52,09/03/2025,Playin Rivoli,Marwyn,Y
-16/03/2025 23:23:47,16/03/2025,@Joël,Rocco,N
+16/03/2025 23:23:47,16/03/2025,Chez Joël,Rocco,N
 22/04/2025 02:35:58,19/04/2025,Playin Rivoli,Meren,N
 22/04/2025 02:36:09,19/04/2025,Playin Rivoli,Eowyn,N
 22/04/2025 02:36:25,19/04/2025,Playin Rivoli,Eowyn,N
@@ -25,9 +25,9 @@ Horodateur,Date,Lieu,Mon deck ?,Gagnant ?
 04/05/2025 19:48:52,04/05/2025,Playin Rivoli,Meren,N
 04/05/2025 19:49:26,04/05/2025,Playin Rivoli,Tom Bombadil,Y
 04/05/2025 19:49:40,04/05/2025,Playin Rivoli,Ruhan,N
-17/06/2025 15:57:50,15/06/2025,@Joël,Amalia,N
-17/06/2025 15:58:05,15/06/2025,@Joël,Davros,Y
-17/06/2025 15:58:20,15/06/2025,@Joël,Captain America,N
+17/06/2025 15:57:50,15/06/2025,Chez Joël,Amalia,N
+17/06/2025 15:58:05,15/06/2025,Chez Joël,Davros,Y
+17/06/2025 15:58:20,15/06/2025,Chez Joël,Captain America,N
 21/06/2025 22:33:29,21/06/2025,Playin BNF,Amalia,N
 21/06/2025 22:34:04,21/06/2025,Playin BNF,Meren,N
 21/06/2025 22:34:32,21/06/2025,Playin BNF,Rocco,Y
@@ -73,8 +73,8 @@ Horodateur,Date,Lieu,Mon deck ?,Gagnant ?
 31/08/2025 00:42:49,30/08/2025,Playin Rivoli,Greven,Y
 31/08/2025 00:43:10,30/08/2025,Playin Rivoli,Terra,N
 31/08/2025 00:43:40,30/08/2025,Playin Rivoli,Davros,N
-14/09/2025 17:40:28,14/09/2025,@Joël,Terra,N
-14/09/2025 17:40:43,14/09/2025,@Joël,Shadow,N
+14/09/2025 17:40:28,14/09/2025,Chez Joël,Terra,N
+14/09/2025 17:40:43,14/09/2025,Chez Joël,Shadow,N
 06/10/2025 13:36:51,05/10/2025,Playin Rivoli,Choco,N
 06/10/2025 13:37:03,05/10/2025,Playin Rivoli,Pako / Haldan,Y
 06/10/2025 13:37:29,05/10/2025,Playin Rivoli,Jodah,N
@@ -87,8 +87,8 @@ Horodateur,Date,Lieu,Mon deck ?,Gagnant ?
 09/11/2025 21:36:40,09/11/2025,Playin Rivoli,Rocco,N
 03/12/2025 11:24:18,30/11/2025,Playin Rivoli,Terra,N
 03/12/2025 11:24:40,30/11/2025,Playin Rivoli,Bumbleflower,Y
-14/12/2025 20:00:53,14/12/2025,@Joël,Terra,Y
-14/12/2025 20:01:06,14/12/2025,@Joël,Choco,Y
+14/12/2025 20:00:53,14/12/2025,Chez Joël,Terra,Y
+14/12/2025 20:01:06,14/12/2025,Chez Joël,Choco,Y
 21/12/2025 19:47:23,21/12/2025,Playin Rivoli,Abdel Adrian,Y
 21/12/2025 19:47:58,21/12/2025,Playin BNF,Eowyn,Y
 21/12/2025 19:49:24,21/12/2025,Playin Rivoli,Bumbleflower,N
