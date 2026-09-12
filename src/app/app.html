@@ -11,9 +11,16 @@
     -->
     <div class="m-2">
         <div class=" flex justify-center  items-center gap-2 mb-2">
-            <svg data-p-icon="calculator" [size]="24"></svg>EDH STATS
+
         </div>
-        <p-menubar [model]="menuData" class="m-2" />
+        <p-menubar [model]="menuData" class="m-2">
+            <ng-template #start>
+                <a [routerLink]="['/']" class="flex items-center gap-2">
+                    <svg data-p-icon="calculator" [size]="24"></svg>
+                    <span>EDH STATS</span>
+                </a>
+            </ng-template>
+        </p-menubar>
     </div>
 
 

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MenubarModule } from 'primeng/menubar';
 import { BreadcrumbModule } from "primeng/breadcrumb";
 import { Calculator } from '@primeicons/angular';
@@ -7,7 +7,7 @@ import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
-  imports: [MenubarModule, RouterOutlet, BreadcrumbModule, Calculator],
+  imports: [MenubarModule, RouterOutlet, BreadcrumbModule, Calculator, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
