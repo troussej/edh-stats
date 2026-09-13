@@ -1,5 +1,5 @@
 import { Component, computed, inject, model } from '@angular/core';
-import { ExternalLink, PlusCircle, MinusCircle, ChevronDown, ChevronRight, Minus, Plus } from '@primeicons/angular';
+import { ExternalLink, PlusCircle, MinusCircle, ChevronDown, ChevronRight, Minus, Plus, ArrowCircleRight } from '@primeicons/angular';
 import { TimelineModule } from 'primeng/timeline';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { StatsService } from 'app/services/stats.service';
@@ -12,11 +12,13 @@ import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConfigService } from 'app/services/config.service';
 import { SettingsService } from 'app/services/settings.service';
+import { Commander } from 'app/models/game.model';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
 @Component({
   selector: 'app-decks-timeline',
-  imports: [TimelineModule, PlusCircle, MinusCircle, Minus, Plus, PanelModule, CardModule, RouterLink,
+  imports: [TimelineModule, PlusCircle, MinusCircle, Minus, Plus, ArrowCircleRight, PanelModule, CardModule, RouterLink,
     AvatarModule, NgTemplateOutlet, ToggleButtonModule, FormsModule,
-    ChevronDown, ChevronRight],
+    OverlayBadgeModule],
   templateUrl: './decks-timeline.html',
   styleUrl: './decks-timeline.css',
 })
@@ -63,5 +65,9 @@ export class DecksTimeline {
         destructions: byFin[date] || []
       }))
       .value();
+  });
+
+  public getCommander = computed<((name: string) => Commander)>(() => (name: string) => {
+    return this.statsService.commanders()[name];
   });
 }

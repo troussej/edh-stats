@@ -1,50 +1,37 @@
 <div class="">
-    <p-togglebutton [(ngModel)]="extend" onLabel="" offLabel="" class="min-w-12">
-        <ng-template #icon let-checked>
-            @if (checked) {
-            <svg data-p-icon="minus"></svg>
-            } @else {
-            <svg data-p-icon="plus"></svg>
-            }
-        </ng-template>
-    </p-togglebutton>
-    <div class="m-2 my-4 ml-[1rem]">
+    <p>Nouveaux decks:</p>
+    <div class="m-4">
+
+        <p-togglebutton [(ngModel)]="extend" onLabel="" offLabel="" class="min-w-12">
+            <ng-template #icon let-checked>
+                @if (checked) {
+                <svg data-p-icon="minus"></svg>
+                } @else {
+                <svg data-p-icon="plus"></svg>
+                }
+            </ng-template>
+        </p-togglebutton>
+    </div>
+    <div class="m-2 my-4 ml-[1rem] ">
         <p-timeline [value]="events()" [align]="'left'">
             <ng-template #content let-event>
-                <div class="flex flex-row gap-4">
+                <div class="flex flex-row flex-wrap gap-4 my-4">
 
-                    @if(event.destructions.length > 0){
-                    <div class="mb-2">
-                        <div class="flex flex-row flex-wrap gap-2   border-t border-red-300  p-2">
-                            <div class="w-12 max-w-12 flex  justify-center">
-                                <svg data-p-icon="minus-circle" [size]="32" class=" text-red-400"></svg>
-                            </div>
-                            @for(commander of event.destructions;track commander){
+                    @for(commander of event.creations;track commander){
+                    <ng-container
+                        *ngTemplateOutlet="myFragment; context: { commander: commander, creation: true }"></ng-container>
 
-                            <ng-container
-                                *ngTemplateOutlet="myFragment; context: { commander: commander }"></ng-container>
-                            }
+                    }
+                    @for(commander of event.destructions;track commander){
 
-                        </div>
-
-                    </div>
+                    <ng-container
+                        *ngTemplateOutlet="myFragment; context: { commander: commander, creation: false }"></ng-container>
                     }
                 </div>
+
             </ng-template>
             <ng-template #opposite let-event>
-                @if(event.creations.length > 0){
-                <div class="mb-2  flex  justify-end ">
-                    <div class="flex flex-row flex-wrap gap-2 p-2 border-t border-green-200 justify-end ">
-                        <div class="w-12 max-w-12 flex  justify-center">
-                            <svg data-p-icon="plus-circle" [size]="32" class=" text-green-300"></svg>
-                        </div>
-                        @for(commander of event.creations;track commander){
-                        <ng-container *ngTemplateOutlet="myFragment; context: { commander: commander }"></ng-container>
 
-                        }
-                    </div>
-                </div>
-                }
             </ng-template>
             <ng-template #marker let-event>
                 <span class="flex items-center justify-center  h-8 w-14 rounded-full shadow-lg bg-cyan-600">
@@ -59,17 +46,37 @@
     </div>
 </div>
 
-<ng-template #myFragment let-commander="commander">
-    <div class="flex flex-col items-center ">
-        @if(commander.url){
-        <a [routerLink]="['/commander',commander.commander]">
-            <p-avatar [image]="commander.url" shape="circle" class="w-12! h-12!" />
-        </a>
+<ng-template #myFragment let-commander="commander" let-creation="creation">
+    <div class="flex flex-row flex-wrap">
+        <div class="flex flex-col items-center ">
+            @if(commander.url){
+            <p-overlay-badge [value]="creation?'+' : '-'" [severity]="creation?'success':'danger'">
+                <a [routerLink]="['/commander',commander.commander]">
+                    <p-avatar [image]="commander.url" shape="circle" class="w-12! h-12!" />
+                </a>
+            </p-overlay-badge>
+            }
+            <a [routerLink]="['/commander',commander.commander]">
+                <div class="w-14 max-w-14 text-center text-[12px] leading-[1.2] break-words">
+                    <span> {{ commander.commander }}</span>
+                </div>
+            </a>
+
+        </div>
+        @if(!creation && commander.replacement){
+        <div class="w-12 max-w-12 flex  justify-center">
+            <svg data-p-icon="arrow-circle-right" [size]="32" class="mt-2 text-yellow-300"></svg>
+        </div>
+        <div class="flex flex-col items-center ">
+            <a [routerLink]="['/commander',getCommander()(commander.replacement).commander]">
+                <p-avatar [image]="getCommander()(commander.replacement).url" shape="circle" class="w-12! h-12!" />
+            </a>
+            <a [routerLink]="['/commander',getCommander()(commander.replacement).commander]">
+                <div class="w-14 max-w-14 text-center text-[12px] leading-[1.2] break-words">
+                    <span> {{ getCommander()(commander.replacement).commander }}</span>
+                </div>
+            </a>
+        </div>
         }
-        <a [routerLink]="['/commander',commander.commander]">
-            <div class="w-14 max-w-14 text-center text-[12px] leading-[1.2] break-words">
-                <span> {{ commander.commander }}</span>
-            </div>
-        </a>
     </div>
 </ng-template>

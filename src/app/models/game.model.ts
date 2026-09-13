@@ -18,7 +18,8 @@ export class Commander {
         public decklist = '',
         public debut = 0,
         public fin: number | undefined = undefined,
-        public colors: string = ''
+        public colors: string = '',
+        public replacement = ''
 
     ) {
     }
