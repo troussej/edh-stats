@@ -1,11 +1,17 @@
 import _ from "lodash";
 
+export enum GameResult {
+    WIN = 'win',
+    LOSS = 'loss',
+    DNF = 'dnf'
+}
+
 export interface Game {
     year: number,
     date: Date,
     lieu: string,
     deck: string,
-    gagnant: boolean
+    resultat: GameResult
 }
 
 export class Commander {
@@ -40,11 +46,12 @@ export class Stats {
         public games = 0,
         public wins = 0,
         public losses = 0,
-        public winrate = 0
+        public winrate = 0,
+        public dnfs = 0,
     ) { }
 
     calcWinrate() {
-        this.winrate = this.wins / this.games;
+        this.winrate = this.wins / (this.wins + this.losses);
     }
     get title() {
         return this.name;

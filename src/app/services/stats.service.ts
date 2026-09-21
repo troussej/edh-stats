@@ -1,6 +1,6 @@
 import { computed, inject, Service, signal } from "@angular/core";
 import { SheetService } from "./sheet.service";
-import { Commander, Game, StatsPerCommander, StatsPerYear, Stats, GlobalStats } from "app/models/game.model";
+import { Commander, Game, StatsPerCommander, StatsPerYear, Stats, GlobalStats, GameResult } from "app/models/game.model";
 import { forkJoin, map, Observable, of, ReplaySubject, pipe, mergeMap } from "rxjs";
 import _, { Dictionary } from "lodash";
 import { ConfigService } from "./config.service";
@@ -70,10 +70,12 @@ export class StatsService {
 
         const res = _.reduce(games, (stat, game) => {
             stat.games++;
-            if (game.gagnant) {
+            if (game.resultat === GameResult.WIN) {
                 stat.wins++;
-            } else {
+            } else if (game.resultat === GameResult.LOSS) {
                 stat.losses++;
+            } else if (game.resultat === GameResult.DNF) {
+                stat.dnfs++;
             }
             return stat;
         }, stat);

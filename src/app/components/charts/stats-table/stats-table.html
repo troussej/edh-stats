@@ -43,7 +43,12 @@
             @else(){
             <td>{{ stat.title }}</td>
             }
-            <td>{{ stat.games }}</td>
+            <td>{{ stat.games }}
+                @if(stat.dnfs > 0){
+                <span class="text-xs">({{ stat.dnfs }} DNF)</span>
+                }
+
+            </td>
             <td class="hidden md:table-cell">{{ stat.wins }}</td>
             <td class="hidden md:table-cell">{{ stat.losses }}</td>
             <td>{{ stat.winrate |percent}}</td>

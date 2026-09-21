@@ -3,7 +3,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { SettingsService } from 'app/services/settings.service';
 import { StatsService } from 'app/services/stats.service';
 import _ from 'lodash';
-import { Game } from '../../models/game.model';
+import { Game, GameResult } from '../../models/game.model';
 import { Debug } from 'app/debug/debug';
 import { ChartData, ChartConfiguration, ChartDataset, plugins, Tooltip } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -60,8 +60,8 @@ export class CompareYears {
       .mapValues((games: Game[]) => {
         return {
           games: games.length,
-          wins: _.sumBy(games, g => g.gagnant ? 1 : 0),
-          winrate: Math.round((games.length > 0 ? _.sumBy(games, g => g.gagnant ? 1 : 0) / games.length : 0) * 100) || 0
+          wins: _.sumBy(games, g => g.resultat === GameResult.WIN ? 1 : 0),
+          winrate: Math.round((games.length > 0 ? _.sumBy(games, g => g.resultat === GameResult.WIN ? 1 : 0) / games.length : 0) * 100) || 0
         }
       })
       //  .map((val, month) => ({ month: parseInt(month), ...val }))
