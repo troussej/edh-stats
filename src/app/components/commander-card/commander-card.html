@@ -3,13 +3,13 @@
 
     </ng-template>
     <ng-template #title>
-        <app-commander-title [commander]="cmr" avatarSize="medium"></app-commander-title>
+        <app-commander-title [commander]="cmr()" avatarSize="medium"></app-commander-title>
     </ng-template>
     <ng-template #subtitle>
         <div class="flex items-center gap-0">
-            <p-tag severity="info" value="{{cmr.debut}}" />
-            @if(cmr.fin){>
-            <p-tag severity="info" value="{{cmr.fin}}" />
+            <p-tag severity="info" value="{{cmr().debut}}" />
+            @if(cmr().fin){>
+            <p-tag severity="info" value="{{cmr().fin}}" />
             }
 
         </div>

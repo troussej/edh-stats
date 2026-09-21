@@ -1,4 +1,4 @@
-import { Component, computed, inject, Input } from '@angular/core';
+import { Component, computed, inject, input, Input } from '@angular/core';
 import { Commander, StatsPerCommander } from 'app/models/game.model';
 import { TagModule } from 'primeng/tag';
 import { CommanderTitle } from '../commander-title/commander-title';
@@ -18,15 +18,14 @@ export class CommanderCard {
 
   public statsService = inject(StatsService);
 
-  @Input()
-  cmr!: Commander;
+  cmr = input.required<Commander>();
 
   public chartData = computed<ChartDataInput>(() => {
 
     const statsPerYear = _.chain(this.statsService.games())
-      .filter({ deck: this.cmr.commander })
+      .filter({ deck: this.cmr().commander })
       .groupBy('year')
-      .mapValues((games, year) => this.statsService.calcStats(new StatsPerCommander(this.cmr), games))
+      .mapValues((games, year) => this.statsService.calcStats(new StatsPerCommander(this.cmr()), games))
       .value();
 
     return this.buildChartData(statsPerYear);
