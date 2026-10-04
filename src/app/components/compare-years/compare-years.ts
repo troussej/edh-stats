@@ -59,9 +59,9 @@ export class CompareYears {
       .groupBy(g => g.date.getMonth())
       .mapValues((games: Game[]) => {
         return {
-          games: games.length,
+          games: _.sumBy(games, g => g.resultat !== GameResult.DNF ? 1 : 0),
           wins: _.sumBy(games, g => g.resultat === GameResult.WIN ? 1 : 0),
-          winrate: Math.round((games.length > 0 ? _.sumBy(games, g => g.resultat === GameResult.WIN ? 1 : 0) / games.length : 0) * 100) || 0
+          winrate: Math.round((games.length > 0 ? _.sumBy(games, g => g.resultat === GameResult.WIN ? 1 : 0) / _.sumBy(games, g => g.resultat !== GameResult.DNF ? 1 : 0) : 0) * 100) || 0
         }
       })
       //  .map((val, month) => ({ month: parseInt(month), ...val }))

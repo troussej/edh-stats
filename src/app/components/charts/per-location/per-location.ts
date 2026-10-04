@@ -6,7 +6,7 @@ import { ChartData, ChartConfiguration } from 'chart.js';
 import _ from 'lodash';
 import { BaseChartDirective } from 'ng2-charts';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Filters, GameResult } from 'app/models/game.model';
+import { Filters, GameResult, Stats } from 'app/models/game.model';
 import { Debug } from "app/debug/debug";
 
 const monthLabels = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'];
@@ -78,11 +78,14 @@ export class PerLocation {
     const winratePerMonth = _.chain(games).map(g => (
       {
         lieu: g.lieu,
-        mois: g.date.getMonth(), win: g.resultat === GameResult.WIN ? 1 : 0
+        mois: g.date.getMonth(),
+        game: g
       }
     ))
       .groupBy('mois')
-      .mapValues(val => _.round(_.meanBy(val, 'win') * 100, 0))
+      .mapValues((val, month) => this.statsService.calcStats(new Stats(month), _.map(val, 'game')))
+      // .mapValues(val => _.round(_.meanBy(val, 'win') * 100, 0))
+      .mapValues(val => _.round(val.winrate * 100, 0))
       .value();
     return {
       label: 'Winrate',
