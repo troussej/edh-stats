@@ -18,18 +18,6 @@ export class Mana {
   }
 
   public colorClass(s: string) {
-    switch (s) {
-      case 'w':
-        return 'text-yellow-300';
-      case 'u':
-        return 'text-cyan-300';
-      case 'b':
-        return 'text-violet-300';;
-      case 'r':
-        return 'text-red-300';;
-      case 'g':
-        return 'text-green-300';;
-    }
-    return '';
+    return `text-${s}`;
   }
 }
