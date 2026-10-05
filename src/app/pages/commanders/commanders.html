@@ -1,11 +1,11 @@
 <app-options></app-options>
-<div class="m-4">
-    <div class="mt-2 mb-4">
+<div class="m-2">
+    <div class="mt-2 mb-2">
 
         <app-decks-timeline></app-decks-timeline>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 ">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-2 ">
 
         @for (cmr of commanders(); track $index) {
         <app-commander-card [cmr]="cmr"></app-commander-card>

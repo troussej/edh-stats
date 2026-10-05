@@ -1,10 +1,10 @@
-<div class="m-4">
+<div class="m-2">
 
 
     <p-select [options]="commanders()" (onChange)="gotTo($event)" [showClear]="true" placeholder="Commander"
         filter="true"></p-select>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 mt-2 gap-2">
 
         <p-card class="">
             <app-commander-card [cmr]="commander()"></app-commander-card>

@@ -1,7 +1,7 @@
 <app-options></app-options>
-<div class="grid grid-cols-1 gap-4 m-4 ">
+<div class="grid grid-cols-1 gap-2 m-2 ">
 
-    <div class="grid lg:grid-cols-3 gap-4">
+    <div class="grid lg:grid-cols-3 gap-2">
 
 
         <app-global-stats></app-global-stats>
@@ -17,7 +17,7 @@
 
 
 
-    <div class="grid xl:grid-cols-2 gap-4">
+    <div class="grid xl:grid-cols-2 gap-2">
         <div>
             <p-fieldset legend=" Par winrate (plus de 3 parties)" [toggleable]="true">
                 <app-table [stats]="perWinrate()" sortField="winrate" [sortOrder]="-1"></app-table>
