@@ -1,9 +1,11 @@
 <p-tag severity="secondary" variant="outlined" size="small">
-    <span class="flex gap-1 pb-0.5 pl-0.5 text-xs">
+    <span class="flex gap-1 pb-0.5 pl-0.5 text-xs  ">
         @for (item of symbols;track $index) {
         <span [class]="colorClass(item)">
             <i class="ms ms-{{item}}"></i>
         </span>
         }
     </span>
+    <!-- hack pour charger les classes de couleur -->
+    <span class="text-w text-u text-b text-r text-w text-g"></span>
 </p-tag>

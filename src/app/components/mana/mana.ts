@@ -18,6 +18,6 @@ export class Mana {
   }
 
   public colorClass(s: string) {
-    return `text-${s}`;
+    return `text-${s.toLowerCase()}`;
   }
 }
