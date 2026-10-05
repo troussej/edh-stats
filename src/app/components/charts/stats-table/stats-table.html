@@ -13,7 +13,18 @@
                 <p-sort-icon field="title" class="ml-1" />
             </th>
             }
-            <th></th>
+            <th class="text-sm">
+                <div pSortableColumn="winrate">
+                    <span>Winrate</span>
+                    <p-sort-icon field="winrate" class="ml-1" />
+                </div>
+                <div pSortableColumn="games">
+                    <span>Games</span>
+                    <p-sort-icon field="games" class="ml-1" />
+                </div>
+            </th>
+
+
 
         </tr>
     </ng-template>
