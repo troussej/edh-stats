@@ -1,13 +1,25 @@
-<div class="w-64">
+<div class="w-64 flex flex-col gap-1">
 
     <div class="w-full flex flex-row rounded-xl text-xs ">
         @for(value of values();track value){
         @if(value.value >0){
         <div [class]="value.class" class="px-2 text-gray-800 font-semibold overflow-hidden truncate "
-            [style.width.%]="value.value" pTooltip="{{value.name}} ({{value.count}} , {{value.value}}%)">
+            [style.width.%]="value.value" pTooltip="{{value.rate}}">
             {{value.count}}{{value.name}}
+            @if(value.rate !==''){
+            ({{value.rate}})
+            }
         </div>
         }
         }
     </div>
+    @if(max()??0 > 0){
+    <div class="w-full flex flex-row rounded-xl text-xs ">
+        <div class="px-2 text-gray-800 font-semibold overflow-hidden truncate bg-gray-300 rounded-full"
+            [style.width.%]="gamesPercentage()">
+            {{games()}}G
+        </div>
+
+    </div>
+    }
 </div>

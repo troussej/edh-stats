@@ -5,8 +5,10 @@
 
 
         <app-global-stats></app-global-stats>
+        <p-fieldset legend="Brackets" class="" [toggleable]="true">
 
-        <app-per-bracket></app-per-bracket>
+            <app-per-bracket></app-per-bracket>
+        </p-fieldset>
         <p-fieldset legend="Par lieu" class="" [toggleable]="true">
             <app-lieu></app-lieu>
 
@@ -17,26 +19,15 @@
 
     <div class="grid xl:grid-cols-2 gap-4">
         <div>
-
-
             <p-fieldset legend=" Par winrate (plus de 3 parties)" [toggleable]="true">
-                <app-bar-chart [stats]="perWinrate()" [maxSize]="8" sortProp="winrate" sortOrder="desc"></app-bar-chart>
-                <p-panel header="Details" [toggleable]="true" [collapsed]="false">
-
-                    <app-table [stats]="perWinrate()" sortField="winrate" [sortOrder]="-1"></app-table>
-                </p-panel>
+                <app-table [stats]="perWinrate()" sortField="winrate" [sortOrder]="-1"></app-table>
             </p-fieldset>
         </div>
         <div>
 
             <p-fieldset legend="Nombre de parties" [toggleable]="true">
-                <app-bar-chart [stats]="perWinrate()" [maxSize]="8" sortProp="games" sortOrder="desc"></app-bar-chart>
-                <p-panel header="Details" [toggleable]="true" [collapsed]="false">
-
-                    <app-table [stats]="perGames()" sortField="games" [sortOrder]="-1"
-                        legend="Nombre de parties"></app-table>
-                </p-panel>
-
+                <app-table [stats]="perGames()" sortField="games" [sortOrder]="-1"
+                    legend="Nombre de parties"></app-table>
             </p-fieldset>
         </div>
     </div>

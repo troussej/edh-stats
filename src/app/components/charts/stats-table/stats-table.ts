@@ -10,6 +10,7 @@ import { PopoverModule } from 'primeng/popover';
 import { TooltipModule } from 'primeng/tooltip';
 import { CommanderTitle } from "../../commander-title/commander-title";
 import { WinrateBar } from 'app/components/winrate-bar/winrate-bar';
+import _ from 'lodash';
 @Component({
   selector: 'app-table',
   imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule,
@@ -38,6 +39,8 @@ export class Table {
   @Input()
   public title = '';
 
-
+  public maxGames() {
+    return _.max(this.stats.map(s => s.games));
+  }
 
 }

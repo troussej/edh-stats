@@ -15,9 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { PanelModule } from "primeng/panel";
 import { BarChart } from '../charts/bar-chart/bar-chart';
 import { SettingsService } from 'app/services/settings.service';
+import { Table } from '../charts/stats-table/stats-table';
 @Component({
   selector: 'app-global-stats',
-  imports: [CardModule, PieChart, FieldsetModule, TableModule, PercentPipe, ArrowUpRight, ArrowDownRight, RadioButton, FormsModule, PanelModule, BarChart],
+  imports: [CardModule, PieChart, FieldsetModule, TableModule, FormsModule, PanelModule, Table],
   templateUrl: './global-stats.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './global-stats.css',
