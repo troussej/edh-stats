@@ -13,21 +13,8 @@
                 <p-sort-icon field="title" class="ml-1" />
             </th>
             }
-            <th pSortableColumn="games" class="text-nowrap"><span class="">Parties</span>
-                <p-sort-icon field="games" class="ml-1" />
+            <th></th>
 
-            </th>
-            <th pSortableColumn="wins" class="hidden md:table-cell  text-nowrap"><span> Gagnées
-                </span><p-sort-icon field="wins" class="ml-1" />
-            </th>
-            <th pSortableColumn="losses" class="hidden md:table-cell  text-nowrap">
-                <span>Perdues</span><p-sort-icon field="losses" class="ml-1" />
-            </th>
-            <th pSortableColumn="winrate" class="text-nowrap">
-                <span class="invisible md:visible">Winrate</span>
-                <span class="invisible max-md:visible">W%</span>
-                <p-sort-icon field="winrate" class="ml-1" />
-            </th>
         </tr>
     </ng-template>
     <ng-template #body let-stat>
@@ -43,15 +30,10 @@
             @else(){
             <td>{{ stat.title }}</td>
             }
-            <td>{{ stat.games }}
-                @if(stat.dnfs > 0){
-                <span class="text-xs">({{ stat.dnfs }} DNF)</span>
-                }
+            <td>
 
+                <app-winrate-bar [stats]="stat"></app-winrate-bar>
             </td>
-            <td class="hidden md:table-cell">{{ stat.wins }}</td>
-            <td class="hidden md:table-cell">{{ stat.losses }}</td>
-            <td>{{ stat.winrate |percent}}</td>
         </tr>
     </ng-template>
 </p-table>

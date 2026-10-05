@@ -1,0 +1,13 @@
+<div class="w-64">
+
+    <div class="w-full flex flex-row rounded-xl text-xs ">
+        @for(value of values();track value){
+        @if(value.value >0){
+        <div [class]="value.class" class="px-2 text-gray-800 font-semibold overflow-hidden truncate "
+            [style.width.%]="value.value" pTooltip="{{value.name}} ({{value.count}} , {{value.value}}%)">
+            {{value.count}}{{value.name}}
+        </div>
+        }
+        }
+    </div>
+</div>

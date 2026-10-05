@@ -9,9 +9,11 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { PopoverModule } from 'primeng/popover';
 import { TooltipModule } from 'primeng/tooltip';
 import { CommanderTitle } from "../../commander-title/commander-title";
+import { WinrateBar } from 'app/components/winrate-bar/winrate-bar';
 @Component({
   selector: 'app-table',
-  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule, FieldsetModule, PopoverModule, TooltipModule, CommanderTitle, SortableColumn],
+  imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule,
+    FieldsetModule, PopoverModule, TooltipModule, CommanderTitle, SortableColumn, WinrateBar],
   templateUrl: './stats-table.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './stats-table.css',

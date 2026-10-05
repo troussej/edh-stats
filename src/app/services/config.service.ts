@@ -15,7 +15,14 @@ export class ConfigService {
                     "type": "google",
                     "games": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjL_LcidTbTef4uSyu2qVzINpugpHtaHxTMv5KIoTWy9M297iOmri_lJv-xLnIz5bmich8XtO0zrax/pub?gid=1675252690&single=true&output=csv",
                 }
-            }
+            },
+            colors: {
+                W: '#ffdf20',
+                U: '#53eafd',
+                B: '#c4b4ff',
+                R: '#ffa2a2',
+                G: '#7bf1a8',
+            },
         };
     }
 }

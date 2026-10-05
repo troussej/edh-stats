@@ -11,6 +11,14 @@
     --breakpoint-xs: 30rem;
     --breakpoint-2xl: 100rem;
     --breakpoint-3xl: 120rem;
+
+
+    --color-w: #ffdf20;
+    --color-u: #53eafd;
+    --color-b: #c4b4ff;
+    --color-r: #ffa2a2;
+    --color-g: #7bf1a8;
+
 }
 
 :root {
