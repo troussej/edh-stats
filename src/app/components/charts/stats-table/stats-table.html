@@ -12,12 +12,12 @@
                 <p-sort-icon field="title" class="ml-1" />
                 }
             </th>
-            <th class="text-sm col-span-{{sizeRight}}">
-                <div pSortableColumn="winrate">
+            <th class="text-sm col-span-{{sizeRight}} flex flex-row gap-2">
+                <div pSortableColumn="winrate" sortOrder="-1">
                     <span>Winrate</span>
                     <p-sort-icon field="winrate" class="ml-1" />
                 </div>
-                <div pSortableColumn="games">
+                <div pSortableColumn="games" sortOrder="-1">
                     <span>Games</span>
                     <p-sort-icon field="games" class="ml-1" />
                 </div>
@@ -38,9 +38,9 @@
 
                 }
             </td>
-            <td class="col-span-{{sizeRight}}">
+            <td class="col-span-{{sizeRight}} flex items-center">
 
-                <app-winrate-bar [stats]="stat" [max]="maxGames()"></app-winrate-bar>
+                <app-winrate-bar [stats]="stat" [max]="maxGames()" class="w-full"></app-winrate-bar>
             </td>
         </tr>
     </ng-template>

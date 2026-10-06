@@ -3,7 +3,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Stats } from 'app/models/game.model';
 import { CardModule } from 'primeng/card';
 import { ImageModule } from 'primeng/image';
-import { SortableColumn, TableModule } from 'primeng/table';
+import { SortableColumn, TableModule, SortIcon } from 'primeng/table';
 import { AvatarModule } from 'primeng/avatar';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PopoverModule } from 'primeng/popover';
@@ -14,7 +14,7 @@ import _ from 'lodash';
 @Component({
   selector: 'app-table',
   imports: [PercentPipe, CardModule, TableModule, ImageModule, AvatarModule,
-    FieldsetModule, PopoverModule, TooltipModule, CommanderTitle, SortableColumn, WinrateBar],
+    FieldsetModule, PopoverModule, TooltipModule, CommanderTitle, SortableColumn, SortIcon, WinrateBar],
   templateUrl: './stats-table.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './stats-table.css',
@@ -43,14 +43,14 @@ export class Table {
   public sizeLeft = 1;
 
   @Input()
-  public sizeRight = 2;
+  public sizeRight = 3;
 
   public maxGames() {
     return _.max(this.stats.map(s => s.games));
   }
 
   public sizeTotal() {
-    return this.sizeLeft + this.sizeRight;
+    return (this.sizeLeft + this.sizeRight).toString();
   }
 
 }
