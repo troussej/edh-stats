@@ -1,6 +1,6 @@
 <p-table [value]="stats" size="small" [sortField]="sortField" [sortOrder]="sortOrder" class="mt-2" scrollable="true">
     <ng-template #header>
-        <tr class="grid grid-cols-{{sizeTotal()}}">
+        <tr class="grid " [class]="`grid-cols-${sizeTotal()}`">
             <th pSortableColumn="title" class=" text-nowrap col-span-{{sizeLeft}}">
                 @if(commanderCol){
                 <span>Commandeur</span>
@@ -25,7 +25,7 @@
         </tr>
     </ng-template>
     <ng-template #body let-stat>
-        <tr class="grid grid-cols-{{sizeTotal()}}">
+        <tr class="grid " [class]="`grid-cols-${sizeTotal()}`">
             <td class="col-span-{{sizeLeft}}">
                 @if(commanderCol){
                 <div class="m-1 mt-3">
