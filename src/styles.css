@@ -1,11 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 @import 'tailwindcss';
 @import "tailwindcss-primeui";
 @import 'primeicons/primeicons.css';
-@import './theme/colors.css';
-@import './theme/layout.css';
-@import './theme/utilities.css';
+
 
 @theme {
     --breakpoint-xs: 30rem;
@@ -19,9 +18,15 @@
     --color-r: #ffa2a2;
     --color-g: #7bf1a8;
 
+
 }
 
-:root {
-    --p-panel-title-font-size: small;
+@layer app-style {
+
+    :root {
+        --p-panel-title-font-size: small;
+        --p-tag-gap: 0;
+    }
+
 
 }
