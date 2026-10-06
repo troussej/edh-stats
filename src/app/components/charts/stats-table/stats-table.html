@@ -1,19 +1,18 @@
 <p-table [value]="stats" size="small" [sortField]="sortField" [sortOrder]="sortOrder" class="mt-2" scrollable="true">
     <ng-template #header>
-        <tr>
-            @if(commanderCol){
-            <th pSortableColumn="title" class=" text-nowrap">
+        <tr class="grid grid-cols-{{sizeTotal()}}">
+            <th pSortableColumn="title" class=" text-nowrap col-span-{{sizeLeft}}">
+                @if(commanderCol){
                 <span>Commandeur</span>
                 <p-sort-icon field="title" class="ml-1" />
-            </th>
-            }
-            @else(){
-            <th pSortableColumn="title" class="text-nowrap"><span>{{title}}</span>
+                }
+                @else(){
+                <span>{{title}}</span>
 
                 <p-sort-icon field="title" class="ml-1" />
+                }
             </th>
-            }
-            <th class="text-sm">
+            <th class="text-sm col-span-{{sizeRight}}">
                 <div pSortableColumn="winrate">
                     <span>Winrate</span>
                     <p-sort-icon field="winrate" class="ml-1" />
@@ -23,25 +22,23 @@
                     <p-sort-icon field="games" class="ml-1" />
                 </div>
             </th>
-
-
-
         </tr>
     </ng-template>
     <ng-template #body let-stat>
-        <tr>
-            @if(commanderCol){
-            <td class="">
+        <tr class="grid grid-cols-{{sizeTotal()}}">
+            <td class="col-span-{{sizeLeft}}">
+                @if(commanderCol){
                 <div class="m-1 mt-3">
 
                     <app-commander-title [commander]="stat.commander" avatarSize="small"></app-commander-title>
                 </div>
+                }
+                @else(){
+                {{ stat.title }}
+
+                }
             </td>
-            }
-            @else(){
-            <td>{{ stat.title }}</td>
-            }
-            <td>
+            <td class="col-span-{{sizeRight}}">
 
                 <app-winrate-bar [stats]="stat" [max]="maxGames()"></app-winrate-bar>
             </td>

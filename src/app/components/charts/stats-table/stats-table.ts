@@ -39,8 +39,18 @@ export class Table {
   @Input()
   public title = '';
 
+  @Input()
+  public sizeLeft = 1;
+
+  @Input()
+  public sizeRight = 2;
+
   public maxGames() {
     return _.max(this.stats.map(s => s.games));
+  }
+
+  public sizeTotal() {
+    return this.sizeLeft + this.sizeRight;
   }
 
 }

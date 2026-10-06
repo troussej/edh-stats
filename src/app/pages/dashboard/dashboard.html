@@ -20,13 +20,14 @@
     <div class="grid xl:grid-cols-2 gap-2">
         <div>
             <p-fieldset legend=" Par winrate (plus de 3 parties)" [toggleable]="true">
-                <app-table [stats]="perWinrate()" sortField="winrate" [sortOrder]="-1"></app-table>
+                <app-table [stats]="perWinrate()" sortField="winrate" [sortOrder]="-1" [sizeLeft]="2"
+                    [sizeRight]="3"></app-table>
             </p-fieldset>
         </div>
         <div>
 
             <p-fieldset legend="Nombre de parties" [toggleable]="true">
-                <app-table [stats]="perGames()" sortField="games" [sortOrder]="-1"
+                <app-table [stats]="perGames()" sortField="games" [sortOrder]="-1" [sizeLeft]="2" [sizeRight]="3"
                     legend="Nombre de parties"></app-table>
             </p-fieldset>
         </div>
