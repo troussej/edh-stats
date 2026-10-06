@@ -50,7 +50,7 @@ export class Table {
   }
 
   public sizeTotal() {
-    return (this.sizeLeft + this.sizeRight).toString();
+    return this.sizeLeft + this.sizeRight;
   }
 
 }

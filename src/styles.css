@@ -5,6 +5,9 @@
 @import "tailwindcss-primeui";
 @import 'primeicons/primeicons.css';
 
+@source inline("{grid-cols,col-span}-{1..10}");
+@source inline("{text-w,text-u,text-b,text-r,text-g}");
+
 
 @theme {
     --breakpoint-xs: 30rem;
