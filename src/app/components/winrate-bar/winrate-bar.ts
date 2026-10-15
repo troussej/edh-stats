@@ -37,9 +37,9 @@ export class WinrateBar {
       {
         name: 'D',
         value: Math.round(this.stats().dnfs / total * 100),
-        rate: '',
+        rate: this.stats().dnfs,
         count: this.stats().dnfs,
-        class: 'bg-w rounded-r-lg',
+        class: 'bg-gray-300 rounded-r-lg',
 
       },
     ]
