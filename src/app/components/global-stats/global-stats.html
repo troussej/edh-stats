@@ -1,6 +1,6 @@
 @if(globals()){
 <p-fieldset legend="Stats globales" [toggleable]="true">
-    <app-table [commanderCol]="false" [title]="'Année'" [stats]="globalsAsArray()" sortField="games" [sortOrder]="1"
+    <app-table [commanderCol]="false" [title]="'Année'" [stats]="globalsAsArray()" sortField="title" [sortOrder]="-1"
         legend="Par lieu"></app-table>
 </p-fieldset>
 }
