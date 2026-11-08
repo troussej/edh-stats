@@ -33,7 +33,7 @@ export class Dashboard {
   public perWinrate = computed<Stats[]>(() => {
     return _.chain(this.statPerCommanderCurYear())
       .filter(s => !_.isNil(s))
-      .filter(s => s.games > 3)
+      .filter(s => s.games >= 3)
       .orderBy('winrate')
       .value();
 
