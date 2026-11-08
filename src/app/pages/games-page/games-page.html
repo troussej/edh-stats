@@ -1,0 +1,68 @@
+<app-options></app-options>
+
+<p-card class="m-2">
+
+    <p-table [value]="games()" size="small" [sortField]="'date'" [sortOrder]="-1" class="mt-2" scrollable="true">
+        <ng-template #header>
+            <tr>
+                <th pSortableColumn="deck" class=" text-nowrap">
+
+                    <span>Commandeur</span>
+                    <p-sort-icon field="deck" class="ml-1" />
+
+
+                </th>
+
+                <th>
+                    <div pSortableColumn="date" sortOrder="-1">
+                        <span>Date</span>
+                        <p-sort-icon field="date" class="ml-1" />
+                    </div>
+                </th>
+
+                <th>
+                    <div pSortableColumn="lieu" sortOrder="-1">
+                        <span>Lieu</span>
+                        <p-sort-icon field="lieu" class="ml-1" />
+                    </div>
+                </th>
+                <th>
+                    <div pSortableColumn="resultat" sortOrder="-1">
+                        <span>Résultat</span>
+                        <p-sort-icon field="resultat" class="ml-1" />
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-game>
+            <tr class="">
+                <td>
+
+                    <app-commander-title [commander]="cmr()(game.deck)" avatarSize="xs"></app-commander-title>
+                </td>
+                <td>
+                    {{ game.date |date:'shortDate'}}
+                </td>
+                <td>
+                    {{ game.lieu }}
+                </td>
+                <td>
+                    @switch(game.resultat){
+                    @case('win'){
+                    <svg data-p-icon="thumbs-up"></svg>
+                    }
+                    @case('loss'){
+                    <svg data-p-icon="thumbs-down"></svg>
+                    }
+                    @case('dnf'){
+                    <svg data-p-icon="ellipsis-h"></svg>
+                    }
+                    @default{
+                    Inconnu
+                    }
+                    }
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

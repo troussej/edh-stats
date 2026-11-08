@@ -43,6 +43,14 @@ export class App implements OnInit {
 
       },
       {
+        label: 'Games',
+        icon: 'pi pi-list',
+        command: () => {
+          this.router.navigate(['/games']);
+        }
+
+      },
+      {
         label: 'Themes',
         icon: 'pi pi-palette',
         command: () => {

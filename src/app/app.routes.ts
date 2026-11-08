@@ -4,6 +4,7 @@ import { Commanders } from './pages/commanders/commanders';
 import { GamesTimeline } from './pages/games-timeline/games-timeline';
 import { Themes } from './themes/themes';
 import { CommanderDetail } from './pages/commander-detail/commander-detail';
+import { GamesPage } from './pages/games-page/games-page';
 
 export const routes: Routes = [
     { path: '', component: Dashboard, },
@@ -11,5 +12,6 @@ export const routes: Routes = [
     { path: 'commander/:cmr', component: CommanderDetail, },
     { path: 'timeline', component: GamesTimeline, },
     { path: 'themes', component: Themes, },
+    { path: 'games', component: GamesPage, },
 
 ];

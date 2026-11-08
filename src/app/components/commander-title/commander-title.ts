@@ -25,6 +25,9 @@ export class CommanderTitle {
   get avatarCss(): string {
     let res;
     switch (this.avatarSize()) {
+      case 'xs':
+        res = "h-8! w-8!";
+        break;
       case 'small':
         res = "h-12! w-12!";
         break;
