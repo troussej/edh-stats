@@ -13,6 +13,7 @@ export class WinrateBar {
   public config = inject(ConfigService).config;
   public stats = input.required<Stats>()
   public max = input<number>()
+  public mode = input<'games' | 'winrate'>('games')
 
   public values = computed(() => {
     let total = this.stats().wins + this.stats().losses + this.stats().dnfs;
@@ -63,6 +64,17 @@ export class WinrateBar {
   gamesPercentage = computed(() => {
     let total = this.games()
     return total / (this.max() ?? 1) * 100;
+  });
+
+  winratePercentage = computed(() => {
+    const wins = this.stats().wins;
+    const losses = this.stats().losses;
+    const total = wins + losses;
+    return total > 0 ? Math.round(wins / total * 100) : 0;
+  });
+
+  barWidth = computed(() => {
+    return this.mode() === 'winrate' ? this.winratePercentage() : this.gamesPercentage();
   });
 
 }

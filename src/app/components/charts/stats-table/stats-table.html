@@ -13,14 +13,25 @@
                 }
             </th>
             <th class="text-sm col-span-{{sizeRight}} flex flex-row gap-2">
-                <div pSortableColumn="winrate" sortOrder="-1">
-                    <span>Winrate</span>
-                    <p-sort-icon field="winrate" class="ml-1" />
-                </div>
-                <div pSortableColumn="games" sortOrder="-1">
-                    <span>Games</span>
-                    <p-sort-icon field="games" class="ml-1" />
-                </div>
+                @if(mode === 'winrate') {
+                    <div pSortableColumn="winrate" sortOrder="-1">
+                        <span>Winrate</span>
+                        <p-sort-icon field="winrate" class="ml-1" />
+                    </div>
+                    <div pSortableColumn="games" sortOrder="-1">
+                        <span>Games</span>
+                        <p-sort-icon field="games" class="ml-1" />
+                    </div>
+                } @else {
+                    <div pSortableColumn="games" sortOrder="-1">
+                        <span>Games</span>
+                        <p-sort-icon field="games" class="ml-1" />
+                    </div>
+                    <div pSortableColumn="winrate" sortOrder="-1">
+                        <span>Winrate</span>
+                        <p-sort-icon field="winrate" class="ml-1" />
+                    </div>
+                }
             </th>
         </tr>
     </ng-template>
@@ -40,7 +51,7 @@
             </td>
             <td class="col-span-{{sizeRight}} flex items-center">
 
-                <app-winrate-bar [stats]="stat" [max]="maxGames()" class="w-full"></app-winrate-bar>
+                <app-winrate-bar [stats]="stat" [max]="maxGames()" [mode]="mode" class="w-full"></app-winrate-bar>
             </td>
         </tr>
     </ng-template>

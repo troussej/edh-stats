@@ -45,6 +45,9 @@ export class Table {
   @Input()
   public sizeRight = 3;
 
+  @Input()
+  public mode: 'games' | 'winrate' = 'games';
+
   public maxGames() {
     return _.max(this.stats.map(s => s.games));
   }

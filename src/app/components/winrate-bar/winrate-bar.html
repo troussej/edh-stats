@@ -1,6 +1,10 @@
 <div class="w-full flex flex-row gap-1 ">
     <div class="bg-gray-800 rounded-xl text-xs px-1 min-w-8 flex justify-center">
-        {{games()}}G
+        @if(mode() === 'games') {
+            {{games()}}G
+        } @else {
+            {{winratePercentage()}}%
+        }
     </div>
     <!-- @if(this.stats().dnfs > 0){
     <div class="rounded-xl text-xs px-1  bg-gray-300 text-gray-800">
@@ -8,7 +12,7 @@
     </div>
     } -->
 
-    <div class="w-full flex flex-row rounded-xl text-xs" [style.width.%]="gamesPercentage() ">
+    <div class="w-full flex flex-row rounded-xl text-xs" [style.width.%]="barWidth()">
         @for(value of values();track value){
         @if(value.value >0){
         <div [class]="value.class" class="px-1 text-gray-800 font-semibold overflow-hidden truncate "
