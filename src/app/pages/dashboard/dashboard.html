@@ -19,7 +19,7 @@
 
     <div class="grid xl:grid-cols-2 gap-2">
         <div>
-            <p-fieldset legend=" Par winrate (plus de 3 parties)" [toggleable]="true">
+            <p-fieldset legend="Par winrate" [toggleable]="true">
                 <app-table [stats]="perWinrate()" sortField="winrate" [sortOrder]="-1" [sizeLeft]="2" [sizeRight]="3"
                     mode="winrate"></app-table>
             </p-fieldset>

@@ -33,8 +33,7 @@ export class Dashboard {
   public perWinrate = computed<Stats[]>(() => {
     return _.chain(this.statPerCommanderCurYear())
       .filter(s => !_.isNil(s))
-      .filter(s => s.games >= 3)
-      .orderBy('winrate')
+      .orderBy(['winrate', 'games'], ['desc', 'desc'])
       .value();
 
   });
@@ -42,7 +41,7 @@ export class Dashboard {
   public perGames = computed(() => {
     return _.chain(this.statPerCommanderCurYear())
       .filter(s => !_.isNil(s))
-      .orderBy('games')
+      .orderBy(['games', 'winrate'], ['desc', 'desc'])
       .value();
   });
 
