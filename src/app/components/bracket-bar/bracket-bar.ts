@@ -1,9 +1,10 @@
 import { PercentPipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-bracket-bar',
-  imports: [PercentPipe],
+  imports: [PercentPipe, TooltipModule],
   templateUrl: './bracket-bar.html',
 })
 export class BracketBar {

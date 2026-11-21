@@ -4,6 +4,7 @@
             @if (value.count > 0) {
                 <div class="px-1 text-gray-800 font-semibold overflow-hidden truncate"
                     [style.width.%]="value.fraction * 100" [style.background-color]="value.color"
+                    [pTooltip]="'Bracket ' + value.bracket + ': ' + value.count + ' (' + (value.fraction | percent:'1.0-1') + ')'"
                     role="img" [attr.aria-label]="'Bracket ' + value.bracket + ': ' + value.count + ' (' + (value.fraction | percent:'1.0-1') + ')'">
                     <span aria-hidden="true">{{ value.count }} B{{ value.bracket }}</span>
                 </div>
