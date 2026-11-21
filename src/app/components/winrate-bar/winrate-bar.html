@@ -1,16 +1,4 @@
-<div class="w-full flex flex-row gap-1 ">
-    <div class="bg-gray-800 rounded-xl text-xs px-1 min-w-8 shrink-0 flex justify-center">
-        {{games()}}G
-    </div>
-    <div class="bg-gray-800 rounded-xl text-xs px-2 min-w-8 shrink-0 flex justify-center">
-        {{winratePercentage()}}%
-    </div>
-    <!-- @if(this.stats().dnfs > 0){
-    <div class="rounded-xl text-xs px-1  bg-gray-300 text-gray-800">
-        {{this.stats().dnfs}}D
-    </div>
-    } -->
-
+<div class="w-full flex flex-row gap-1">
     <div class="w-full flex flex-row rounded-xl text-xs" [style.width.%]="barWidth()">
         @for(value of values();track value){
         @if(value.value >0){

@@ -23,31 +23,27 @@ describe('WinrateBar', () => {
     expect(component).toBeTruthy();
   });
 
-  it('shows games and winrate in games mode and scales the bar by games', () => {
+  it('scales the bar by games in games mode', () => {
     fixture.detectChanges();
 
     const children = fixture.nativeElement.firstElementChild.children as HTMLCollectionOf<HTMLElement>;
-    expect(children[0].textContent?.trim()).toBe('4G');
-    expect(children[1].textContent?.trim()).toBe('67%');
-    expect(children[2].style.width).toBe('50%');
+    expect(children.length).toBe(1);
+    expect(children[0].style.width).toBe('50%');
   });
 
-  it('shows games and winrate in winrate mode and scales the bar by winrate', () => {
+  it('scales the bar by winrate in winrate mode', () => {
     fixture.componentRef.setInput('mode', 'winrate');
     fixture.detectChanges();
 
     const children = fixture.nativeElement.firstElementChild.children as HTMLCollectionOf<HTMLElement>;
-    expect(children[0].textContent?.trim()).toBe('4G');
-    expect(children[1].textContent?.trim()).toBe('67%');
-    expect(children[2].style.width).toBe('67%');
+    expect(children[0].style.width).toBe('67%');
   });
 
-  it('shows zero games and zero winrate when there are no games', () => {
+  it('calculates zero games and zero winrate when there are no games', () => {
     fixture.componentRef.setInput('stats', new Stats());
     fixture.detectChanges();
 
-    const children = fixture.nativeElement.firstElementChild.children as HTMLCollectionOf<HTMLElement>;
-    expect(children[0].textContent?.trim()).toBe('0G');
-    expect(children[1].textContent?.trim()).toBe('0%');
+    expect(component.games()).toBe(0);
+    expect(component.winratePercentage()).toBe(0);
   });
 });

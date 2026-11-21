@@ -53,6 +53,16 @@ export class Stats {
     calcWinrate() {
         this.winrate = this.wins / (this.wins + this.losses);
     }
+
+    get gameCount(): number {
+        return this.wins + this.losses + this.dnfs;
+    }
+
+    get winratePercentage(): number {
+        const total = this.wins + this.losses;
+        return total > 0 ? Math.round(this.wins / total * 100) : 0;
+    }
+
     get title() {
         return this.name;
     }

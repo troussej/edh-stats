@@ -2,6 +2,7 @@ import { Component, computed, inject, input } from '@angular/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { Stats } from 'app/models/game.model';
 import { ConfigService } from 'app/services/config.service';
+
 @Component({
   selector: 'app-winrate-bar',
   imports: [TooltipModule],
@@ -16,7 +17,7 @@ export class WinrateBar {
   public mode = input<'games' | 'winrate'>('games')
 
   public values = computed(() => {
-    let total = this.stats().wins + this.stats().losses + this.stats().dnfs;
+    let total = this.stats().gameCount;
 
     let res = [
       {
@@ -58,7 +59,7 @@ export class WinrateBar {
   })
 
   games = computed(() => {
-    return this.stats().wins + this.stats().losses + this.stats().dnfs;
+    return this.stats().gameCount;
   });
 
   gamesPercentage = computed(() => {
@@ -67,10 +68,7 @@ export class WinrateBar {
   });
 
   winratePercentage = computed(() => {
-    const wins = this.stats().wins;
-    const losses = this.stats().losses;
-    const total = wins + losses;
-    return total > 0 ? Math.round(wins / total * 100) : 0;
+    return this.stats().winratePercentage;
   });
 
   barWidth = computed(() => {

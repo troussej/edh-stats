@@ -1,2 +1,9 @@
 <app-table [commanderCol]="false" title="Lieu" [stats]="parlieu()" sortField="games" [sortOrder]="-1"
-    legend="Par lieu"></app-table>
+    legend="Par lieu">
+    <ng-template #additionalStats let-stat>
+        @if (bracketData().counts.get(stat.title); as counts) {
+            <app-bracket-bar class="block w-full mt-1" [brackets]="bracketData().brackets"
+                [counts]="counts" [max]="maxGames()"></app-bracket-bar>
+        }
+    </ng-template>
+</app-table>
