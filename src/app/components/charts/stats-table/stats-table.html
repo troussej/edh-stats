@@ -1,6 +1,6 @@
 <p-table [value]="stats" size="small" [sortField]="sortField" [sortOrder]="sortOrder" class="mt-2" scrollable="true">
     <ng-template #header>
-        <tr class="grid" [class]="`grid-cols-${sizeTotal()}`" [style.grid-template-columns]="gridColumns()">
+        <tr class="grid" [class]="`grid-cols-${sizeTotal()}`">
             <th pSortableColumn="title" class="text-nowrap col-span-{{sizeLeft}}">
                 @if(commanderCol){
                 <span>Commandeur</span>
@@ -12,7 +12,10 @@
                 <p-sort-icon field="title" class="ml-1" />
                 }
             </th>
-            <th scope="col" class="text-sm flex flex-row gap-2">
+            <th scope="col" class="col-span-1 text-sm ">
+
+            </th>
+            <th scope="col" class="text-sm col-span-{{sizeRight}} flex flex-row gap-2">
                 <div pSortableColumn="games" sortOrder="-1">
                     <span>Games</span>
                     <p-sort-icon field="games" class="ml-1" />
@@ -22,11 +25,10 @@
                     <p-sort-icon field="winrate" class="ml-1" />
                 </div>
             </th>
-            <th scope="col" class="text-sm col-span-{{sizeRight}}">Results</th>
         </tr>
     </ng-template>
     <ng-template #body let-stat>
-        <tr class="grid" [class]="`grid-cols-${sizeTotal()}`" [style.grid-template-columns]="gridColumns()">
+        <tr class="grid" [class]="`grid-cols-${sizeTotal()}`">
             <td class="col-span-{{sizeLeft}}">
                 @if(commanderCol){
                 <div class="m-1 mt-3">
@@ -39,18 +41,20 @@
 
                 }
             </td>
-            <td class="flex items-center">
+            <td class="col-span-1 flex items-center">
                 <div class="flex gap-1">
-                    <span class="bg-gray-800 rounded-xl text-xs px-1 min-w-8 flex justify-center">{{stat.gameCount}}G</span>
-                    <span class="bg-gray-800 rounded-xl text-xs px-2 min-w-8 flex justify-center">{{stat.winratePercentage}}%</span>
+                    <span
+                        class="bg-gray-800 rounded-xl text-xs px-1 min-w-8 flex justify-center">{{stat.gameCount}}G</span>
+                    <span
+                        class="bg-gray-800 rounded-xl text-xs px-2 min-w-8 flex justify-center">{{stat.winratePercentage}}%</span>
                 </div>
             </td>
             <td class="flex items-center min-w-0 col-span-{{sizeRight}}">
                 <div class="w-full">
                     <app-winrate-bar [stats]="stat" [max]="maxGames()" [mode]="mode" class="w-full"></app-winrate-bar>
                     @if (additionalStats(); as additionalStatsTemplate) {
-                        <ng-container [ngTemplateOutlet]="additionalStatsTemplate"
-                            [ngTemplateOutletContext]="{ $implicit: stat }"></ng-container>
+                    <ng-container [ngTemplateOutlet]="additionalStatsTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: stat }"></ng-container>
                     }
                 </div>
             </td>
